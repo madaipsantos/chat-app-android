@@ -17,7 +17,7 @@ class ChatScreen extends StatelessWidget {
           padding: const EdgeInsets.all(4.0),
           child: CircleAvatar(
             backgroundImage: NetworkImage(
-              'https://1.bp.blogspot.com/-DTJch3FMmQg/T7WZW8_tCfI/AAAAAAAAAn8/MvqD67OYvE8/s1600/aniston0uo1.jpg',
+              'https://www.shutterstock.com/image-vector/chat-bot-icon-virtual-smart-600nw-2478937553.jpg',
             ),
           ),
         ),
