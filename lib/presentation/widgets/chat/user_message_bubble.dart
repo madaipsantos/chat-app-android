@@ -25,7 +25,7 @@ class UsuarioMessageBubble extends StatelessWidget {
             child: Text(message.text, style: const TextStyle(color: Colors.white),),
           ),
         ),
-        SizedBox(height: 10,),
+        SizedBox(height: 5,),
       ],
     );
   }
