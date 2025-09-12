@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:yes_no_app/domain/entities/message.dart';
+import 'package:yes_no_app/presentation/providers/chat_provider.dart';
 import 'package:yes_no_app/presentation/widgets/chat/inteligent_message_bubble.dart';
 import 'package:yes_no_app/presentation/widgets/chat/user_message_bubble.dart';
 import 'package:yes_no_app/presentation/widgets/shared/message_field_box.dart';
@@ -18,8 +21,8 @@ class ChatScreen extends StatelessWidget {
             ),
           ),
         ),
-        title: const Text('Mi amor'),
-        centerTitle: false,
+        title: const Text('Inteligent Chat'),
+        centerTitle: true,
       ),
       body: _ChatView(),
     );
@@ -27,8 +30,12 @@ class ChatScreen extends StatelessWidget {
 }
 
 class _ChatView extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
+
+    final chatprovider = context.watch<ChatProvider>();
+
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -36,14 +43,20 @@ class _ChatView extends StatelessWidget {
           children: [
             Expanded(
               child: ListView.builder(
+                itemCount: chatprovider.messageList.length,
                 itemBuilder: (context, index) {
-                  return (index % 2 == 0)
-                      ? const InteligentMessageBubble()
-                      : const UsuarioMessageBubble();
+                  final message = chatprovider.messageList[index];
+                  return (message.fromWho == FromWho.inteligentMessage)
+                      ? InteligentMessageBubble()
+                      : UsuarioMessageBubble(message: message);
                 },
               ),
             ),
-            const MessageFieldBox(),
+            MessageFieldBox(
+              onValue: (value) {
+                chatprovider.sendMessage(value);
+              },
+            ),
           ],
         ),
       ),
