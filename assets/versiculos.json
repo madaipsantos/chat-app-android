@@ -1,0 +1,26 @@
+[
+  {
+    "livro": "João",
+    "capitulo": 3,
+    "versiculo": 16,
+    "texto": "Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito..."
+  },
+  {
+    "livro": "1 Coríntios",
+    "capitulo": 13,
+    "versiculo": 4,
+    "texto": "O amor é paciente, o amor é bondoso..."
+  },
+  {
+    "livro": "Romanos",
+    "capitulo": 5,
+    "versiculo": 8,
+    "texto": "Mas Deus prova o seu amor para conosco..."
+  },
+  {
+    "livro": "Hebreus",
+    "capitulo": 11,
+    "versiculo": 1,
+    "texto": "Ora, a fé é a certeza daquilo que esperamos e a prova das coisas que não vemos."
+  }
+]

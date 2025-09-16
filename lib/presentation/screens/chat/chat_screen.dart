@@ -38,7 +38,7 @@ class _ChatView extends StatelessWidget {
 
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Column(
           children: [
             Expanded(
@@ -48,7 +48,7 @@ class _ChatView extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final message = chatprovider.messageList[index];
                   return (message.fromWho == FromWho.inteligentMessage)
-                      ? InteligentMessageBubble()
+                      ? InteligentMessageBubble(message: message)
                       : UsuarioMessageBubble(message: message);
                 },
               ),

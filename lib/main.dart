@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:yes_no_app/config/theme/app_theme.dart';
+import 'package:yes_no_app/infrastructure/services/bible_service.dart';
 import 'package:yes_no_app/presentation/providers/chat_provider.dart';
 import 'package:yes_no_app/presentation/screens/chat/chat_screen.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await BibleService.carregarVersiculos();
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
