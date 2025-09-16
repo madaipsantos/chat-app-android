@@ -5,6 +5,7 @@ import 'package:yes_no_app/infrastructure/models/bible_verse_model.dart';
 
 class ChatProvider extends ChangeNotifier {
   final chatScrollController = ScrollController();
+  bool aguardandoRespostaNovaBusca = false;
 
   List<Message> messageList = [
     Message(text: '¡Hola!', fromWho: FromWho.inteligentMessage),
@@ -18,7 +19,19 @@ class ChatProvider extends ChangeNotifier {
   List<BibleVerseModel> resultados = [];
   bool aguardandoEscolha = false;
 
+  // Garantia de carregamento
+  bool _jsonCarregado = true; // Como já carregamos no main, já pode ser true
+
   Future<void> sendMessage(String text) async {
+    if (!_jsonCarregado) {
+      messageList.add(Message(
+        text: "Carregando os versículos, por favor aguarde...",
+        fromWho: FromWho.inteligentMessage,
+      ));
+      notifyListeners();
+      return;
+    }
+
     if (text.isEmpty) return;
 
     final newMessage = Message(text: text, fromWho: FromWho.userMessage);
@@ -35,21 +48,56 @@ class ChatProvider extends ChangeNotifier {
   }
 
   void _processarEscolha(String text) {
-    int? escolha = int.tryParse(text);
-    if (escolha != null && escolha > 0 && escolha <= resultados.length) {
-      final v = resultados[escolha - 1];
-      messageList.add(v.toMessageEntity());
+  // Verifica se é uma resposta sim/não para nova busca
+  if (aguardandoRespostaNovaBusca) {
+    if (text.toLowerCase().contains('sim') || 
+        text.toLowerCase().contains('ok') || 
+        text.toLowerCase().contains('quero')) {
       aguardandoEscolha = false;
+      aguardandoRespostaNovaBusca = false;
       resultados = [];
-    } else {
       messageList.add(
         Message(
-          text: 'Escolha inválida. Digite um número válido da lista.',
+          text: 'Ótimo! Pode fazer uma nova busca.',
           fromWho: FromWho.inteligentMessage,
         ),
       );
+      return;
+    } else {
+      aguardandoRespostaNovaBusca = false;
+      String lista = "Ok, aqui estão os versículos novamente:\n";
+      for (int i = 0; i < resultados.length; i++) {
+        final v = resultados[i];
+        lista += "${i + 1}. ${v.livro} ${v.capitulo}:${v.versiculo}\n";
+      }
+      messageList.add(
+        Message(
+          text: lista + "\nPor favor, escolha um número da lista.",
+          fromWho: FromWho.inteligentMessage,
+        ),
+      );
+      return;
     }
   }
+
+  // Tenta converter a entrada para número
+  int? escolha = int.tryParse(text);
+  
+  if (escolha != null && escolha > 0 && escolha <= resultados.length) {
+    final v = resultados[escolha - 1];
+    messageList.add(v.toMessageEntity());
+    aguardandoEscolha = false;
+    resultados = [];
+  } else {
+    messageList.add(
+      Message(
+        text: 'Essa não é uma opção válida. Você gostaria de fazer uma nova busca?',
+        fromWho: FromWho.inteligentMessage,
+      ),
+    );
+    aguardandoRespostaNovaBusca = true;
+  }
+}
 
   void _buscarVersiculos(String query) {
     resultados = BibleService.buscar(query);
@@ -64,7 +112,7 @@ class ChatProvider extends ChangeNotifier {
     } else if (resultados.length == 1) {
       messageList.add(resultados[0].toMessageEntity());
     } else {
-      String lista = "Encontrei ${resultados.length} versículos:\n";
+      String lista = "Encontrei ${resultados.length} versículos:\n\n";
       for (int i = 0; i < resultados.length; i++) {
         final v = resultados[i];
         lista += "${i + 1}. ${v.livro} ${v.capitulo}:${v.versiculo}\n";
