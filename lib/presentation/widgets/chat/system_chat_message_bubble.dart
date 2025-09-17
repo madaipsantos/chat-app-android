@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:yes_no_app/domain/entities/message.dart';
 
-class InteligentMessageBubble extends StatelessWidget {
+class SystemChatMessageBubble extends StatelessWidget {
   final Message message;
 
-  const InteligentMessageBubble({super.key, required this.message});
+  const SystemChatMessageBubble({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {

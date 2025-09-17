@@ -1,26 +1,38 @@
 [
   {
-    "livro": "João",
-    "capitulo": 3,
-    "versiculo": 16,
-    "texto": "Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito..."
+    "livro": "Romanos",
+    "capitulo": 12,
+    "versiculo": 2,
+    "texto": "No os conforméis a este siglo, sino transformaos por medio de la renovación de vuestro entendimiento, para que comprobéis cuál sea la buena voluntad de Dios, agradable y perfecta."
   },
   {
-    "livro": "1 Coríntios",
+    "livro": "1 Corintios",
     "capitulo": 13,
     "versiculo": 4,
-    "texto": "O amor é paciente, o amor é bondoso..."
+    "texto": "El amor es sufrido, es benigno; el amor no tiene envidia, el amor no es jactancioso, no se envanece."
   },
   {
     "livro": "Romanos",
     "capitulo": 5,
     "versiculo": 8,
-    "texto": "Mas Deus prova o seu amor para conosco..."
+    "texto": "Mas Dios muestra su amor para con nosotros, en que siendo aún pecadores, Cristo murió por nosotros."
   },
   {
     "livro": "Hebreus",
     "capitulo": 11,
     "versiculo": 1,
-    "texto": "Ora, a fé é a certeza daquilo que esperamos e a prova das coisas que não vemos."
+    "texto": "Es, pues, la fe la certeza de lo que se espera, la convicción de lo que no se ve."
+  },
+  {
+    "livro": "Juan",
+    "capitulo": 3,
+    "versiculo": 16,
+    "texto": "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna."
+  },
+  {
+    "livro": "Juan",
+    "capitulo": 3,
+    "versiculo": 17,
+    "texto": "Porque no envió Dios a su Hijo al mundo para condenar al mundo, sino para que el mundo sea salvo por él."
   }
 ]

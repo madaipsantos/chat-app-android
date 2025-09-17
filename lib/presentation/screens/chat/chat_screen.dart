@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yes_no_app/domain/entities/message.dart';
 import 'package:yes_no_app/presentation/providers/chat_provider.dart';
-import 'package:yes_no_app/presentation/widgets/chat/inteligent_message_bubble.dart';
-import 'package:yes_no_app/presentation/widgets/chat/user_message_bubble.dart';
+import 'package:yes_no_app/presentation/widgets/chat/system_chat_message_bubble.dart';
+import 'package:yes_no_app/presentation/widgets/chat/user_chat_message_bubble.dart';
 import 'package:yes_no_app/presentation/widgets/shared/message_field_box.dart';
 
 class ChatScreen extends StatelessWidget {
@@ -21,7 +21,7 @@ class ChatScreen extends StatelessWidget {
             ),
           ),
         ),
-        title: const Text('Inteligent Chat'),
+        title: const Text('System Chat Mesages'),
         centerTitle: true,
       ),
       body: _ChatView(),
@@ -47,9 +47,9 @@ class _ChatView extends StatelessWidget {
                 itemCount: chatprovider.messageList.length,
                 itemBuilder: (context, index) {
                   final message = chatprovider.messageList[index];
-                  return (message.fromWho == FromWho.inteligentMessage)
-                      ? InteligentMessageBubble(message: message)
-                      : UsuarioMessageBubble(message: message);
+                  return (message.fromWho == FromWho.systemChatMessage)
+                      ? SystemChatMessageBubble(message: message)
+                      : UserChatMessageBubble(message: message);
                 },
               ),
             ),
