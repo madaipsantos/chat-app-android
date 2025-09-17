@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:yes_no_app/domain/entities/message.dart';
 
-class UsuarioMessageBubble extends StatelessWidget {
+class UserChatMessageBubble extends StatelessWidget {
 
   final Message message;
 
-  const UsuarioMessageBubble({super.key, required this.message});
+  const UserChatMessageBubble({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {

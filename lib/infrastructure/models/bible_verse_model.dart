@@ -29,6 +29,6 @@ class BibleVerseModel {
 
   Message toMessageEntity() => Message(
         text: "$livro $capitulo:$versiculo - $texto",
-        fromWho: FromWho.inteligentMessage,
+        fromWho: FromWho.systemChatMessage,
       );
 }
