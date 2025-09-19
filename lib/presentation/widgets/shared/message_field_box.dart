@@ -36,7 +36,7 @@ class _MessageFieldBoxState extends State<MessageFieldBox> {
   void _handleSubmit() {
     final textValue = textController.text;
     if (textValue.isEmpty) return;
-    
+
     textController.clear();
     widget.onValue(textValue);
     focusNode.requestFocus(); // Mantém o foco após enviar
