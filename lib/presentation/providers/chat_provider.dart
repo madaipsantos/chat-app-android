@@ -61,24 +61,24 @@ class ChatProvider extends ChangeNotifier {
   /// Processa a escolha do usuário
 Future<void> _processChoice(String text) async {
     final upperText = text.toUpperCase().trim();
+    final invalidOptionsMessage = 'Escribe "BUSCAR" para una nueva búsqueda.\nEscribe "VOLVER" para regresar a los versículos.\nEscribe "SALIR" si quieres terminar el chat.';
     
-    if (upperText == 'BUSCAR') {
-        _resetSearch();
-        _addSystemChatMessage('Escribe lo que tengas en mente, por ejemplo: "amor", "perdón" o "Salmos 23:1".');
-        _currentState = SearchState.initial;
-        return;
-    }
-    
-    if (upperText == 'VOLVER') {
-        _showVersesList();
-        _currentState = SearchState.waitingChoice;
-        return;
-    }
-    
-    if (upperText == 'SALIR') {
-        _addSystemChatMessage('¡Hasta luego! Gracias por usar el asistente bíblico.');
-        await Future.delayed(const Duration(seconds: 1));
-        exit(0);
+    switch (upperText) {
+        case 'BUSCAR':
+            _resetSearch();
+            _addSystemChatMessage('Escribe lo que tengas en mente, por ejemplo: "amor", "perdón" o "Salmos 23:1".');
+            _currentState = SearchState.initial;
+            return;
+            
+        case 'VOLVER':
+            _showVersesList();
+            _currentState = SearchState.waitingChoice;
+            return;
+            
+        case 'SALIR':
+            _addSystemChatMessage('¡Hasta luego! Gracias por usar el asistente bíblico.');
+            await Future.delayed(const Duration(seconds: 1));
+            exit(0);
     }
 
     final choice = int.tryParse(text);
@@ -88,7 +88,8 @@ Future<void> _processChoice(String text) async {
         _showVersesList();
     } else {
         _addSystemChatMessage('¡Ups! Esa opción no es válida.');
-        _addSystemChatMessage('Escribe "BUSCAR" para una nueva búsqueda.\nEscribe "VOLVER" para regresar a los versículos.\nEscribe "SALIR" si quieres terminar el chat.');
+        _addSystemChatMessage('Escribe un número válido de la lista para ver el versículo correspondiente, o elige una de las siguientes opciones:');
+        _addSystemChatMessage(invalidOptionsMessage);
         _currentState = SearchState.waitingChoice;
     }
 }
@@ -177,13 +178,6 @@ Future<void> _handleNewSearchResponse(String text) async {
       buffer.write("${i + 1}. ${verse.livro} ${verse.capitulo}:${verse.versiculo}\n");
     }
     return buffer.toString();
-  }
-
-  void _askForNewSearch() {
-    _currentState = SearchState.waitingNewSearch; // Actualizar el estado primero
-    _addSystemChatMessage('¡Ups! Esa opción no es válida.');
-    _addSystemChatMessage('Escribe "BUSCAR" para una nueva búsqueda.\nEscribe "VOLVER" para egresar a la lista de versículos.\nEscribe "SALIR" si quieres terminar el chat.');
-    notifyListeners(); // Asegurar que los cambios se notifiquen
   }
 
   Future<void> moveScrollToBottom() async {
