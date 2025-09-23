@@ -13,25 +13,94 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: CircleAvatar(
-            backgroundImage: NetworkImage(
-              'https://www.shutterstock.com/image-vector/chat-bot-icon-virtual-smart-600nw-2478937553.jpg',
-            ),
+      appBar: _buildAppBar(),
+      body: const _ChatView(),
+    );
+  }
+
+  AppBar _buildAppBar() {
+    return AppBar(
+      leading: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: CircleAvatar(
+          backgroundImage: const NetworkImage(
+            'https://www.shutterstock.com/image-vector/chat-bot-icon-virtual-smart-600nw-2478937553.jpg',
           ),
         ),
-        title: const Text('System Chat Mesages'),
-        centerTitle: true,
       ),
-      body: _ChatView(),
+      title: const Text('System Chat Messages'),
+      centerTitle: true,
     );
   }
 }
 
-class _ChatView extends StatelessWidget {
-  
+class _ChatView extends StatefulWidget {
+  const _ChatView();
+  @override
+  State<_ChatView> createState() => _ChatViewState();
+}
+
+class _ChatViewState extends State<_ChatView> {
+  final _messageFocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _messageFocusNode.addListener(_scrollToBottom);
+  }
+
+  @override
+  void dispose() {
+    _messageFocusNode.removeListener(_scrollToBottom);
+    _messageFocusNode.dispose();
+    super.dispose();
+  }
+
+  void _scrollToBottom() {
+    final chatProvider = Provider.of<ChatProvider>(context, listen: false);
+    
+    Future.delayed(const Duration(milliseconds: 100), () {
+      if (!chatProvider.chatScrollController.hasClients) return;
+      
+      chatProvider.chatScrollController.animateTo(
+        chatProvider.chatScrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOutCubic,
+      );
+    });
+  }
+
+  Widget _buildMessageList(ChatProvider chatProvider) {
+    return ListView.builder(
+      controller: chatProvider.chatScrollController,
+      itemCount: chatProvider.messageList.length,
+      itemBuilder: (context, index) {
+        final message = chatProvider.messageList[index];
+        return _buildMessageBubble(message);
+      },
+    );
+  }
+
+  Widget _buildMessageBubble(Message message) {
+    switch (message.fromWho) {
+      case FromWho.systemChatMessage:
+        return SystemChatMessageBubble(message: message);
+      case FromWho.userChatMessage:
+        return UserChatMessageBubble(message: message);
+      case FromWho.typingIndicator:
+        return const Padding(
+          padding: EdgeInsets.only(left: 20, bottom: 8),
+          child: TypingIndicator(),
+        );
+    }
+  }
+
+  void _handleMessageSend(String value) {
+    final chatProvider = Provider.of<ChatProvider>(context, listen: false);
+    chatProvider.sendMessage(value);
+    _scrollToBottom();
+  }
+
   @override
   Widget build(BuildContext context) {
     final chatProvider = context.watch<ChatProvider>();
@@ -43,29 +112,15 @@ class _ChatView extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: ListView.builder(
-                controller: chatProvider.chatScrollController,
-                itemCount: chatProvider.messageList.length,
-                itemBuilder: (context, index) {
-                  final message = chatProvider.messageList[index];
-                  switch (message.fromWho) {
-                    case FromWho.systemChatMessage:
-                      return SystemChatMessageBubble(message: message);
-                    case FromWho.userChatMessage:
-                      return UserChatMessageBubble(message: message);
-                    case FromWho.typingIndicator:
-                      return const Padding(
-                        padding: EdgeInsets.only(left: 20, bottom: 8),
-                        child: TypingIndicator(),
-                      );
-                  }
-                },
-              ),
+              child: _buildMessageList(chatProvider),
             ),
-            Padding(
+            AnimatedPadding(
               padding: EdgeInsets.only(bottom: keyboardPadding),
+              duration: const Duration(milliseconds: 100),
               child: MessageFieldBox(
-                onValue: (value) => chatProvider.sendMessage(value),
+                focusNode: _messageFocusNode,
+                onValue: _handleMessageSend,
+                onTap: _scrollToBottom,
               ),
             ),
           ],

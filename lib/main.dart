@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await BibleService.carregarVersiculos();
+  await BibleService.instance.initialize();
   runApp(const MyApp());
 }
 
