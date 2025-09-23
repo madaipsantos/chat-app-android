@@ -1,38 +1,56 @@
-import 'dart:convert';
-import 'package:flutter/services.dart';
 import '../models/bible_verse_model.dart';
-import 'package:diacritic/diacritic.dart'; // para remover acentos
+import '../repositories/bible_repository.dart';
+import 'package:diacritic/diacritic.dart';
 
 class BibleService {
-  static List<BibleVerseModel> versiculos = [];
+  final IBibleRepository _repository;
+  List<BibleVerseModel> _versiculos = [];
+  bool _initialized = false;
+  
+  // Singleton instance
+  static final BibleService instance = BibleService._internal(BibleRepository());
+  
+  // Private constructor
+  BibleService._internal(this._repository);
+
+  // Getter para versículos
+  List<BibleVerseModel> get versiculos => _versiculos;
 
   /// Carrega o JSON dos assets
-  static Future<void> carregarVersiculos() async {
-    final String response =
-        await rootBundle.loadString('assets/versiculos.json');
-    final data = jsonDecode(response) as List;
-    versiculos = data.map((v) => BibleVerseModel.fromJson(v)).toList();
+  Future<void> initialize() async {
+    if (!_initialized) {
+      try {
+        _versiculos = await _repository.getAllVerses();
+        _initialized = true;
+      } catch (e) {
+        throw Exception('Falha ao inicializar o serviço: $e');
+      }
+    }
   }
 
   /// Busca por palavra ou frase, ignorando acentos, maiúsculas e pontuação
-  static List<BibleVerseModel> buscar(String query) {
+  List<BibleVerseModel> buscar(String query) {
+    if (query.isEmpty || !_initialized) return [];
+    
     final normalizedQuery = _normalize(query);
+    final queryWords = normalizedQuery.split(' ').where((word) => word.isNotEmpty).toList();
+    
+    if (queryWords.isEmpty) return [];
 
-    return versiculos.where((v) {
+    return _versiculos.where((v) {
       final normalizedTexto = _normalize(v.texto);
       final normalizedLivro = _normalize(v.livro);
-      // Retorna true se o versículo contém qualquer palavra da query
-      final queryWords = normalizedQuery.split(' ');
-      return queryWords.any((word) =>
+      
+      return queryWords.any((word) => 
           normalizedTexto.contains(word) || normalizedLivro.contains(word));
     }).toList();
   }
 
   /// Normaliza texto: minúsculas, remove acentos e pontuação
-  static String _normalize(String text) {
+  String _normalize(String text) {
     String temp = text.toLowerCase();
-    temp = removeDiacritics(temp); // remove acentos
-    temp = temp.replaceAll(RegExp(r'[^\w\s]'), ''); // remove pontuação
+    temp = removeDiacritics(temp);
+    temp = temp.replaceAll(RegExp(r'[^\w\s]'), '');
     return temp;
   }
 }
