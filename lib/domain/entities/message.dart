@@ -1,4 +1,4 @@
-enum FromWho {userChatMessage, systemChatMessage}
+enum FromWho {userChatMessage, systemChatMessage, typingIndicator}
 
 class Message {
   final String text;

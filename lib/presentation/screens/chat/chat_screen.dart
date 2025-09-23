@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yes_no_app/domain/entities/message.dart';
+import 'package:yes_no_app/presentation/widgets/chat/typing_indicator.dart';
 import 'package:yes_no_app/presentation/providers/chat_provider.dart';
 import 'package:yes_no_app/presentation/widgets/chat/system_chat_message_bubble.dart';
 import 'package:yes_no_app/presentation/widgets/chat/user_chat_message_bubble.dart';
@@ -33,8 +34,8 @@ class _ChatView extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-
-    final chatprovider = context.watch<ChatProvider>();
+    final chatProvider = context.watch<ChatProvider>();
+    final keyboardPadding = MediaQuery.of(context).viewInsets.bottom;
 
     return SafeArea(
       child: Padding(
@@ -43,20 +44,29 @@ class _ChatView extends StatelessWidget {
           children: [
             Expanded(
               child: ListView.builder(
-                controller: chatprovider.chatScrollController,
-                itemCount: chatprovider.messageList.length,
+                controller: chatProvider.chatScrollController,
+                itemCount: chatProvider.messageList.length,
                 itemBuilder: (context, index) {
-                  final message = chatprovider.messageList[index];
-                  return (message.fromWho == FromWho.systemChatMessage)
-                      ? SystemChatMessageBubble(message: message)
-                      : UserChatMessageBubble(message: message);
+                  final message = chatProvider.messageList[index];
+                  switch (message.fromWho) {
+                    case FromWho.systemChatMessage:
+                      return SystemChatMessageBubble(message: message);
+                    case FromWho.userChatMessage:
+                      return UserChatMessageBubble(message: message);
+                    case FromWho.typingIndicator:
+                      return const Padding(
+                        padding: EdgeInsets.only(left: 20, bottom: 8),
+                        child: TypingIndicator(),
+                      );
+                  }
                 },
               ),
             ),
-            MessageFieldBox(
-              onValue: (value) {
-                chatprovider.sendMessage(value);
-              },
+            Padding(
+              padding: EdgeInsets.only(bottom: keyboardPadding),
+              child: MessageFieldBox(
+                onValue: (value) => chatProvider.sendMessage(value),
+              ),
             ),
           ],
         ),

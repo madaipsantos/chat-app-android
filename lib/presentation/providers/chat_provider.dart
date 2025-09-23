@@ -13,16 +13,50 @@ enum SearchState {
 
 /// Provedor para gerenciar o estado do chat
 class ChatProvider extends ChangeNotifier {
+  static const Duration typingDelay = Duration(milliseconds: 800);
+  
   final ScrollController chatScrollController = ScrollController();
-  final List<Message> messageList = [
-    Message(text: '¡Hola!', fromWho: FromWho.systemChatMessage),
-    Message(text: 'Soy tu asistente bíblico personal.', fromWho: FromWho.systemChatMessage,),
-    Message(text: '¿Quieres buscar un versículo de la Biblia?', fromWho: FromWho.systemChatMessage),
-    Message(text: 'Escribe lo que tengas en mente, por ejemplo: "amor", "perdón" o "Salmos 23:1".', fromWho: FromWho.systemChatMessage),
-    Message(text: 'Si deseas salir del chat en cualquier momento, puedes escribir "SALIR', fromWho: FromWho.systemChatMessage),
-  ];
+  final List<Message> messageList = [];
 
   List<BibleVerseModel> _searchResults = [];
+  
+  ChatProvider() {
+    // Iniciamos la carga de mensajes iniciales después de que el widget esté construido
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _initializeChat();
+    });
+  }
+  
+  Future<void> _initializeChat() async {
+    final initialMessages = [
+      '¡Hola!',
+      'Soy tu asistente bíblico personal.',
+      '¿Quieres buscar un versículo de la Biblia?',
+      'Escribe lo que tengas en mente, por ejemplo: "amor", "perdón" o "Salmos 23:1".',
+      'Si deseas salir del chat en cualquier momento, puedes escribir "SALIR"',
+    ];
+    
+    for (final message in initialMessages) {
+      // Agregar el indicador de escritura
+      _addMessage(Message(
+        text: '',
+        fromWho: FromWho.typingIndicator,
+      ));
+      await moveScrollToBottom();
+      
+      await Future.delayed(typingDelay);
+      
+      // Reemplazar con el mensaje real
+      messageList.removeLast();
+      _addMessage(Message(
+        text: message,
+        fromWho: FromWho.systemChatMessage,
+      ));
+      
+      await moveScrollToBottom();
+      await Future.delayed(const Duration(milliseconds: 500)); // Pequeña pausa entre mensajes
+    }
+  }
   SearchState _currentState = SearchState.initial;
   bool _isJsonLoaded = true;
 
@@ -66,30 +100,37 @@ Future<void> _processChoice(String text) async {
     switch (upperText) {
         case 'BUSCAR':
             _resetSearch();
-            _addSystemChatMessage('Escribe lo que tengas en mente, por ejemplo: "amor", "perdón" o "Salmos 23:1".');
+            await _addSystemChatMessage('Escribe lo que tengas en mente, por ejemplo: "amor", "perdón" o "Salmos 23:1".');
             _currentState = SearchState.initial;
             return;
             
         case 'VOLVER':
-            _showVersesList();
+            await _showVersesList();
             _currentState = SearchState.waitingChoice;
             return;
             
         case 'SALIR':
-            _addSystemChatMessage('¡Hasta luego! Gracias por usar el asistente bíblico.');
+            await _addSystemMessages([
+                '¡Hasta luego!',
+                'Gracias por usar el asistente bíblico.'
+            ]);
             await Future.delayed(const Duration(seconds: 1));
             exit(0);
     }
 
     final choice = int.tryParse(text);
     if (_isValidChoice(choice)) {
-        _showSelectedVerse(choice!);
+        await _showSelectedVerse(choice!);
+        // Agregamos una pausa más corta para mejorar la fluidez
+        await Future.delayed(const Duration(milliseconds: 300));
         _currentState = SearchState.waitingChoice;
-        _showVersesList();
+        await _showVersesList();
     } else {
-        _addSystemChatMessage('¡Ups! Esa opción no es válida.');
-        _addSystemChatMessage('Escribe un número válido de la lista para ver el versículo correspondiente, o elige una de las siguientes opciones:');
-        _addSystemChatMessage(invalidOptionsMessage);
+        await _addSystemMessages([
+            '¡Ups! Esa opción no es válida.',
+            'Por favor, elige una opción:',
+            invalidOptionsMessage
+        ]);
         _currentState = SearchState.waitingChoice;
     }
 }
@@ -122,11 +163,31 @@ Future<void> _handleNewSearchResponse(String text) async {
 }
 
   /// Métodos auxiliares
-  void _addSystemChatMessage(String text) {
+  Future<void> _addSystemChatMessage(String text) async {
+    // Agregar el indicador de escritura como un mensaje
+    _addMessage(Message(
+      text: '',
+      fromWho: FromWho.typingIndicator,
+    ));
+    await moveScrollToBottom();
+    
+    await Future.delayed(typingDelay);
+    
+    // Reemplazar el último mensaje (indicador) con el mensaje real
+    messageList.removeLast();
     _addMessage(Message(
       text: text,
       fromWho: FromWho.systemChatMessage,
     ));
+    
+    await moveScrollToBottom();
+  }
+
+  Future<void> _addSystemMessages(List<String> messages) async {
+    for (String message in messages) {
+      await _addSystemChatMessage(message);
+      await Future.delayed(const Duration(seconds: 1)); // Pausa más larga entre mensajes
+    }
   }
 
   void _addUserChatMessage(String text) {
@@ -156,8 +217,22 @@ Future<void> _handleNewSearchResponse(String text) async {
   bool _isValidChoice(int? choice) =>
       choice != null && choice > 0 && choice <= _searchResults.length;
 
-  void _showSelectedVerse(int choice) {
-    _addMessage(_searchResults[choice - 1].toMessageEntity());
+  Future<void> _showSelectedVerse(int choice) async {
+    // Agregar el indicador de escritura
+    _addMessage(Message(
+      text: '',
+      fromWho: FromWho.typingIndicator,
+    ));
+    await moveScrollToBottom();
+    
+    await Future.delayed(typingDelay);
+    
+    // Reemplazar con el mensaje real
+    messageList.removeLast();
+    final message = _searchResults[choice - 1].toMessageEntity();
+    _addMessage(message);
+    
+    await moveScrollToBottom();
   }
 
   void _resetSearch() {
@@ -165,10 +240,11 @@ Future<void> _handleNewSearchResponse(String text) async {
     _searchResults = [];
   }
 
-  void _showVersesList() {
+  Future<void> _showVersesList() async {
     final lista = _createVersesList();
-    _addSystemChatMessage(lista);
+    await _addSystemChatMessage(lista);
     _currentState = SearchState.waitingChoice;
+    await moveScrollToBottom();
   }
 
   String _createVersesList() {
@@ -182,19 +258,18 @@ Future<void> _handleNewSearchResponse(String text) async {
 
   Future<void> moveScrollToBottom() async {
     try {
-      // Usar addPostFrameCallback para evitar builds durante el frame
+      await Future.delayed(const Duration(milliseconds: 100));
+      
       WidgetsBinding.instance.addPostFrameCallback((_) async {
         if (!chatScrollController.hasClients) return;
         
-        // Obtener las posiciones de scroll de manera segura
         final maxScroll = chatScrollController.position.maxScrollExtent;
         final currentScroll = chatScrollController.position.pixels;
         
-        // Solo hacer scroll si es necesario
         if (currentScroll < maxScroll) {
           await chatScrollController.animateTo(
             maxScroll,
-            duration: const Duration(milliseconds: 100), // Reducir duración
+            duration: const Duration(milliseconds: 300),
             curve: Curves.easeOut,
           );
         }
