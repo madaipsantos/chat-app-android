@@ -1,6 +1,7 @@
 import '../models/bible_verse_model.dart';
 import '../repositories/bible_repository.dart';
 import 'package:diacritic/diacritic.dart';
+import 'package:flutter/foundation.dart';
 
 class BibleService {
   final IBibleRepository _repository;
@@ -10,6 +11,10 @@ class BibleService {
   // Singleton instance
   static final BibleService instance = BibleService._internal(BibleRepository());
   
+  // Constructor for testing
+  @visibleForTesting
+  BibleService(this._repository);
+
   // Private constructor
   BibleService._internal(this._repository);
 
