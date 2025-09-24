@@ -24,11 +24,13 @@ class ChatProvider extends ChangeNotifier {
   SearchState _currentState = SearchState.initial;
   final bool _isJsonLoaded = true;
   
-  ChatProvider() {
-    // Iniciamos la carga de mensajes iniciales después de que el widget esté construido
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _initializeChat();
-    });
+  ChatProvider({bool initializeChat = true}) {
+    if (initializeChat) {
+      // Iniciamos la carga de mensajes iniciales después de que el widget esté construido
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _initializeChat();
+      });
+    }
   }
   
   /// Inicializa o chat com mensagens de boas-vindas
