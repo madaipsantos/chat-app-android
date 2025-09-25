@@ -13,6 +13,7 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: _buildAppBar(),
       body: const _ChatView(),
     );
@@ -46,12 +47,15 @@ class _ChatViewState extends State<_ChatView> {
   @override
   void initState() {
     super.initState();
-    _messageFocusNode.addListener(_scrollToBottom);
+    _messageFocusNode.addListener(() {
+      if (_messageFocusNode.hasFocus) {
+        _scrollToBottom();
+      }
+    });
   }
 
   @override
   void dispose() {
-    _messageFocusNode.removeListener(_scrollToBottom);
     _messageFocusNode.dispose();
     super.dispose();
   }
@@ -59,13 +63,13 @@ class _ChatViewState extends State<_ChatView> {
   void _scrollToBottom() {
     final chatProvider = Provider.of<ChatProvider>(context, listen: false);
     
-    Future.delayed(const Duration(milliseconds: 100), () {
+    Future.delayed(const Duration(milliseconds: 300), () {
       if (!chatProvider.chatScrollController.hasClients) return;
       
       chatProvider.chatScrollController.animateTo(
         chatProvider.chatScrollController.position.maxScrollExtent,
         duration: const Duration(milliseconds: 300),
-        curve: Curves.easeOutCubic,
+        curve: Curves.easeOut,
       );
     });
   }
