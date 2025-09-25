@@ -10,12 +10,18 @@ class MockChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final chatProvider = context.watch<ChatProvider>();
 
+    final keyboardPadding = MediaQuery.of(context).viewInsets.bottom;
+
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: const Text('System Chat Messages'),
         centerTitle: true,
       ),
-      body: Column(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: Column(
         children: [
           Expanded(
             child: ListView.builder(
@@ -29,13 +35,19 @@ class MockChatScreen extends StatelessWidget {
               },
             ),
           ),
-          TextField(
-            onSubmitted: chatProvider.sendMessage,
-            decoration: const InputDecoration(
-              hintText: 'Digite sua mensagem...',
+          AnimatedPadding(
+            padding: EdgeInsets.only(bottom: keyboardPadding),
+            duration: const Duration(milliseconds: 100),
+            child: TextFormField(
+              onFieldSubmitted: chatProvider.sendMessage,
+              decoration: const InputDecoration(
+                hintText: 'Digite sua mensagem...',
+              ),
             ),
           ),
-        ],
+            ],
+          ),
+        ),
       ),
     );
   }
