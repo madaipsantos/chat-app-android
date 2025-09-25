@@ -13,54 +13,59 @@ enum SearchState {
 
 /// Provedor para gerenciar o estado do chat e interações com a API bíblica
 class ChatProvider extends ChangeNotifier {
-  // Constantes
-  static const Duration typingDelay = Duration(milliseconds: 400);
-  static const Duration messageDelay = Duration(milliseconds: 500);
-  
   // Controllers e estado
   final ScrollController chatScrollController = ScrollController();
   final List<Message> messageList = [];
   List<BibleVerseModel> _searchResults = [];
   SearchState _currentState = SearchState.initial;
   final bool _isJsonLoaded = true;
+  String _userName = '';
+  BuildContext? _context;
   
   ChatProvider({bool initializeChat = true}) {
     if (initializeChat) {
       // Iniciamos la carga de mensajes iniciales después de que el widget esté construido
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        _initializeChat();
+        if (_userName.isEmpty) {
+          _initializeChat();
+        }
       });
     }
   }
   
+  /// Define o nome do usuário
+  void setContext(BuildContext context) {
+    _context = context;
+  }
+
+  void setUserName(String name) {
+    _userName = name;
+    // Inicializamos el chat cada vez que se establece un nuevo nombre
+    messageList.clear();
+    _resetSearch();
+    _currentState = SearchState.initial;
+    _initializeChat();
+    notifyListeners();
+  }
+
   /// Inicializa o chat com mensagens de boas-vindas
   Future<void> _initializeChat() async {
     final initialMessages = [
-      '¡Hola!',
-      'Soy tu asistente bíblico personal.',
-      '¿Quieres buscar un versículo de la Biblia?',
-      'Escribe lo que tengas en mente, por ejemplo: "amor", "perdón" o "Salmos 23:1".',
-      'Si deseas salir del chat en cualquier momento, puedes escribir "SALIR"',
+      'Holá${_userName.isNotEmpty ? ", $_userName" : ""}!',
+      'Soy tu asistente personal con la Biblia.',
+      '¿Quieres buscar un versículo bíblico?',
+      'Escribe lo que tienes en mente, por ejemplo: "amor", "perdón" o "Salmo 23:1".',
+      'Si quieres salir del chat en cualquier momento, puedes escribir "SALIR".',
     ];
     
     for (final message in initialMessages) {
       await _showTypingThenMessage(message);
-      await Future.delayed(messageDelay);
+      await Future.delayed(const Duration(milliseconds: 300));
     }
   }
 
-  /// Mostra o indicador de digitação e depois a mensagem
+  /// Adiciona a mensagem diretamente sem efeito de digitação
   Future<void> _showTypingThenMessage(dynamic messageContent) async {
-    _addMessage(Message(
-      text: '',
-      fromWho: FromWho.typingIndicator,
-    ));
-    await moveScrollToBottom();
-    
-    await Future.delayed(typingDelay);
-    
-    messageList.removeLast();
-    
     if (messageContent is String) {
       _addMessage(Message(
         text: messageContent,
@@ -80,6 +85,37 @@ class ChatProvider extends ChangeNotifier {
   /// Processa a mensagem enviada pelo usuário
   Future<void> sendMessage(String text) async {
     if (text.isEmpty) return;
+    
+    // Verificar SALIR antes de cualquier otra operación
+    if (text.toUpperCase().trim() == 'SALIR') {
+      _addUserChatMessage(text);
+      // Mostrar mensajes de despedida
+      await _addSystemMessages([
+        '¡Hasta luego!',
+        'Gracias por usar el asistente bíblico.'
+      ]);
+      await Future.delayed(const Duration(seconds: 2));
+      
+      // Limpiar completamente el chat
+      messageList.clear();
+      notifyListeners();
+      
+      // Esperar un momento para que se vea la limpieza
+      await Future.delayed(const Duration(milliseconds: 500));
+      
+      // Reiniciar el estado
+      _resetSearch();
+      _currentState = SearchState.initial;
+      
+      // Redirigir a la pantalla inicial y limpiar el historial de navegación
+      if (_context != null) {
+        Navigator.of(_context!).pushNamedAndRemoveUntil(
+          '/',
+          (route) => false,  // Esto removerá todas las rutas anteriores
+        );
+      }
+      return;
+    }
     
     if (!_isJsonLoaded) {
       await _addSystemChatMessage("Cargando versos, por favor espere...");
@@ -121,12 +157,8 @@ Future<void> _processChoice(String text) async {
             return;
             
         case 'SALIR':
-            await _addSystemMessages([
-                '¡Hasta luego!',
-                'Gracias por usar el asistente bíblico.'
-            ]);
-            await Future.delayed(const Duration(seconds: 1));
-            exit(0);
+            // La lógica de salida ahora está en sendMessage
+            return;
     }
 
     final choice = int.tryParse(text);
@@ -173,8 +205,27 @@ Future<void> _processChoice(String text) async {
       '¡Hasta luego!',
       'Gracias por usar el asistente bíblico.'
     ]);
-    await Future.delayed(const Duration(seconds: 1));
-    exit(0);
+    await Future.delayed(const Duration(seconds: 2));
+    
+    // Limpiamos completamente el chat
+    messageList.clear();
+    notifyListeners();
+    
+    // Esperamos un momento para que se vea la limpieza
+    await Future.delayed(const Duration(milliseconds: 500));
+    
+    // Reiniciamos el estado
+    _resetSearch();
+    _currentState = SearchState.initial;
+    _userName = ''; // Limpiamos también el nombre de usuario
+    
+    // Redirigir a la pantalla inicial y limpiar el historial de navegación
+    if (_context != null) {
+      Navigator.of(_context!).pushNamedAndRemoveUntil(
+        '/',
+        (route) => false,
+      );
+    }
   }
 
   /// Adiciona uma mensagem do sistema com efeito de digitação
@@ -186,7 +237,7 @@ Future<void> _processChoice(String text) async {
   Future<void> _addSystemMessages(List<String> messages) async {
     for (String message in messages) {
       await _addSystemChatMessage(message);
-      await Future.delayed(const Duration(milliseconds: 800));
+      await Future.delayed(const Duration(milliseconds: 300));
     }
   }
 
