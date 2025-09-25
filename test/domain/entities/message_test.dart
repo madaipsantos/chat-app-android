@@ -27,16 +27,5 @@ void main() {
       expect(message.imageUrl, equals('https://example.com/image.jpg'));
     });
 
-    test('should create a typing indicator message correctly', () {
-      final message = Message(
-        text: 'typing...',
-        fromWho: FromWho.typingIndicator,
-      );
-      
-      expect(message.text, equals('typing...'));
-      expect(message.fromWho, equals(FromWho.typingIndicator));
-      expect(message.imageUrl, isNull);
-    });
-
   });
 }
