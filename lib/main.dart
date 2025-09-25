@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yes_no_app/config/theme/app_theme.dart';
 import 'package:yes_no_app/infrastructure/services/bible_service.dart';
 import 'package:yes_no_app/presentation/providers/chat_provider.dart';
-import 'package:yes_no_app/presentation/screens/chat/chat_screen.dart';
+import 'package:yes_no_app/presentation/screens/welcome/welcome_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -24,7 +24,10 @@ class MyApp extends StatelessWidget {
         title: 'Yes No App',
         debugShowCheckedModeBanner: false,
         theme: AppTheme(selectedColor: 2).theme(),
-        home: const ChatScreen()
+        initialRoute: '/',
+        routes: {
+          '/': (context) => const WelcomeScreen(),
+        }
       ),
     );
   }

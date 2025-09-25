@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yes_no_app/domain/entities/message.dart';
-import 'package:yes_no_app/presentation/widgets/chat/typing_indicator.dart';
 import 'package:yes_no_app/presentation/providers/chat_provider.dart';
 import 'package:yes_no_app/presentation/widgets/chat/system_chat_message_bubble.dart';
 import 'package:yes_no_app/presentation/widgets/chat/user_chat_message_bubble.dart';
@@ -47,6 +46,10 @@ class _ChatViewState extends State<_ChatView> {
   @override
   void initState() {
     super.initState();
+    // Establecer el contexto en el ChatProvider
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<ChatProvider>(context, listen: false).setContext(context);
+    });
     _messageFocusNode.addListener(() {
       if (_messageFocusNode.hasFocus) {
         _scrollToBottom();
@@ -86,17 +89,10 @@ class _ChatViewState extends State<_ChatView> {
   }
 
   Widget _buildMessageBubble(Message message) {
-    switch (message.fromWho) {
-      case FromWho.systemChatMessage:
-        return SystemChatMessageBubble(message: message);
-      case FromWho.userChatMessage:
-        return UserChatMessageBubble(message: message);
-      case FromWho.typingIndicator:
-        return const Padding(
-          padding: EdgeInsets.only(left: 20, bottom: 8),
-          child: TypingIndicator(),
-        );
-    }
+    return switch (message.fromWho) {
+      FromWho.systemChatMessage => SystemChatMessageBubble(message: message),
+      FromWho.userChatMessage => UserChatMessageBubble(message: message)
+    };
   }
 
   void _handleMessageSend(String value) {
