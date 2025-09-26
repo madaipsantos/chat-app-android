@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import '../models/bible_verse_model.dart';
+import '../../data/models/bible_verse_model.dart';
 
 abstract class IBibleRepository {
   Future<List<BibleVerseModel>> getAllVerses();

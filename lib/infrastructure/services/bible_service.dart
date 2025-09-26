@@ -1,5 +1,5 @@
-import '../models/bible_verse_model.dart';
-import '../repositories/bible_repository.dart';
+import '../../data/models/bible_verse_model.dart';
+import '../../domain/repositories/bible_repository.dart';
 import 'package:diacritic/diacritic.dart';
 import 'package:flutter/foundation.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:yes_no_app/domain/entities/message.dart';
-import 'package:yes_no_app/infrastructure/models/bible_verse_model.dart';
+import 'package:yes_no_app/data/models/bible_verse_model.dart';
 
 void main() {
   group('BibleVerseModel Tests', () {

@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/services.dart';
-import 'package:yes_no_app/infrastructure/repositories/bible_repository.dart';
-import 'package:yes_no_app/infrastructure/models/bible_verse_model.dart';
+import 'package:yes_no_app/domain/repositories/bible_repository.dart';
+import 'package:yes_no_app/data/models/bible_verse_model.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
