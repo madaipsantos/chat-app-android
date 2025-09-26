@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:yes_no_app/domain/entities/message.dart';
-import 'package:yes_no_app/infrastructure/models/bible_verse_model.dart';
+import 'package:yes_no_app/data/models/bible_verse_model.dart';
 import 'package:yes_no_app/infrastructure/services/bible_service.dart';
-import 'package:yes_no_app/infrastructure/repositories/bible_repository.dart';
+import 'package:yes_no_app/domain/repositories/bible_repository.dart';
 import 'package:yes_no_app/presentation/providers/chat_provider.dart';
 
 // Mock do BibleRepository
