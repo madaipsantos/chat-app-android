@@ -38,7 +38,10 @@ class ChatProvider extends ChangeNotifier {
   }
 
   void setUserName(String name) {
-    _userName = name;
+      // Capitaliza la primera letra y pone el resto en minúsculas
+      _userName = name.isNotEmpty
+          ? "${name[0].toUpperCase()}${name.substring(1).toLowerCase()}"
+          : name;
     // Inicializamos el chat cada vez que se establece un nuevo nombre
     messageList.clear();
     _resetSearch();
@@ -50,11 +53,11 @@ class ChatProvider extends ChangeNotifier {
   /// Inicializa o chat com mensagens de boas-vindas
   Future<void> _initializeChat() async {
     final initialMessages = [
-      'Holá${_userName.isNotEmpty ? ", $_userName" : ""}!',
-      'Soy tu asistente personal con la Biblia.',
+      'Holá${_userName.isNotEmpty ? ", $_userName" : ""}! Soy tu asistente bíblico personal.',      
+      'En cualquier momento, puedes escribir: ',
+      'Escribe "BUSCAR" para una nueva búsqueda.\nEscribe "SALIR" si quieres salir del chat.',
       '¿Quieres buscar un versículo bíblico?',
       'Escribe lo que tienes en mente, por ejemplo: "amor", "perdón" o "Salmo 23:1".',
-      'Si quieres salir del chat en cualquier momento, puedes escribir "SALIR".',
     ];
 
     for (final message in initialMessages) {
@@ -85,8 +88,10 @@ class ChatProvider extends ChangeNotifier {
   Future<void> sendMessage(String text) async {
     if (text.isEmpty) return;
 
-    // Verificar SALIR antes de cualquier otra operación
-    if (text.toUpperCase().trim() == 'SALIR') {
+    final upperText = text.toUpperCase().trim();
+
+    // Verificar SALIR y BUSCAR antes de cualquier otra operación
+    if (upperText == 'SALIR') {
       _addUserChatMessage(text);
       // Mostrar mensajes de despedida
       await _addSystemMessages([
@@ -113,6 +118,12 @@ class ChatProvider extends ChangeNotifier {
           (route) => false, // Esto removerá todas las rutas anteriores
         );
       }
+      return;
+    }
+
+    if (upperText == 'BUSCAR') {
+      _addUserChatMessage(text);
+      await _handleSearchCommand();
       return;
     }
 
@@ -144,24 +155,15 @@ class ChatProvider extends ChangeNotifier {
   Future<void> _processChoice(String text) async {
     final upperText = text.toUpperCase().trim();
     final invalidOptionsMessage =
-        'Escribe "BUSCAR" para una nueva búsqueda.\nEscribe "VOLVER" para regresar a los versículos.\nEscribe "SALIR" si quieres terminar el chat.';
+        'Escribe "BUSCAR" para una nueva búsqueda.\nEscribe "SALIR" si quieres terminar el chat.';
 
     switch (upperText) {
-      case 'BUSCAR':
-        _resetSearch();
-        await _addSystemChatMessage(
-          'Escribe lo que tengas en mente, por ejemplo: "amor", "perdón" o "Salmos 23:1".',
-        );
-        _currentState = SearchState.initial;
-        return;
-
       case 'VOLVER':
         await _showVersesList();
         _currentState = SearchState.waitingChoice;
         return;
 
       case 'SALIR':
-        // La lógica de salida ahora está en sendMessage
         return;
     }
 
@@ -218,7 +220,7 @@ class ChatProvider extends ChangeNotifier {
     notifyListeners();
 
     // Esperamos un momento para que se vea la limpieza
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(const Duration(milliseconds: 300));
 
     // Reiniciamos el estado
     _resetSearch();
@@ -270,7 +272,11 @@ class ChatProvider extends ChangeNotifier {
 
   /// Mostra um versículo selecionado pelo usuário
   Future<void> _showSelectedVerse(int choice) async {
-    await _showTypingThenMessage(_searchResults[choice - 1].toMessageEntity());
+    final verse = _searchResults[choice - 1];
+    await _showTypingThenMessage(Message(
+      text: verse.toMessageEntity().text,
+      fromWho: FromWho.verseMessage,
+    ));
   }
 
   void _resetSearch() {
@@ -281,6 +287,10 @@ class ChatProvider extends ChangeNotifier {
   Future<void> _showVersesList() async {
     final lista = _createVersesList();
     await _addSystemChatMessage(lista);
+    await _addSystemChatMessage("Por favor, elige un número de la lista para ver el versículo completo, o escribe una de las opciones de abajo.");
+    await _addSystemChatMessage("Escribe 'BUSCAR' para una nueva búsqueda.\nEscribe 'SALIR' si quieres terminar el chat.");
+    // Mostrar mensajes de navegación si hay más de una página
+
     _currentState = SearchState.waitingChoice;
     await moveScrollToBottom();
   }
@@ -289,12 +299,14 @@ class ChatProvider extends ChangeNotifier {
     final buffer = StringBuffer(
       "Encontré ${_searchResults.length} versículos:\n\n",
     );
+
     for (var i = 0; i < _searchResults.length; i++) {
       final verse = _searchResults[i];
       buffer.write(
         "${i + 1}. ${verse.livro} ${verse.capitulo}:${verse.versiculo}\n",
       );
     }
+
     return buffer.toString();
   }
 
@@ -320,5 +332,12 @@ class ChatProvider extends ChangeNotifier {
     } catch (e) {
       // Ignora erros de scroll, pois não são críticos para a funcionalidade
     }
+  }
+
+  /// Maneja el comando BUSCAR
+  Future<void> _handleSearchCommand() async {
+    _resetSearch();
+    await _addSystemChatMessage('Escribe el tema o versículo que deseas buscar.');
+    _currentState = SearchState.initial;
   }
 }
