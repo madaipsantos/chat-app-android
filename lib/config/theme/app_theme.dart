@@ -6,9 +6,9 @@ const List<Color> _colorThemes = [
   _customColor,
   Colors.yellow,
   Colors.blue,
-  Colors.green,
-  Colors.orange,
   Colors.purple,
+  Colors.orange,
+  Colors.green,
 ];
 
 class AppTheme {

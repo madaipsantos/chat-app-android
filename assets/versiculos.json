@@ -1,38 +1,2193 @@
 [
   {
+    "livro": "Génesis",
+    "capitulo": 1,
+    "versiculo": 1,
+    "texto": "En el principio creó Dios los cielos y la tierra."
+  },
+  {
+    "livro": "Éxodo",
+    "capitulo": 20,
+    "versiculo": 3,
+    "texto": "No tendrás dioses ajenos delante de mí."
+  },
+  {
+    "livro": "Levítico",
+    "capitulo": 19,
+    "versiculo": 18,
+    "texto": "No te vengarás, ni guardarás rencor a los hijos de tu pueblo, sino amarás a tu prójimo como a ti mismo. Yo Jehová."
+  },
+  {
+    "livro": "Números",
+    "capitulo": 6,
+    "versiculo": 24,
+    "texto": "Jehová te bendiga, y te guarde;"
+  },
+  {
+    "livro": "Deuteronomio",
+    "capitulo": 6,
+    "versiculo": 5,
+    "texto": "Y amarás a Jehová tu Dios de todo tu corazón, y de toda tu alma, y con todas tus fuerzas."
+  },
+  {
+    "livro": "Josué",
+    "capitulo": 1,
+    "versiculo": 8,
+    "texto": "Nunca se apartará de tu boca este libro de la ley, sino que de día y de noche meditarás en él, para que guardes y hagas conforme a todo lo que en él está escrito; porque entonces harás prosperar tu camino, y todo te saldrá bien."
+  },
+  {
+    "livro": "Jueces",
+    "capitulo": 2,
+    "versiculo": 16,
+    "texto": "Y Jehová levantó jueces que los librasen de mano de los que les despojaban."
+  },
+  {
+    "livro": "Rut",
+    "capitulo": 1,
+    "versiculo": 16,
+    "texto": "Respondió Rut: No me ruegues que te deje, y me aparte de ti; porque a dondequiera que tú fueres, iré yo, y dondequiera que vivieres, viviré. Tu pueblo será mi pueblo, y tu Dios mi Dios."
+  },
+  {
+    "livro": "1 Samuel",
+    "capitulo": 16,
+    "versiculo": 7,
+    "texto": "Y Jehová respondió a Samuel: No mires a su parecer, ni a lo grande de su estatura, porque yo lo desecho; porque Jehová no mira lo que mira el hombre; pues el hombre mira lo que está delante de sus ojos, pero Jehová mira el corazón."
+  },
+  {
+    "livro": "2 Samuel",
+    "capitulo": 22,
+    "versiculo": 3,
+    "texto": "Dios mío, fortaleza mía, en él confiaré; Mi escudo, y la fuerza de mi salvación, mi alto refugio; Salvador mío; de violencia me libraste."
+  },
+  {
+    "livro": "1 Reyes",
+    "capitulo": 3,
+    "versiculo": 9,
+    "texto": "Da, pues, a tu siervo corazón entendido para juzgar a tu pueblo, y para discernir entre lo bueno y lo malo; porque ¿quién podrá gobernar este tu pueblo tan grande?"
+  },
+  {
+    "livro": "2 Reyes",
+    "capitulo": 20,
+    "versiculo": 5,
+    "texto": "Vuelve, y di a Ezequías, príncipe de mi pueblo: Así dice Jehová, el Dios de David tu padre: Yo he oído tu oración, y he visto tus lágrimas; he aquí que yo te sano; al tercer día subirás a la casa de Jehová."
+  },
+  {
+    "livro": "1 Crónicas",
+    "capitulo": 28,
+    "versiculo": 9,
+    "texto": "Y tú, Salomón, hijo mío, reconoce al Dios de tu padre, y sírvele con corazón perfecto y con ánimo voluntario; porque Jehová escudriña los corazones de todos, y entiende todo intento de los pensamientos. Si tú le buscares, lo hallarás; mas si lo dejares, él te desechará para siempre."
+  },
+  {
+    "livro": "2 Crónicas",
+    "capitulo": 7,
+    "versiculo": 14,
+    "texto": "si se humillare mi pueblo, sobre el cual mi nombre es invocado, y oraren, y buscaren mi rostro, y se convirtieren de sus malos caminos; entonces yo oiré desde los cielos, y perdonaré sus pecados, y sanaré su tierra."
+  },
+  {
+    "livro": "Esdras",
+    "capitulo": 7,
+    "versiculo": 10,
+    "texto": "Porque Esdras había preparado su corazón para inquirir la ley de Jehová y para cumplirla, y para enseñar en Israel sus estatutos y decretos."
+  },
+  {
+    "livro": "Nehemías",
+    "capitulo": 8,
+    "versiculo": 10,
+    "texto": "Luego les dijo: Id, comed grosuras, y bebed vino dulce, y enviad porciones a los que no tienen nada preparado; porque día santo es a nuestro Señor; no os entristezcáis, porque el gozo de Jehová es vuestra fuerza."
+  },
+  {
+    "livro": "Ester",
+    "capitulo": 4,
+    "versiculo": 14,
+    "texto": "Porque si callas absolutamente en este tiempo, la liberación y el alivio vendrá de alguna otra parte para los judíos; mas tú y la casa de tu padre pereceréis. ¿Y quién sabe si para esta hora has llegado al reino?"
+  },
+  {
+    "livro": "Job",
+    "capitulo": 19,
+    "versiculo": 25,
+    "texto": "Yo sé que mi Redentor vive, y al fin se levantará sobre el polvo;"
+  },
+  {
+    "livro": "Salmos",
+    "capitulo": 46,
+    "versiculo": 1,
+    "texto": "Dios es nuestro amparo y fortaleza, nuestro pronto auxilio en las tribulaciones."
+  },
+  {
+    "livro": "Proverbios",
+    "capitulo": 3,
+    "versiculo": 6,
+    "texto": "Reconócelo en todos tus caminos, y él enderezará tus veredas."
+  },
+  {
+    "livro": "Eclesiastés",
+    "capitulo": 12,
+    "versiculo": 1,
+    "texto": "Acuérdate de tu Creador en los días de tu juventud, antes que vengan los días malos, y lleguen los años de los cuales digas: No tengo en ellos contentamiento;"
+  },
+  {
+    "livro": "Cantares",
+    "capitulo": 2,
+    "versiculo": 16,
+    "texto": "Mi amado es mío, y yo suya; Él apacienta entre lirios."
+  },
+  {
+    "livro": "Isaías",
+    "capitulo": 53,
+    "versiculo": 5,
+    "texto": "Mas él herido fue por nuestras rebeliones, molido por nuestros pecados; el castigo de nuestra paz fue sobre él, y por su llaga fuimos nosotros curados."
+  },
+  {
+    "livro": "Jeremías",
+    "capitulo": 33,
+    "versiculo": 3,
+    "texto": "Clama a mí, y yo te responderé, y te enseñaré cosas grandes y ocultas que tú no conoces."
+  },
+  {
+    "livro": "Lamentaciones",
+    "capitulo": 3,
+    "versiculo": 22,
+    "texto": "Por la misericordia de Jehová no hemos sido consumidos, porque nunca decayeron sus misericordias."
+  },
+  {
+    "livro": "Ezequiel",
+    "capitulo": 36,
+    "versiculo": 26,
+    "texto": "Os daré corazón nuevo, y pondré espíritu nuevo dentro de vosotros; y quitaré de vuestra carne el corazón de piedra, y os daré un corazón de carne."
+  },
+  {
+    "livro": "Daniel",
+    "capitulo": 2,
+    "versiculo": 20,
+    "texto": "Y Daniel habló y dijo: Sea bendito el nombre de Dios de siglos en siglos, porque la sabiduría y la fuerza son suyas."
+  },
+  {
+    "livro": "Oseas",
+    "capitulo": 6,
+    "versiculo": 6,
+    "texto": "Porque misericordia quiero, y no sacrificio, y conocimiento de Dios más que holocaustos."
+  },
+  {
+    "livro": "Joel",
+    "capitulo": 2,
+    "versiculo": 28,
+    "texto": "Y después de esto derramaré mi Espíritu sobre toda carne, y profetizarán vuestros hijos y vuestras hijas; vuestros ancianos soñarán sueños, y vuestros jóvenes verán visiones."
+  },
+  {
+    "livro": "Amós",
+    "capitulo": 5,
+    "versiculo": 24,
+    "texto": "Pero corra el juicio como agua, y la justicia como impetuoso arroyo."
+  },
+  {
+    "livro": "Miqueas",
+    "capitulo": 6,
+    "versiculo": 8,
+    "texto": "¿Qué pide Jehová de ti, sino solamente hacer justicia, y amar misericordia, y humillarte ante tu Dios?"
+},
+{
+    "livro": "Nahúm",
+    "capitulo": 1,
+    "versiculo": 7,
+    "texto": "Jehová es bueno, fortaleza en el día de la angustia; y conoce a los que en él confían."
+},
+{
+    "livro": "Habacuc",
+    "capitulo": 2,
+    "versiculo": 4,
+    "texto": "Mas el justo por su fe vivirá."
+},
+{
+    "livro": "Sofonías",
+    "capitulo": 3,
+    "versiculo": 17,
+    "texto": "Jehová está en medio de ti, poderoso, él salvará; se gozará sobre ti con alegría, callará de amor, se regocijará sobre ti con cánticos."
+},
+{
+    "livro": "Hageo",
+    "capitulo": 2,
+    "versiculo": 4,
+    "texto": "Esforzaos ahora, Zorobabel, dice Jehová; esforzaos, sumo sacerdote Josué hijo de Josadac; esforzaos, pueblo todo de la tierra, dice Jehová, y trabajad; porque yo estoy con vosotros, dice Jehová de los ejércitos."
+},
+{
+    "livro": "Zacarías",
+    "capitulo": 4,
+    "versiculo": 6,
+    "texto": "No con ejército, ni con fuerza, sino con mi Espíritu, ha dicho Jehová de los ejércitos."
+},
+{
+    "livro": "Malaquías",
+    "capitulo": 3,
+    "versiculo": 10,
+    "texto": "Traed todos los diezmos al alfolí y haya alimento en mi casa; y probadme ahora en esto, dice Jehová de los ejércitos, si no os abriré las ventanas de los cielos, y derramaré sobre vosotros bendición hasta que sobreabunde."
+},
+{
+    "livro": "Mateo",
+    "capitulo": 5,
+    "versiculo": 9,
+    "texto": "Bienaventurados los pacificadores, porque ellos serán llamados hijos de Dios."
+},
+{
+    "livro": "Marcos",
+    "capitulo": 10,
+    "versiculo": 45,
+    "texto": "Porque el Hijo del Hombre no vino para ser servido, sino para servir, y para dar su vida en rescate por muchos."
+},
+{
+    "livro": "Lucas",
+    "capitulo": 6,
+    "versiculo": 31,
+    "texto": "Y como queréis que hagan los hombres con vosotros, así también haced vosotros con ellos."
+},
+{
+    "livro": "Juan",
+    "capitulo": 1,
+    "versiculo": 12,
+    "texto": "Mas a todos los que le recibieron, a los que creen en su nombre, les dio potestad de ser hechos hijos de Dios;"
+},
+{
+    "livro": "Hechos",
+    "capitulo": 4,
+    "versiculo": 12,
+    "texto": "Y en ningún otro hay salvación; porque no hay otro nombre bajo el cielo, dado a los hombres, en que podamos ser salvos."
+},
+{
+    "livro": "Romanos",
+    "capitulo": 6,
+    "versiculo": 23,
+    "texto": "Porque la paga del pecado es muerte, mas la dádiva de Dios es vida eterna en Cristo Jesús Señor nuestro."
+},
+{
+    "livro": "1 Corintios",
+    "capitulo": 10,
+    "versiculo": 13,
+    "texto": "No os ha sobrevenido ninguna tentación que no sea humana; pero fiel es Dios, que no os dejará ser tentados más de lo que podéis resistir, sino que dará también juntamente con la tentación la salida, para que podáis soportar."
+},
+{
+    "livro": "2 Corintios",
+    "capitulo": 5,
+    "versiculo": 17,
+    "texto": "De modo que si alguno está en Cristo, nueva criatura es; las cosas viejas pasaron; he aquí todas son hechas nuevas."
+},
+{
+    "livro": "Gálatas",
+    "capitulo": 6,
+    "versiculo": 7,
+    "texto": "No os engañéis; Dios no puede ser burlado: pues todo lo que el hombre sembrare, eso también segará."
+},
+{
+    "livro": "Efesios",
+    "capitulo": 4,
+    "versiculo": 32,
+    "texto": "Antes sed benignos unos con otros, misericordiosos, perdonándoos unos a otros, como Dios también os ha perdonado a vosotros en Cristo."
+},
+{
+    "livro": "Filipenses",
+    "capitulo": 4,
+    "versiculo": 6,
+    "texto": "Por nada estéis afanosos, sino sean conocidas vuestras peticiones delante de Dios en toda oración y ruego, con acción de gracias."
+},
+{
+    "livro": "Colosenses",
+    "capitulo": 3,
+    "versiculo": 23,
+    "texto": "Y todo lo que hagáis, hacedlo de corazón, como para el Señor y no para los hombres;"
+},
+{
+    "livro": "1 Tesalonicenses",
+    "capitulo": 5,
+    "versiculo": 16,
+    "texto": "Estad siempre gozosos."
+},
+{
+    "livro": "2 Tesalonicenses",
+    "capitulo": 3,
+    "versiculo": 10,
+    "texto": "Porque también cuando estábamos con vosotros, os ordenábamos esto: Si alguno no quiere trabajar, tampoco coma."
+},
+{
+    "livro": "1 Timoteo",
+    "capitulo": 4,
+    "versiculo": 12,
+    "texto": "Ninguno tenga en poco tu juventud, sino sé ejemplo de los creyentes en palabra, conducta, amor, espíritu, fe y pureza."
+},
+{
+    "livro": "2 Timoteo",
+    "capitulo": 4,
+    "versiculo": 7,
+    "texto": "He peleado la buena batalla, he acabado la carrera, he guardado la fe."
+},
+{
+    "livro": "Tito",
+    "capitulo": 3,
+    "versiculo": 5,
+    "texto": "nos salvó, no por obras de justicia que nosotros hubiéramos hecho, sino por su misericordia, por el lavamiento de la regeneración y por la renovación en el Espíritu Santo,"
+},
+{
+    "livro": "Filemón",
+    "capitulo": 1,
+    "versiculo": 6,
+    "texto": "para que la participación de tu fe sea eficaz en el conocimiento de todo el bien que está en vosotros por Cristo Jesús."
+},
+{
+    "livro": "Hebreos",
+    "capitulo": 4,
+    "versiculo": 12,
+    "texto": "Porque la palabra de Dios es viva y eficaz, y más cortante que toda espada de dos filos; y penetra hasta partir el alma y el espíritu, las coyunturas y los tuétanos, y discierne los pensamientos y las intenciones del corazón."
+},
+{
+    "livro": "Santiago",
+    "capitulo": 2,
+    "versiculo": 17,
+    "texto": "Así también la fe, si no tiene obras, es en sí misma muerta."
+},
+{
+    "livro": "1 Pedro",
+    "capitulo": 5,
+    "versiculo": 7,
+    "texto": "echando toda vuestra ansiedad sobre él, porque él tiene cuidado de vosotros."
+},
+{
+    "livro": "2 Pedro",
+    "capitulo": 3,
+    "versiculo": 9,
+    "texto": "El Señor no retarda su promesa, según algunos la tienen por tardanza, sino que es paciente para con nosotros, no queriendo que ninguno perezca, sino que todos procedan al arrepentimiento."
+},
+{
+    "livro": "1 Juan",
+    "capitulo": 1,
+    "versiculo": 9,
+    "texto": "Si confesamos nuestros pecados, él es fiel y justo para perdonar nuestros pecados, y limpiarnos de toda maldad."
+},
+{
+    "livro": "2 Juan",
+    "capitulo": 1,
+    "versiculo": 6,
+    "texto": "Y este es el amor, que andemos según sus mandamientos. Este es el mandamiento: que andéis en amor, como vosotros habéis oído desde el principio."
+},
+{
+    "livro": "3 Juan",
+    "capitulo": 1,
+    "versiculo": 4,
+    "texto": "No tengo yo mayor gozo que este, el oír que mis hijos andan en la verdad."
+},
+{
+    "livro": "Judas",
+    "capitulo": 1,
+    "versiculo": 24,
+    "texto": "Y a aquel que es poderoso para guardaros sin caída, y presentaros sin mancha delante de su gloria con gran alegría,"
+},
+{
+    "livro": "Apocalipsis",
+    "capitulo": 21,
+    "versiculo": 4,
+    "texto": "Enjugará Dios toda lágrima de los ojos de ellos; y ya no habrá muerte, ni más llanto, ni clamor, ni dolor; porque las primeras cosas pasaron."
+},
+{
+    "livro": "Salmos",
+    "capitulo": 19,
+    "versiculo": 14,
+    "texto": "Sean gratos los dichos de mi boca y la meditación de mi corazón delante de ti, Oh Jehová, roca mía, y redentor mío."
+},
+{
+    "livro": "Mateo",
+    "capitulo": 7,
+    "versiculo": 7,
+    "texto": "Pedid, y se os dará; buscad, y hallaréis; llamad, y se os abrirá."
+},
+{
+    "livro": "Lucas",
+    "capitulo": 19,
+    "versiculo": 10,
+    "texto": "Porque el Hijo del Hombre vino a buscar y a salvar lo que se había perdido."
+},
+{
+    "livro": "Juan",
+    "capitulo": 15,
+    "versiculo": 5,
+    "texto": "Yo soy la vid, vosotros los pámpanos; el que permanece en mí, y yo en él, este lleva mucho fruto; porque separados de mí nada podéis hacer."
+},
+{
     "livro": "Romanos",
     "capitulo": 12,
     "versiculo": 2,
     "texto": "No os conforméis a este siglo, sino transformaos por medio de la renovación de vuestro entendimiento, para que comprobéis cuál sea la buena voluntad de Dios, agradable y perfecta."
-  },
-  {
+},
+{
     "livro": "1 Corintios",
+    "capitulo": 6,
+    "versiculo": 19,
+    "texto": "¿O ignoráis que vuestro cuerpo es templo del Espíritu Santo, el cual está en vosotros, el cual tenéis de Dios, y que no sois vuestros?"
+},
+{
+    "livro": "Gálatas",
+    "capitulo": 3,
+    "versiculo": 26,
+    "texto": "pues todos sois hijos de Dios por la fe en Cristo Jesús;"
+},
+{
+    "livro": "Efesios",
+    "capitulo": 6,
+    "versiculo": 11,
+    "texto": "Vestíos de toda la armadura de Dios, para que podáis estar firmes contra las asechanzas del diablo."
+},
+{
+    "livro": "Filipenses",
+    "capitulo": 2,
+    "versiculo": 3,
+    "texto": "Nada hagáis por contienda o por vanagloria; antes bien con humildad, estimando cada uno a los demás como superiores a sí mismo;"
+},
+{
+    "livro": "Colosenses",
+    "capitulo": 3,
+    "versiculo": 13,
+    "texto": "soportándoos unos a otros, y perdonándoos unos a otros si alguno tuviere queja contra otro. De la manera que Cristo os perdonó, así también hacedlo vosotros."
+},
+{
+    "livro": "1 Tesalonicenses",
+    "capitulo": 5,
+    "versiculo": 18,
+    "texto": "Dad gracias en todo, porque esta es la voluntad de Dios para con vosotros en Cristo Jesús."
+},
+{
+    "livro": "2 Timoteo",
+    "capitulo": 1,
+    "versiculo": 7,
+    "texto": "Porque no nos ha dado Dios espíritu de cobardía, sino de poder, de amor y de dominio propio."
+},
+{
+    "livro": "Hebreos",
+    "capitulo": 10,
+    "versiculo": 25,
+    "texto": "no dejando de congregarnos, como algunos tienen por costumbre, sino exhortándonos; y tanto más, cuanto veis que aquel día se acerca."
+},
+{
+    "livro": "Santiago",
+    "capitulo": 4,
+    "versiculo": 7,
+    "texto": "Someteos, pues, a Dios; resistid al diablo, y huirá de vosotros."
+},
+{
+    "livro": "1 Pedro",
+    "capitulo": 4,
+    "versiculo": 8,
+    "texto": "Y ante todo, tened entre vosotros ferviente amor; porque el amor cubrirá multitud de pecados."
+},
+{
+    "livro": "1 Juan",
+    "capitulo": 4,
+    "versiculo": 8,
+    "texto": "El que no ama, no ha conocido a Dios; porque Dios es amor."
+},
+{
+    "livro": "Salmos",
+    "capitulo": 1,
+    "versiculo": 2,
+    "texto": "Sino que en la ley de Jehová está su delicia, Y en su ley medita de día y de noche."
+},
+{
+    "livro": "Proverbios",
+    "capitulo": 22,
+    "versiculo": 6,
+    "texto": "Instruye al niño en su camino, Y aun cuando fuere viejo no se apartará de él."
+},
+{
+    "livro": "Isaías",
+    "capitulo": 40,
+    "versiculo": 31,
+    "texto": "pero los que esperan a Jehová tendrán nuevas fuerzas; levantarán alas como las águilas; correrán, y no se cansarán; caminarán, y no se fatigarán."
+},
+{
+    "livro": "Mateo",
+    "capitulo": 28,
+    "versiculo": 19,
+    "texto": "Por tanto, id, y haced discípulos a todas las naciones, bautizándolos en el nombre del Padre, y del Hijo, y del Espíritu Santo;"
+},
+{
+    "livro": "Hechos",
+    "capitulo": 1,
+    "versiculo": 8,
+    "texto": "pero recibiréis poder, cuando haya venido sobre vosotros el Espíritu Santo, y me seréis testigos en Jerusalén, en toda Judea, en Samaria, y hasta lo último de la tierra."
+},
+{
+    "livro": "Romanos",
+    "capitulo": 10,
+    "versiculo": 9,
+    "texto": "que si confesares con tu boca que Jesús es el Señor, y creyeres en tu corazón que Dios le levantó de los muertos, serás salvo."
+},
+{
+    "livro": "1 Corintios",
+    "capitulo": 15,
+    "versiculo": 58,
+    "texto": "Así que, hermanos míos amados, estad firmes y constantes, creciendo en la obra del Señor siempre, sabiendo que vuestro trabajo en el Señor no es en vano."
+},
+{
+    "livro": "Efesios",
+    "capitulo": 5,
+    "versiculo": 2,
+    "texto": "Y andad en amor, como también Cristo nos amó, y se entregó a sí mismo por nosotros, ofrenda y sacrificio a Dios en olor suave."
+},
+{
+    "livro": "Hebreos",
     "capitulo": 13,
+    "versiculo": 8,
+    "texto": "Jesucristo es el mismo ayer, y hoy, y por los siglos."
+},
+{
+    "livro": "Apocalipsis",
+    "capitulo": 3,
+    "versiculo": 11,
+    "texto": "He aquí, yo vengo pronto; retén lo que tienes, para que ninguno tome tu corona."
+},
+{
+    "livro": "Salmos",
+    "capitulo": 34,
+    "versiculo": 18,
+    "texto": "Cercano está Jehová a los quebrantados de corazón; Y salva a los contritos de espíritu."
+},
+{
+    "livro": "Proverbios",
+    "capitulo": 18,
+    "versiculo": 10,
+    "texto": "Torre fuerte es el nombre de Jehová; A él correrá el justo, y será levantado."
+},
+{
+    "livro": "Isaías",
+    "capitulo": 26,
+    "versiculo": 3,
+    "texto": "Tú guardarás en completa paz a aquel cuyo pensamiento en ti persevera; porque en ti ha confiado."
+},
+{
+    "livro": "Jeremías",
+    "capitulo": 17,
+    "versiculo": 9,
+    "texto": "Engañoso es el corazón más que todas las cosas, y perverso; ¿quién lo conocerá?"
+},
+{
+    "livro": "Oseas",
+    "capitulo": 14,
     "versiculo": 4,
-    "texto": "El amor es sufrido, es benigno; el amor no tiene envidia, el amor no es jactancioso, no se envanece."
-  },
-  {
+    "texto": "Yo sanaré su rebelión, los amaré de pura gracia; porque mi ira se apartó de ellos."
+},
+{
+    "livro": "Mateo",
+    "capitulo": 18,
+    "versiculo": 20,
+    "texto": "Porque donde están dos o tres congregados en mi nombre, allí estoy yo en medio de ellos."
+},
+{
+    "livro": "Marcos",
+    "capitulo": 11,
+    "versiculo": 24,
+    "texto": "Por tanto, os digo que todo lo que pidiereis orando, creed que lo recibiréis, y os vendrá."
+},
+{
+    "livro": "Lucas",
+    "capitulo": 12,
+    "versiculo": 34,
+    "texto": "Porque donde está vuestro tesoro, allí estará también vuestro corazón."
+},
+{
+    "livro": "Juan",
+    "capitulo": 8,
+    "versiculo": 32,
+    "texto": "y conoceréis la verdad, y la verdad os hará libres."
+},
+{
+    "livro": "Hechos",
+    "capitulo": 2,
+    "versiculo": 38,
+    "texto": "Pedro les dijo: Arrepentíos, y bautícese cada uno de vosotros en el nombre de Jesucristo para perdón de los pecados; y recibiréis el don del Espíritu Santo."
+},
+{
     "livro": "Romanos",
     "capitulo": 5,
     "versiculo": 8,
     "texto": "Mas Dios muestra su amor para con nosotros, en que siendo aún pecadores, Cristo murió por nosotros."
-  },
-  {
-    "livro": "Hebreus",
-    "capitulo": 11,
-    "versiculo": 1,
-    "texto": "Es, pues, la fe la certeza de lo que se espera, la convicción de lo que no se ve."
-  },
-  {
-    "livro": "Juan",
+},
+{
+    "livro": "1 Corintios",
+    "capitulo": 16,
+    "versiculo": 14,
+    "texto": "Todas vuestras cosas sean hechas con amor."
+},
+{
+    "livro": "2 Corintios",
+    "capitulo": 9,
+    "versiculo": 7,
+    "texto": "Cada uno dé como propuso en su corazón: no con tristeza, ni por necesidad, porque Dios ama al dador alegre."
+},
+{
+    "livro": "Gálatas",
+    "capitulo": 2,
+    "versiculo": 20,
+    "texto": "Con Cristo estoy juntamente crucificado, y ya no vivo yo, mas vive Cristo en mí; y lo que ahora vivo en la carne, lo vivo en la fe del Hijo de Dios, el cual me amó y se entregó a sí mismo por mí."
+},
+{
+    "livro": "Efesios",
+    "capitulo": 4,
+    "versiculo": 26,
+    "texto": "Airaos, pero no pequéis; no se ponga el sol sobre vuestro enojo,"
+},
+{
+    "livro": "Filipenses",
+    "capitulo": 3,
+    "versiculo": 14,
+    "texto": "prosigo a la meta, al premio del supremo llamamiento de Dios en Cristo Jesús."
+},
+{
+    "livro": "Colosenses",
     "capitulo": 3,
     "versiculo": 16,
-    "texto": "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna."
-  },
-  {
+    "texto": "La palabra de Cristo more en abundancia en vosotros, enseñándoos y exhortándoos unos a otros en toda sabiduría, cantando con gracia en vuestros corazones al Señor con salmos e himnos y cánticos espirituales."
+},
+{
+    "livro": "1 Tesalonicenses",
+    "capitulo": 4,
+    "versiculo": 11,
+    "texto": "y que procuréis tener tranquilidad, y ocuparos en vuestros negocios, y trabajar con vuestras manos de la manera que os hemos mandado,"
+},
+{
+    "livro": "2 Tesalonicenses",
+    "capitulo": 2,
+    "versiculo": 16,
+    "texto": "Y el mismo Jesucristo Señor nuestro, y Dios nuestro Padre, el cual nos amó y nos dio consolación eterna y buena esperanza por gracia,"
+},
+{
+    "livro": "1 Timoteo",
+    "capitulo": 6,
+    "versiculo": 10,
+    "texto": "porque raíz de todos los males es el amor al dinero, el cual codiciando algunos, se extraviaron de la fe, y fueron traspasados de muchos dolores."
+},
+{
+    "livro": "Tito",
+    "capitulo": 2,
+    "versiculo": 13,
+    "texto": "aguardando la esperanza bienaventurada y la manifestación gloriosa de nuestro gran Dios y Salvador Jesucristo,"
+},
+{
+    "livro": "Hebreos",
+    "capitulo": 12,
+    "versiculo": 1,
+    "texto": "Por tanto, nosotros también, teniendo en derredor nuestro tan grande nube de testigos, despojémonos de todo peso y del pecado que nos asedia, y corramos con paciencia la carrera que tenemos por delante,"
+},
+{
+    "livro": "Santiago",
+    "capitulo": 1,
+    "versiculo": 19,
+    "texto": "Por esto, mis amados hermanos, todo hombre sea pronto para oír, tardo para hablar, tardo para airarse;"
+},
+{
+    "livro": "1 Pedro",
+    "capitulo": 2,
+    "versiculo": 9,
+    "texto": "Mas vosotros sois linaje escogido, real sacerdocio, nación santa, pueblo adquirido por Dios, para que anunciéis las virtudes de aquel que os llamó de las tinieblas a su luz admirable;"
+},
+{
+    "livro": "2 Pedro",
+    "capitulo": 1,
+    "versiculo": 4,
+    "texto": "por medio de las cuales nos ha dado preciosas y grandísimas promesas, para que por ellas llegaseis a ser participantes de la naturaleza divina, habiendo huido de la corrupción que hay en el mundo a causa del deseo."
+},
+{
+    "livro": "1 Juan",
+    "capitulo": 5,
+    "versiculo": 4,
+    "texto": "Porque todo lo que es nacido de Dios vence al mundo; y esta es la victoria que ha vencido al mundo, nuestra fe."
+},
+{
+    "livro": "Salmos",
+    "capitulo": 118,
+    "versiculo": 24,
+    "texto": "Este es el día que hizo Jehová; Nos gozaremos y alegraremos en él."
+},
+{
+    "livro": "Proverbios",
+    "capitulo": 17,
+    "versiculo": 22,
+    "texto": "El corazón alegre constituye buen remedio; Mas el espíritu triste seca los huesos."
+},
+{
+    "livro": "Isaías",
+    "capitulo": 55,
+    "versiculo": 11,
+    "texto": "así será mi palabra que sale de mi boca; no volverá a mí vacía, sino que hará lo que yo quiero, y será prosperada en aquello para que la envié."
+},
+{
+    "livro": "Romanos",
+    "capitulo": 8,
+    "versiculo": 31,
+    "texto": "¿Qué, pues, diremos a esto? Si Dios es por nosotros, ¿quién contra nosotros?"
+},
+{
+    "livro": "Mateo",
+    "capitulo": 10,
+    "versiculo": 28,
+    "texto": "Y no temáis a los que matan el cuerpo, mas el alma no pueden matar; temed más bien a aquel que puede destruir el alma y el cuerpo en el infierno."
+},
+{
+    "livro": "Marcos",
+    "capitulo": 16,
+    "versiculo": 15,
+    "texto": "Y les dijo: Id por todo el mundo y predicad el evangelio a toda criatura."
+},
+{
+    "livro": "Lucas",
+    "capitulo": 24,
+    "versiculo": 47,
+    "texto": "y que se predicase en su nombre el arrepentimiento y el perdón de pecados en todas las naciones, comenzando desde Jerusalén."
+},
+{
     "livro": "Juan",
+    "capitulo": 14,
+    "versiculo": 27,
+    "texto": "La paz os dejo, mi paz os doy; yo no os la doy como el mundo la da. No se turbe vuestro corazón, ni tenga miedo."
+},
+{
+    "livro": "Hechos",
+    "capitulo": 17,
+    "versiculo": 30,
+    "texto": "Pero Dios, habiendo pasado por alto los tiempos de esta ignorancia, ahora manda a todos los hombres en todo lugar, que se arrepientan;"
+},
+{
+    "livro": "Romanos",
+    "capitulo": 1,
+    "versiculo": 16,
+    "texto": "Porque no me avergüenzo del evangelio, porque es poder de Dios para salvación a todo aquel que cree; al judío primeramente, y también al griego."
+},
+{
+    "livro": "1 Corintios",
+    "capitulo": 1,
+    "versiculo": 18,
+    "texto": "Porque la palabra de la cruz es locura a los que se pierden; pero a los que se salvan, esto es, a nosotros, es poder de Dios."
+},
+{
+    "livro": "2 Corintios",
+    "capitulo": 12,
+    "versiculo": 9,
+    "texto": "Y me ha dicho: Bástate mi gracia; porque mi poder se perfecciona en la debilidad. Por tanto, de buena gana me gloriaré más bien en mis debilidades, para que repose sobre mí el poder de Cristo."
+},
+{
+    "livro": "Gálatas",
+    "capitulo": 5,
+    "versiculo": 1,
+    "texto": "Estad, pues, firmes en la libertad con que Cristo nos hizo libres, y no estéis otra vez sujetos al yugo de esclavitud."
+},
+{
+    "livro": "Efesios",
+    "capitulo": 3,
+    "versiculo": 20,
+    "texto": "Y a aquel que es poderoso para hacer todas las cosas mucho más abundantemente de lo que pedimos o entendemos, según el poder que actúa en nosotros,"
+},
+{
+    "livro": "Filipenses",
+    "capitulo": 1,
+    "versiculo": 6,
+    "texto": "estando persuadido de esto, que el que comenzó en vosotros la buena obra, la perfeccionará hasta el día de Jesucristo;"
+},
+{
+    "livro": "Colosenses",
+    "capitulo": 1,
+    "versiculo": 17,
+    "texto": "Y él es antes de todas las cosas, y todas las cosas en él subsisten;"
+},
+{
+    "livro": "1 Tesalonicenses",
+    "capitulo": 3,
+    "versiculo": 12,
+    "texto": "Y el Señor os haga crecer y abundar en amor unos para con otros y para con todos, como también lo hacemos nosotros para con vosotros,"
+},
+{
+    "livro": "2 Tesalonicenses",
+    "capitulo": 1,
+    "versiculo": 7,
+    "texto": "a vosotros que sois atribulados, daros reposo con nosotros, cuando se manifieste el Señor Jesús desde el cielo con los ángeles de su poder,"
+},
+{
+    "livro": "1 Timoteo",
+    "capitulo": 2,
+    "versiculo": 5,
+    "texto": "Porque hay un solo Dios, y un solo mediador entre Dios y los hombres, Jesucristo hombre,"
+},
+{
+    "livro": "Hebreos",
+    "capitulo": 11,
+    "versiculo": 6,
+    "texto": "Pero sin fe es imposible agradar a Dios; porque es necesario que el que se acerca a Dios crea que le hay, y que es galardonador de los que le buscan."
+},
+{
+    "livro": "Santiago",
+    "capitulo": 5,
+    "versiculo": 16,
+    "texto": "Confesaos vuestras ofensas unos a otros, y orad unos por otros, para que seáis sanados. La oración eficaz del justo puede mucho."
+},
+{
+    "livro": "1 Pedro",
+    "capitulo": 1,
+    "versiculo": 15,
+    "texto": "sino, como aquel que os llamó es santo, sed también vosotros santos en toda vuestra manera de vivir;"
+},
+{
+    "livro": "2 Pedro",
+    "capitulo": 3,
+    "versiculo": 18,
+    "texto": "Antes bien, creced en la gracia y el conocimiento de nuestro Señor y Salvador Jesucristo. A él sea gloria ahora y hasta el día de la eternidad. Amén."
+},
+{
+    "livro": "1 Juan",
+    "capitulo": 2,
+    "versiculo": 15,
+    "texto": "No améis al mundo, ni las cosas que están en el mundo. Si alguno ama al mundo, el amor del Padre no está en él."
+},
+{
+    "livro": "Salmos",
+    "capitulo": 91,
+    "versiculo": 4,
+    "texto": "Con sus plumas te cubrirá, Y debajo de sus alas estarás seguro; Escudo y adarga es su verdad."
+},
+{
+    "livro": "Proverbios",
+    "capitulo": 4,
+    "versiculo": 23,
+    "texto": "Sobre toda cosa guardada, guarda tu corazón; Porque de él mana la vida."
+},
+{
+    "livro": "Isaías",
+    "capitulo": 60,
+    "versiculo": 1,
+    "texto": "Levántate, resplandece; porque ha venido tu luz, y la gloria de Jehová ha nacido sobre ti."
+},
+{
+    "livro": "Jeremías",
+    "capitulo": 23,
+    "versiculo": 24,
+    "texto": "¿Se ocultará alguno, dice Jehová, en escondrijos que yo no lo vea? ¿No lleno yo, dice Jehová, el cielo y la tierra?"
+},
+{
+    "livro": "Ezequiel",
+    "capitulo": 18,
+    "versiculo": 32,
+    "texto": "Porque no quiero la muerte del que muere, dice Jehová el Señor; convertíos, pues, y viviréis."
+},
+{
+    "livro": "Daniel",
+    "capitulo": 12,
+    "versiculo": 3,
+    "texto": "Los entendidos resplandecerán como el resplandor del firmamento; y los que enseñan la justicia a la multitud, como las estrellas a perpetua eternidad."
+},
+{
+    "livro": "Miqueas",
+    "capitulo": 7,
+    "versiculo": 19,
+    "texto": "Él volverá a tener misericordia de nosotros; sepultará nuestras iniquidades, y echará en lo profundo del mar todos nuestros pecados."
+},
+{
+    "livro": "Habacuc",
+    "capitulo": 3,
+    "versiculo": 18,
+    "texto": "Con todo, yo me alegraré en Jehová, y me gozaré en el Dios de mi salvación."
+},
+{
+    "livro": "Zacarías",
+    "capitulo": 14,
+    "versiculo": 9,
+    "texto": "Y Jehová será rey sobre toda la tierra. En aquel día Jehová será uno, y uno su nombre."
+},
+{
+    "livro": "Malaquías",
+    "capitulo": 4,
+    "versiculo": 2,
+    "texto": "Mas a vosotros los que teméis mi nombre, nacerá el Sol de justicia, y en sus alas traerá salvación; y saldréis, y saltaréis como becerros de la manada."
+},
+{
+    "livro": "Salmos",
+    "capitulo": 51,
+    "versiculo": 10,
+    "texto": "Crea en mí, oh Dios, un corazón limpio, Y renueva un espíritu recto dentro de mí."
+},
+{
+    "livro": "Proverbios",
+    "capitulo": 16,
+    "versiculo": 9,
+    "texto": "El corazón del hombre piensa su camino; Mas Jehová endereza sus pasos."
+},
+{
+    "livro": "Mateo",
+    "capitulo": 5,
+    "versiculo": 14,
+    "texto": "Vosotros sois la luz del mundo; una ciudad asentada sobre un monte no se puede esconder."
+},
+{
+    "livro": "Juan",
+    "capitulo": 10,
+    "versiculo": 10,
+    "texto": "El ladrón no viene sino para hurtar y matar y destruir; yo he venido para que tengan vida, y para que la tengan en abundancia."
+},
+{
+    "livro": "Hechos",
+    "capitulo": 20,
+    "versiculo": 35,
+    "texto": "En todo os he enseñado que, trabajando así, se debe ayudar a los necesitados, y recordar las palabras del Señor Jesús, que dijo: Más bienaventurado es dar que recibir."
+},
+{
+    "livro": "Romanos",
+    "capitulo": 14,
+    "versiculo": 12,
+    "texto": "De manera que cada uno de nosotros dará a Dios cuenta de sí."
+},
+{
+    "livro": "1 Corintios",
+    "capitulo": 13,
+    "versiculo": 13,
+    "texto": "Y ahora permanecen la fe, la esperanza y el amor, estos tres; pero el mayor de ellos es el amor."
+},
+{
+    "livro": "2 Corintios",
+    "capitulo": 4,
+    "versiculo": 16,
+    "texto": "Por tanto, no desmayamos; antes aunque este nuestro hombre exterior se va desgastando, el interior no obstante se renueva de día en día."
+},
+{
+    "livro": "Gálatas",
+    "capitulo": 6,
+    "versiculo": 9,
+    "texto": "No nos cansemos, pues, de hacer bien; porque a su tiempo segaremos, si no desmayamos."
+},
+{
+    "livro": "Efesios",
+    "capitulo": 4,
+    "versiculo": 30,
+    "texto": "Y no contristéis al Espíritu Santo de Dios, con el cual fuisteis sellados para el día de la redención."
+},
+{
+    "livro": "Filipenses",
+    "capitulo": 4,
+    "versiculo": 19,
+    "texto": "Mi Dios, pues, suplirá todo lo que os falta conforme a sus riquezas en gloria en Cristo Jesús."
+},
+{
+    "livro": "Colosenses",
+    "capitulo": 3,
+    "versiculo": 2,
+    "texto": "Poned la mira en las cosas de arriba, no en las de la tierra."
+},
+{
+    "livro": "1 Timoteo",
+    "capitulo": 1,
+    "versiculo": 15,
+    "texto": "Palabra fiel y digna de ser recibida por todos: que Cristo Jesús vino al mundo para salvar a los pecadores, de los cuales yo soy el primero."
+},
+{
+    "livro": "Hebreos",
+    "capitulo": 12,
+    "versiculo": 2,
+    "texto": "puestos los ojos en Jesús, el autor y consumador de la fe, el cual por el gozo puesto delante de él sufrió la cruz, menospreciando el oprobio, y se sentó a la diestra del trono de Dios."
+},
+{
+    "livro": "Santiago",
+    "capitulo": 1,
+    "versiculo": 22,
+    "texto": "Pero sed hacedores de la palabra, y no tan solamente oidores, engañándoos a vosotros mismos."
+},
+{
+    "livro": "1 Pedro",
+    "capitulo": 3,
+    "versiculo": 15,
+    "texto": "sino santificad a Dios el Señor en vuestros corazones, y estad siempre preparados para presentar defensa con mansedumbre y reverencia ante todo el que os demande razón de la esperanza que hay en vosotros;"
+},
+{
+    "livro": "1 Juan",
+    "capitulo": 3,
+    "versiculo": 1,
+    "texto": "Mirad cuál amor nos ha dado el Padre, para que seamos llamados hijos de Dios; por esto el mundo no nos conoce, porque no le conoció a él."
+},
+{
+    "livro": "Apocalipsis",
+    "capitulo": 22,
+    "versiculo": 7,
+    "texto": "¡He aquí, vengo pronto! Bienaventurado el que guarda las palabras de la profecía de este libro."
+},
+{
+    "livro": "Génesis",
+    "capitulo": 50,
+    "versiculo": 20,
+    "texto": "Vosotros pensasteis mal contra mí, mas Dios lo encaminó a bien, para hacer lo que vemos hoy, para mantener en vida a mucho pueblo."
+},
+{
+    "livro": "Éxodo",
+    "capitulo": 14,
+    "versiculo": 14,
+    "texto": "Jehová peleará por vosotros, y vosotros estaréis tranquilos."
+},
+{
+    "livro": "Deuteronomio",
+    "capitulo": 31,
+    "versiculo": 6,
+    "texto": "Esforzaos y cobrad ánimo; no temáis, ni tengáis miedo de ellos, porque Jehová tu Dios es el que va contigo; no te dejará, ni te desamparará."
+},
+{
+    "livro": "1 Samuel",
+    "capitulo": 2,
+    "versiculo": 2,
+    "texto": "No hay santo como Jehová; Porque no hay fuera de ti; Y no hay Roca como el Dios nuestro."
+},
+{
+    "livro": "2 Crónicas",
+    "capitulo": 16,
+    "versiculo": 9,
+    "texto": "Porque los ojos de Jehová contemplan toda la tierra, para mostrar su poder a favor de los que tienen corazón perfecto para con él."
+},
+{
+    "livro": "Nehemías",
+    "capitulo": 4,
+    "versiculo": 14,
+    "texto": "Miré, y me levanté y dije a los nobles y a los oficiales y al resto del pueblo: No temáis delante de ellos; acordaos del Señor, grande y temible, y pelead por vuestros hermanos, por vuestros hijos y por vuestras hijas, por vuestras mujeres y por vuestras casas."
+},
+{
+    "livro": "Job",
+    "capitulo": 1,
+    "versiculo": 21,
+    "texto": "Y dijo: Desnudo salí del vientre de mi madre, y desnudo volveré allá. Jehová dio, y Jehová quitó; sea el nombre de Jehová bendito."
+},
+{
+    "livro": "Isaías",
+    "capitulo": 58,
+    "versiculo": 11,
+    "texto": "Jehová te pastoreará siempre, y en las sequías saciará tu alma, y engordará tus huesos; y serás como huerto de riego, y como manantial de aguas, cuyas aguas nunca faltan."
+},
+{
+    "livro": "Jeremías",
+    "capitulo": 6,
+    "versiculo": 16,
+    "texto": "Así dijo Jehová: Paraos en los caminos, y mirad, y preguntad por las sendas antiguas, cuál sea el buen camino, y andad por él, y hallaréis descanso para vuestra alma."
+},
+{
+    "livro": "Lamentaciones",
+    "capitulo": 3,
+    "versiculo": 23,
+    "texto": "Nuevas son cada mañana; grande es tu fidelidad."
+},
+{
+    "livro": "Ezequiel",
+    "capitulo": 33,
+    "versiculo": 11,
+    "texto": "Diles: Vivo yo, dice Jehová el Señor, que no quiero la muerte del impío, sino que se vuelva el impío de su camino, y que viva. Volveos, volveos de vuestros malos caminos; ¿por qué moriréis, oh casa de Israel?"
+},
+{
+    "livro": "Daniel",
+    "capitulo": 9,
+    "versiculo": 9,
+    "texto": "De Jehová nuestro Dios es el tener misericordia y el perdonar, aunque contra él nos hemos rebelado,"
+},
+{
+    "livro": "Oseas",
+    "capitulo": 10,
+    "versiculo": 12,
+    "texto": "Sembrad para vosotros en justicia, segad para vosotros en misericordia; haced para vosotros barbecho; porque es el tiempo de buscar a Jehová, hasta que venga y os enseñe justicia."
+},
+{
+    "livro": "Jonás",
+    "capitulo": 2,
+    "versiculo": 9,
+    "texto": "Mas yo con voz de alabanza te ofreceré sacrificios; Pagaré lo que prometí. La salvación es de Jehová."
+},
+{
+    "livro": "Sofonías",
+    "capitulo": 2,
+    "versiculo": 3,
+    "texto": "Buscad a Jehová todos los humildes de la tierra, los que pusisteis por obra su juicio; buscad justicia, buscad mansedumbre; quizás seréis guardados en el día del enojo de Jehová."
+},
+{
+    "livro": "Hageo",
+    "capitulo": 1,
+    "versiculo": 5,
+    "texto": "Pues así ha dicho Jehová de los ejércitos: Meditad bien sobre vuestros caminos."
+},
+{
+    "livro": "Zacarías",
+    "capitulo": 8,
+    "versiculo": 16,
+    "texto": "Estas son las cosas que habéis de hacer: Hablad verdad cada cual con su prójimo; juzgad en vuestras puertas con verdad y juicio de paz."
+},
+{
+    "livro": "Mateo",
+    "capitulo": 22,
+    "versiculo": 37,
+    "texto": "Jesús le dijo: Amarás al Señor tu Dios con todo tu corazón, y con toda tu alma, y con toda tu mente."
+},
+{
+    "livro": "Marcos",
+    "capitulo": 9,
+    "versiculo": 23,
+    "texto": "Jesús le dijo: Si puedes creer, al que cree todo le es posible."
+},
+{
+    "livro": "Lucas",
+    "capitulo": 1,
+    "versiculo": 37,
+    "texto": "porque nada hay imposible para Dios."
+},
+{
+    "livro": "Juan",
+    "capitulo": 6,
+    "versiculo": 35,
+    "texto": "Jesús les dijo: Yo soy el pan de vida; el que a mí viene, nunca tendrá hambre; y el que en mí cree, no tendrá sed jamás."
+},
+{
+    "livro": "Hechos",
+    "capitulo": 16,
+    "versiculo": 31,
+    "texto": "Ellos dijeron: Cree en el Señor Jesucristo, y serás salvo, tú y tu casa."
+},
+{
+    "livro": "Romanos",
+    "capitulo": 13,
+    "versiculo": 10,
+    "texto": "El amor no hace mal al prójimo; así que el cumplimiento de la ley es el amor."
+},
+{
+    "livro": "1 Corintios",
+    "capitulo": 2,
+    "versiculo": 9,
+    "texto": "Antes bien, como está escrito: Cosas que ojo no vio, ni oído oyó, Ni han subido en corazón de hombre, Son las que Dios ha preparado para los que le aman."
+},
+{
+    "livro": "2 Corintios",
+    "capitulo": 6,
+    "versiculo": 18,
+    "texto": "Y seré para vosotros por Padre, Y vosotros me seréis hijos e hijas, dice el Señor Todopoderoso."
+},
+{
+    "livro": "Gálatas",
+    "capitulo": 5,
+    "versiculo": 13,
+    "texto": "Porque vosotros, hermanos, a libertad fuisteis llamados; solamente que no uséis la libertad como ocasión para la carne, sino servíos por amor los unos a los otros."
+},
+{
+    "livro": "Efesios",
+    "capitulo": 2,
+    "versiculo": 10,
+    "texto": "Porque somos hechura suya, creados en Cristo Jesús para buenas obras, las cuales Dios preparó de antemano para que anduviésemos en ellas."
+},
+{
+    "livro": "Filipenses",
+    "capitulo": 4,
+    "versiculo": 8,
+    "texto": "Por lo demás, hermanos, todo lo que es verdadero, todo lo honesto, todo lo justo, todo lo puro, todo lo amable, todo lo que es de buen nombre; si hay virtud alguna, si algo digno de alabanza, en esto pensad."
+},
+{
+    "livro": "Colosenses",
     "capitulo": 3,
     "versiculo": 17,
-    "texto": "Porque no envió Dios a su Hijo al mundo para condenar al mundo, sino para que el mundo sea salvo por él."
-  }
+    "texto": "Y todo lo que hacéis, sea de palabra o de hecho, hacedlo todo en el nombre del Señor Jesús, dando gracias a Dios Padre por medio de él."
+},
+{
+    "livro": "1 Tesalonicenses",
+    "capitulo": 5,
+    "versiculo": 23,
+    "texto": "Y el mismo Dios de paz os santifique por completo; y todo vuestro ser, espíritu, alma y cuerpo, sea guardado irreprensible para la venida de nuestro Señor Jesucristo."
+},
+{
+    "livro": "2 Timoteo",
+    "capitulo": 3,
+    "versiculo": 14,
+    "texto": "Pero persiste tú en lo que has aprendido y te persuadiste, sabiendo de quién has aprendido;"
+},
+{
+    "livro": "Hebreos",
+    "capitulo": 13,
+    "versiculo": 5,
+    "texto": "Sean vuestras costumbres sin avaricia, contentos con lo que tenéis ahora; porque él dijo: No te desampararé, ni te dejaré;"
+},
+{
+    "livro": "Santiago",
+    "capitulo": 3,
+    "versiculo": 2,
+    "texto": "Porque todos ofendemos muchas veces. Si alguno no ofende en palabra, éste es varón perfecto, capaz también de refrenar todo el cuerpo."
+},
+{
+    "livro": "1 Pedro",
+    "capitulo": 5,
+    "versiculo": 8,
+    "texto": "Sed sobrios, y velad; porque vuestro adversario el diablo, como león rugiente, anda alrededor buscando a quien devorar;"
+},
+{
+    "livro": "2 Pedro",
+    "capitulo": 2,
+    "versiculo": 9,
+    "texto": "sabe el Señor librar de tentación a los piadosos, y reservar a los injustos para ser castigados en el día del juicio;"
+},
+{
+    "livro": "1 Juan",
+    "capitulo": 4,
+    "versiculo": 19,
+    "texto": "Nosotros le amamos a él, porque él nos amó primero."
+},
+{
+    "livro": "Salmos",
+    "capitulo": 27,
+    "versiculo": 1,
+    "texto": "Jehová es mi luz y mi salvación; ¿de quién temeré? Jehová es la fortaleza de mi vida; ¿de quién he de atemorizarme?"
+},
+{
+    "livro": "Proverbios",
+    "capitulo": 14,
+    "versiculo": 34,
+    "texto": "La justicia engrandece a la nación; Mas el pecado es afrenta de las naciones."
+},
+{
+    "livro": "Isaías",
+    "capitulo": 43,
+    "versiculo": 25,
+    "texto": "Yo, yo soy el que borro tus rebeliones por amor de mí mismo, y no me acordaré de tus pecados."
+},
+{
+    "livro": "Jeremías",
+    "capitulo": 1,
+    "versiculo": 5,
+    "texto": "Antes que te formase en el vientre te conocí, y antes que nacieses te santifiqué, te di por profeta a las naciones."
+},
+{
+    "livro": "Ezequiel",
+    "capitulo": 3,
+    "versiculo": 21,
+    "texto": "Pero si al justo amonestares para que no peque, y él no pecare, de cierto vivirá, porque fue amonestado; y tú habrás librado tu alma."
+},
+{
+    "livro": "Daniel",
+    "capitulo": 7,
+    "versiculo": 14,
+    "texto": "Y le fue dado dominio, gloria y reino, para que todos los pueblos, naciones y lenguas le sirvieran; su dominio es dominio eterno, que nunca pasará, y su reino uno que no será destruido."
+},
+{
+    "livro": "Oseas",
+    "capitulo": 4,
+    "versiculo": 6,
+    "texto": "Mi pueblo fue destruido, porque le faltó conocimiento. Por cuanto desechaste el conocimiento, yo te echaré del sacerdocio; y porque olvidaste la ley de tu Dios, también yo me olvidaré de tus hijos."
+},
+{
+    "livro": "Amós",
+    "capitulo": 3,
+    "versiculo": 7,
+    "texto": "Porque no hará nada Jehová el Señor, sin que revele su secreto a sus siervos los profetas."
+},
+{
+    "livro": "Miqueas",
+    "capitulo": 7,
+    "versiculo": 7,
+    "texto": "Mas yo a Jehová esperaré, esperaré al Dios de mi salvación; el Dios mío me oirá."
+},
+{
+    "livro": "Nahúm",
+    "capitulo": 1,
+    "versiculo": 3,
+    "texto": "Jehová es tardo para la ira y grande en poder, y no tendrá por inocente al culpable. Jehová marcha en la tempestad y el torbellino, y las nubes son el polvo de sus pies."
+},
+{
+    "livro": "Habacuc",
+    "capitulo": 3,
+    "versiculo": 19,
+    "texto": "Jehová el Señor es mi fortaleza, El cual hace mis pies como de ciervas, Y en mis alturas me hace andar."
+},
+{
+    "livro": "Zacarías",
+    "capitulo": 7,
+    "versiculo": 9,
+    "texto": "Así habló Jehová de los ejércitos, diciendo: Juzgad conforme a la verdad, y haced misericordia y piedad cada cual con su hermano;"
+},
+{
+    "livro": "Malaquías",
+    "capitulo": 3,
+    "versiculo": 6,
+    "texto": "Porque yo Jehová no cambio; por esto, hijos de Jacob, no habéis sido consumidos."
+},
+{
+    "livro": "Mateo",
+    "capitulo": 11,
+    "versiculo": 29,
+    "texto": "Llevad mi yugo sobre vosotros, y aprended de mí, que soy manso y humilde de corazón; y hallaréis descanso para vuestras almas;"
+},
+{
+    "livro": "Marcos",
+    "capitulo": 8,
+    "versiculo": 36,
+    "texto": "Porque ¿qué aprovechará al hombre si ganare todo el mundo, y perdiere su alma?"
+},
+{
+    "livro": "Lucas",
+    "capitulo": 10,
+    "versiculo": 27,
+    "texto": "Aquel, respondiendo, dijo: Amarás al Señor tu Dios con todo tu corazón, y con toda tu alma, y con todas tus fuerzas, y con toda tu mente; y a tu prójimo como a ti mismo."
+},
+{
+    "livro": "Juan",
+    "capitulo": 7,
+    "versiculo": 38,
+    "texto": "El que cree en mí, como dice la Escritura, de su interior correrán ríos de agua viva."
+},
+{
+    "livro": "Hechos",
+    "capitulo": 5,
+    "versiculo": 29,
+    "texto": "Respondiendo Pedro y los apóstoles, dijeron: Es necesario obedecer a Dios antes que a los hombres."
+},
+{
+    "livro": "Romanos",
+    "capitulo": 12,
+    "versiculo": 1,
+    "texto": "Así que, hermanos, os ruego por las misericordias de Dios, que presentéis vuestros cuerpos en sacrificio vivo, santo, agradable a Dios, que es vuestro culto racional."
+},
+{
+    "livro": "1 Corintios",
+    "capitulo": 15,
+    "versiculo": 33,
+    "texto": "No erréis; las malas conversaciones corrompen las buenas costumbres."
+},
+{
+    "livro": "2 Corintios",
+    "capitulo": 3,
+    "versiculo": 17,
+    "texto": "Porque el Señor es el Espíritu; y donde está el Espíritu del Señor, allí hay libertad."
+},
+{
+    "livro": "Gálatas",
+    "capitulo": 5,
+    "versiculo": 16,
+    "texto": "Digo, pues: Andad en el Espíritu, y no satisfagáis los deseos de la carne."
+},
+{
+    "livro": "Efesios",
+    "capitulo": 6,
+    "versiculo": 1,
+    "texto": "Hijos, obedeced en el Señor a vuestros padres, porque esto es justo."
+},
+{
+    "livro": "Filipenses",
+    "capitulo": 4,
+    "versiculo": 7,
+    "texto": "Y la paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones y vuestros pensamientos en Cristo Jesús."
+},
+{
+    "livro": "Colosenses",
+    "capitulo": 1,
+    "versiculo": 18,
+    "texto": "Y él es la cabeza del cuerpo que es la iglesia, él que es el principio, el primogénito de entre los muertos, para que en todo tenga la preeminencia;"
+},
+{
+    "livro": "1 Tesalonicenses",
+    "capitulo": 5,
+    "versiculo": 17,
+    "texto": "Orad sin cesar."
+},
+{
+    "livro": "2 Timoteo",
+    "capitulo": 2,
+    "versiculo": 15,
+    "texto": "Procura con diligencia presentarte a Dios aprobado, como obrero que no tiene de qué avergonzarse, que usa bien la palabra de verdad."
+},
+{
+    "livro": "Tito",
+    "capitulo": 2,
+    "versiculo": 11,
+    "texto": "Porque la gracia de Dios se ha manifestado para salvación a todos los hombres,"
+},
+{
+    "livro": "Hebreos",
+    "capitulo": 4,
+    "versiculo": 16,
+    "texto": "Acerquémonos, pues, confiadamente al trono de la gracia, para alcanzar misericordia y hallar gracia para el oportuno socorro."
+},
+{
+    "livro": "Santiago",
+    "capitulo": 1,
+    "versiculo": 17,
+    "texto": "Toda buena dádiva y todo don perfecto desciende de lo alto, del Padre de las luces, en el cual no hay mudanza, ni sombra de variación."
+},
+{
+    "livro": "1 Pedro",
+    "capitulo": 4,
+    "versiculo": 10,
+    "texto": "Cada uno según el don que ha recibido, minístrelo a los otros, como buenos administradores de la multiforme gracia de Dios."
+},
+{
+    "livro": "1 Juan",
+    "capitulo": 5,
+    "versiculo": 14,
+    "texto": "Y esta es la confianza que tenemos en él, que si pedimos alguna cosa conforme a su voluntad, él nos oye."
+},
+{
+    "livro": "Salmos",
+    "capitulo": 139,
+    "versiculo": 14,
+    "texto": "Te alabaré; porque formidables, maravillosas son tus obras; Estoy maravillado, Y mi alma lo sabe muy bien."
+},
+{
+    "livro": "Proverbios",
+    "capitulo": 20,
+    "versiculo": 7,
+    "texto": "Camina en su integridad el justo; Sus hijos son bienaventurados después de él."
+},
+{
+    "livro": "Isaías",
+    "capitulo": 45,
+    "versiculo": 22,
+    "texto": "Mirad a mí, y sed salvos, todos los términos de la tierra, porque yo soy Dios, y no hay más."
+},
+{
+    "livro": "Jeremías",
+    "capitulo": 29,
+    "versiculo": 13,
+    "texto": "y me buscaréis y me hallaréis, porque me buscaréis de todo vuestro corazón."
+},
+{
+    "livro": "Ezequiel",
+    "capitulo": 11,
+    "versiculo": 19,
+    "texto": "Y les daré un corazón, y un espíritu nuevo pondré dentro de ellos; y quitaré el corazón de piedra de en medio de su carne, y les daré un corazón de carne,"
+},
+{
+    "livro": "Joel",
+    "capitulo": 2,
+    "versiculo": 13,
+    "texto": "Rasgad vuestro corazón, y no vuestros vestidos, y convertíos a Jehová vuestro Dios; porque misericordioso es y clemente, tardo para la ira y grande en misericordia, y que se duele del castigo."
+},
+{
+    "livro": "Jonás",
+    "capitulo": 3,
+    "versiculo": 10,
+    "texto": "Y vio Dios lo que hicieron, que se convirtieron de su mal camino; y se arrepintió del mal que había dicho les haría, y no lo hizo."
+},
+{
+    "livro": "Miqueas",
+    "capitulo": 5,
+    "versiculo": 2,
+    "texto": "Pero tú, Belén Efrata, pequeña para estar entre las familias de Judá, de ti me saldrá el que será Señor en Israel; y sus salidas son desde el principio, desde los días de la eternidad."
+},
+{
+    "livro": "Habacuc",
+    "capitulo": 2,
+    "versiculo": 20,
+    "texto": "Mas Jehová está en su santo templo; calle delante de él toda la tierra."
+},
+{
+    "livro": "Zacarías",
+    "capitulo": 12,
+    "versiculo": 10,
+    "texto": "Y derramaré sobre la casa de David, y sobre los moradores de Jerusalén, espíritu de gracia y de oración; y mirarán a mí, a quien traspasaron, y llorarán como se llora por hijo unigénito, afligiéndose por él como quien se aflige por el primogénito."
+},
+{
+    "livro": "Malaquías",
+    "capitulo": 4,
+    "versiculo": 6,
+    "texto": "Él hará volver el corazón de los padres hacia los hijos, y el corazón de los hijos hacia los padres, no sea que yo venga y hiera la tierra con maldición."
+},
+{
+    "livro": "Mateo",
+    "capitulo": 24,
+    "versiculo": 35,
+    "texto": "El cielo y la tierra pasarán, pero mis palabras no pasarán."
+},
+{
+    "livro": "Marcos",
+    "capitulo": 12,
+    "versiculo": 30,
+    "texto": "Y amarás al Señor tu Dios con todo tu corazón, y con toda tu alma, y con toda tu mente, y con todas tus fuerzas. Este es el principal mandamiento."
+},
+{
+    "livro": "Lucas",
+    "capitulo": 9,
+    "versiculo": 23,
+    "texto": "Y decía a todos: Si alguno quiere venir en pos de mí, niéguese a sí mismo, tome su cruz cada día, y sígame."
+},
+{
+    "livro": "Juan",
+    "capitulo": 4,
+    "versiculo": 24,
+    "texto": "Dios es Espíritu; y los que le adoran, en espíritu y en verdad es necesario que adoren."
+},
+{
+    "livro": "Hechos",
+    "capitulo": 3,
+    "versiculo": 19,
+    "texto": "Así que, arrepentíos y convertíos, para que sean borrados vuestros pecados; para que vengan de la presencia del Señor tiempos de refrigerio,"
+},
+{
+    "livro": "Romanos",
+    "capitulo": 15,
+    "versiculo": 13,
+    "texto": "Y el Dios de esperanza os llene de todo gozo y paz en el creer, para que abundéis en esperanza por el poder del Espíritu Santo."
+},
+{
+    "livro": "1 Corintios",
+    "capitulo": 10,
+    "versiculo": 31,
+    "texto": "Si, pues, coméis o bebéis, o hacéis otra cosa, hacedlo todo para la gloria de Dios."
+},
+{
+    "livro": "2 Corintios",
+    "capitulo": 4,
+    "versiculo": 5,
+    "texto": "Porque no nos predicamos a nosotros mismos, sino a Jesucristo como Señor, y a nosotros como vuestros siervos por amor de Jesús."
+},
+{
+    "livro": "Gálatas",
+    "capitulo": 1,
+    "versiculo": 10,
+    "texto": "Pues, ¿busco ahora el favor de los hombres, o el de Dios? ¿O trato de agradar a los hombres? Pues si todavía agradara a los hombres, no sería siervo de Cristo."
+},
+{
+    "livro": "Efesios",
+    "capitulo": 1,
+    "versiculo": 7,
+    "texto": "en quien tenemos redención por su sangre, el perdón de pecados según las riquezas de su gracia,"
+},
+{
+    "livro": "Filipenses",
+    "capitulo": 2,
+    "versiculo": 14,
+    "texto": "Haced todo sin murmuraciones y contiendas,"
+},
+{
+    "livro": "Colosenses",
+    "capitulo": 2,
+    "versiculo": 7,
+    "texto": "arraigados y sobreedificados en él, y confirmados en la fe, así como habéis sido enseñados, abundando en acciones de gracias."
+},
+{
+    "livro": "1 Tesalonicenses",
+    "capitulo": 4,
+    "versiculo": 3,
+    "texto": "pues la voluntad de Dios es vuestra santificación: que os apartéis de fornicación;"
+},
+{
+    "livro": "2 Tesalonicenses",
+    "capitulo": 3,
+    "versiculo": 3,
+    "texto": "Pero fiel es el Señor, que os afirmará y guardará del mal."
+},
+{
+    "livro": "1 Timoteo",
+    "capitulo": 6,
+    "versiculo": 12,
+    "texto": "Pelea la buena batalla de la fe, echa mano de la vida eterna, a la cual asimismo fuiste llamado, habiendo hecho la buena profesión delante de muchos testigos."
+},
+{
+    "livro": "Hebreos",
+    "capitulo": 7,
+    "versiculo": 25,
+    "texto": "por lo cual puede también salvar perpetuamente a los que por él se acercan a Dios, viviendo siempre para interceder por ellos."
+},
+{
+    "livro": "Santiago",
+    "capitulo": 4,
+    "versiculo": 8,
+    "texto": "Acercaos a Dios, y él se acercará a vosotros. Pecadores, limpiad las manos; y vosotros los de doble ánimo, purificad vuestros corazones."
+},
+{
+    "livro": "1 Pedro",
+    "capitulo": 2,
+    "versiculo": 24,
+    "texto": "quien llevó él mismo nuestros pecados en su cuerpo sobre el madero, para que nosotros, estando muertos a los pecados, vivamos a la justicia; y por cuya herida fuisteis sanados."
+},
+{
+    "livro": "2 Pedro",
+    "capitulo": 3,
+    "versiculo": 10,
+    "texto": "Pero el día del Señor vendrá como ladrón en la noche; en el cual los cielos pasarán con grande estruendo, y los elementos ardiendo serán deshechos, y la tierra y las obras que en ella hay serán quemadas."
+},
+{
+    "livro": "1 Juan",
+    "capitulo": 2,
+    "versiculo": 1,
+    "texto": "Hijitos míos, estas cosas os escribo para que no pequéis; y si alguno hubiere pecado, abogado tenemos para con el Padre, a Jesucristo el justo."
+},
+{
+    "livro": "Salmos",
+    "capitulo": 145,
+    "versiculo": 18,
+    "texto": "Cercano está Jehová a todos los que le invocan, A todos los que le invocan de veras."
+},
+{
+    "livro": "Proverbios",
+    "capitulo": 28,
+    "versiculo": 13,
+    "texto": "El que encubre sus pecados no prosperará; Mas el que los confiesa y se aparta alcanzará misericordia."
+},
+{
+    "livro": "Isaías",
+    "capitulo": 54,
+    "versiculo": 10,
+    "texto": "Porque los montes se moverán, y los collados temblarán, pero no se apartará de ti mi misericordia, ni el pacto de mi paz se quebrantará, dijo Jehová, el que tiene misericordia de ti."
+},
+{
+    "livro": "Jeremías",
+    "capitulo": 31,
+    "versiculo": 3,
+    "texto": "Jehová se manifestó a mí hace ya mucho tiempo, diciendo: Con amor eterno te he amado; por tanto, te prolongué mi misericordia."
+},
+{
+    "livro": "Ezequiel",
+    "capitulo": 37,
+    "versiculo": 14,
+    "texto": "Y pondré mi Espíritu en vosotros, y viviréis, y os haré reposar sobre vuestra tierra; y sabréis que yo Jehová hablé, y lo hice, dice Jehová."
+},
+{
+    "livro": "Daniel",
+    "capitulo": 4,
+    "versiculo": 17,
+    "texto": "la sentencia es por decreto de los vigilantes, y la palabra por la de los santos, para que conozcan los vivientes que el Altísimo gobierna el reino de los hombres, y que a quien él quiere lo da, y constituye sobre él al más humilde de los hombres."
+},
+{
+    "livro": "Oseas",
+    "capitulo": 13,
+    "versiculo": 4,
+    "texto": "Mas yo soy Jehová tu Dios desde la tierra de Egipto; no conocerás, pues, otro dios fuera de mí, ni otro salvador sino a mí."
+},
+{
+    "livro": "Joel",
+    "capitulo": 2,
+    "versiculo": 32,
+    "texto": "Y todo aquel que invocare el nombre de Jehová será salvo; porque en el monte de Sion y en Jerusalén habrá salvación, como ha dicho Jehová, y entre el remanente al cual él habrá llamado."
+},
+{
+    "livro": "Amós",
+    "capitulo": 4,
+    "versiculo": 12,
+    "texto": "Por tanto, de esta manera te haré a ti, oh Israel; y porque te he de hacer esto, prepárate para venir al encuentro de tu Dios, oh Israel."
+},
+{
+    "livro": "Jonás",
+    "capitulo": 4,
+    "versiculo": 11,
+    "texto": "¿Y no tendré yo piedad de Nínive, aquella gran ciudad donde hay más de ciento veinte mil personas que no saben discernir entre su mano derecha y su mano izquierda, y muchos animales?"
+},
+{
+    "livro": "Miqueas",
+    "capitulo": 4,
+    "versiculo": 3,
+    "texto": "Y él juzgará entre muchos pueblos, y corregirá a naciones poderosas hasta muy lejos; y martillarán sus espadas para azadones, y sus lanzas para hoces; no alzará espada nación contra nación, ni se enseñarán más para la guerra."
+},
+{
+    "livro": "Sofonías",
+    "capitulo": 1,
+    "versiculo": 14,
+    "texto": "Cercano está el día grande de Jehová, cercano y muy próximo; es amarga la voz del día de Jehová; gritará allí el valiente."
+},
+{
+    "livro": "Mateo",
+    "capitulo": 6,
+    "versiculo": 14,
+    "texto": "Porque si perdonáis a los hombres sus ofensas, os perdonará también a vosotros vuestro Padre celestial;"
+},
+{
+    "livro": "Marcos",
+    "capitulo": 1,
+    "versiculo": 15,
+    "texto": "diciendo: El tiempo se ha cumplido, y el reino de Dios se ha acercado; arrepentíos, y creed en el evangelio."
+},
+{
+    "livro": "Lucas",
+    "capitulo": 15,
+    "versiculo": 7,
+    "texto": "Os digo que así habrá más gozo en el cielo por un pecador que se arrepiente, que por noventa y nueve justos que no necesitan de arrepentimiento."
+},
+{
+    "livro": "Juan",
+    "capitulo": 17,
+    "versiculo": 3,
+    "texto": "Y esta es la vida eterna: que te conozcan a ti, el único Dios verdadero, y a Jesucristo, a quien has enviado."
+},
+{
+    "livro": "Hechos",
+    "capitulo": 2,
+    "versiculo": 42,
+    "texto": "Y perseveraban en la doctrina de los apóstoles, en la comunión unos con otros, en el partimiento del pan y en las oraciones."
+},
+{
+    "livro": "Romanos",
+    "capitulo": 1,
+    "versiculo": 20,
+    "texto": "Porque las cosas invisibles de él, su eterno poder y deidad, se hacen claramente visibles desde la creación del mundo, siendo entendidas por medio de las cosas hechas, de modo que no tienen excusa."
+},
+{
+    "livro": "1 Corintios",
+    "capitulo": 3,
+    "versiculo": 11,
+    "texto": "Porque nadie puede poner otro fundamento que el que está puesto, el cual es Jesucristo."
+},
+{
+    "livro": "2 Corintios",
+    "capitulo": 5,
+    "versiculo": 21,
+    "texto": "Al que no conoció pecado, por nosotros lo hizo pecado, para que nosotros fuésemos hechos justicia de Dios en él."
+},
+{
+    "livro": "Gálatas",
+    "capitulo": 6,
+    "versiculo": 10,
+    "texto": "Así que, según tengamos oportunidad, hagamos bien a todos, y mayormente a los de la familia de la fe."
+},
+{
+    "livro": "Efesios",
+    "capitulo": 5,
+    "versiculo": 16,
+    "texto": "aprovechando bien el tiempo, porque los días son malos."
+},
+{
+    "livro": "Filipenses",
+    "capitulo": 4,
+    "versiculo": 11,
+    "texto": "No lo digo porque tenga escasez, pues he aprendido a contentarme, cualquiera que sea mi situación."
+},
+{
+    "livro": "Colosenses",
+    "capitulo": 4,
+    "versiculo": 6,
+    "texto": "Sea vuestra palabra siempre con gracia, sazonada con sal, para que sepáis cómo debéis responder a cada uno."
+},
+{
+    "livro": "1 Tesalonicenses",
+    "capitulo": 1,
+    "versiculo": 3,
+    "texto": "acordándonos sin cesar delante del Dios y Padre nuestro de la obra de vuestra fe, del trabajo de vuestro amor y de vuestra constancia en la esperanza en nuestro Señor Jesucristo."
+},
+{
+    "livro": "2 Timoteo",
+    "capitulo": 1,
+    "versiculo": 9,
+    "texto": "quien nos salvó y llamó con llamamiento santo, no conforme a nuestras obras, sino conforme al propósito suyo y a la gracia que nos fue dada en Cristo Jesús antes de los tiempos de los siglos,"
+},
+{
+    "livro": "Tito",
+    "capitulo": 1,
+    "versiculo": 2,
+    "texto": "en la esperanza de la vida eterna, la cual Dios, que no miente, prometió desde antes del principio de los siglos,"
+},
+{
+    "livro": "Hebreos",
+    "capitulo": 1,
+    "versiculo": 3,
+    "texto": "el cual, siendo el resplandor de su gloria, y la imagen misma de su sustancia, y quien sustenta todas las cosas con la palabra de su poder, habiendo efectuado la purificación de nuestros pecados por medio de sí mismo, se sentó a la diestra de la Majestad en las alturas,"
+},
+{
+    "livro": "Santiago",
+    "capitulo": 1,
+    "versiculo": 3,
+    "texto": "sabiendo que la prueba de vuestra fe produce paciencia."
+},
+{
+    "livro": "1 Pedro",
+    "capitulo": 1,
+    "versiculo": 8,
+    "texto": "a quien amáis sin haberle visto, en quien creyendo ahora, aunque no lo veáis, os alegráis con gozo inefable y glorioso;"
+},
+{
+    "livro": "1 Juan",
+    "capitulo": 3,
+    "versiculo": 18,
+    "texto": "Hijitos míos, no amemos de palabra ni de lengua, sino de hecho y en verdad."
+},
+{
+    "livro": "Salmos",
+    "capitulo": 103,
+    "versiculo": 2,
+    "texto": "Bendice, alma mía, a Jehová, Y no olvides ninguno de sus beneficios."
+},
+{
+    "livro": "Proverbios",
+    "capitulo": 3,
+    "versiculo": 7,
+    "texto": "No seas sabio en tu propia opinión; Teme a Jehová, y apártate del mal;"
+},
+{
+    "livro": "Isaías",
+    "capitulo": 40,
+    "versiculo": 8,
+    "texto": "La hierba se seca, y la flor se marchita; mas la palabra del Dios nuestro permanece para siempre."
+},
+{
+    "livro": "Jeremías",
+    "capitulo": 32,
+    "versiculo": 27,
+    "texto": "He aquí que yo soy Jehová, Dios de toda carne; ¿habrá algo que sea difícil para mí?"
+},
+{
+    "livro": "Ezequiel",
+    "capitulo": 36,
+    "versiculo": 33,
+    "texto": "Así ha dicho Jehová el Señor: El día que os limpie de todas vuestras iniquidades, haré también que sean habitadas las ciudades, y las ruinas serán reedificadas."
+},
+{
+    "livro": "Daniel",
+    "capitulo": 1,
+    "versiculo": 8,
+    "texto": "Y Daniel propuso en su corazón no contaminarse con la porción de la comida del rey, ni con el vino que él bebía; pidió por tanto al jefe de los eunucos que no se le obligase a contaminarse."
+},
+{
+    "livro": "Oseas",
+    "capitulo": 6,
+    "versiculo": 3,
+    "texto": "Y conoceremos, y proseguiremos en conocer a Jehová; como el alba está dispuesta su salida, y vendrá a nosotros como la lluvia, como la lluvia tardía y temprana a la tierra."
+},
+{
+    "livro": "Amós",
+    "capitulo": 5,
+    "versiculo": 4,
+    "texto": "Pero así dice Jehová a la casa de Israel: Buscadme, y viviréis;"
+},
+{
+    "livro": "Jonás",
+    "capitulo": 2,
+    "versiculo": 8,
+    "texto": "Los que confían en vanidades ilusorias, Su misericordia abandonan."
+},
+{
+    "livro": "Miqueas",
+    "capitulo": 7,
+    "versiculo": 18,
+    "texto": "¿Qué Dios como tú, que perdona la maldad, y olvida el pecado del remanente de su heredad? No retuvo para siempre su enojo, porque se deleita en misericordia."
+},
+{
+    "livro": "Nahúm",
+    "capitulo": 1,
+    "versiculo": 9,
+    "texto": "¿Qué pensáis contra Jehová? Él es el que da fin a la angustia. No tomará la aflicción dos veces."
+},
+{
+    "livro": "Mateo",
+    "capitulo": 16,
+    "versiculo": 26,
+    "texto": "Porque ¿qué aprovechará al hombre, si ganare todo el mundo, y perdiere su alma? ¿O qué recompensa dará el hombre por su alma?"
+},
+{
+    "livro": "Marcos",
+    "capitulo": 14,
+    "versiculo": 38,
+    "texto": "Velad y orad, para que no entréis en tentación; el espíritu a la verdad está dispuesto, pero la carne es débil."
+},
+{
+    "livro": "Lucas",
+    "capitulo": 18,
+    "versiculo": 27,
+    "texto": "Él les dijo: Lo que es imposible para los hombres, es posible para Dios."
+},
+{
+    "livro": "Juan",
+    "capitulo": 11,
+    "versiculo": 25,
+    "texto": "Le dijo Jesús: Yo soy la resurrección y la vida; el que cree en mí, aunque esté muerto, vivirá."
+},
+{
+    "livro": "Hechos",
+    "capitulo": 4,
+    "versiculo": 13,
+    "texto": "Entonces viendo el denuedo de Pedro y de Juan, y sabiendo que eran hombres sin letras y del vulgo, se maravillaban; y les reconocían que habían estado con Jesús."
+},
+{
+    "livro": "Romanos",
+    "capitulo": 8,
+    "versiculo": 37,
+    "texto": "Antes, en todas estas cosas somos más que vencedores por medio de aquel que nos amó."
+},
+{
+    "livro": "1 Corintios",
+    "capitulo": 14,
+    "versiculo": 33,
+    "texto": "pues Dios no es Dios de confusión, sino de paz, como en todas las iglesias de los santos."
+},
+{
+    "livro": "2 Corintios",
+    "capitulo": 8,
+    "versiculo": 9,
+    "texto": "Porque ya conocéis la gracia de nuestro Señor Jesucristo, que por amor a vosotros se hizo pobre, siendo rico, para que vosotros con su pobreza fueseis enriquecidos."
+},
+{
+    "livro": "Gálatas",
+    "capitulo": 5,
+    "versiculo": 25,
+    "texto": "Si vivimos por el Espíritu, andemos también por el Espíritu."
+},
+{
+    "livro": "Efesios",
+    "capitulo": 4,
+    "versiculo": 15,
+    "texto": "sino que siguiendo la verdad en amor, crezcamos en todo en aquel que es la cabeza, esto es, Cristo,"
+},
+{
+    "livro": "Filipenses",
+    "capitulo": 1,
+    "versiculo": 21,
+    "texto": "Porque para mí el vivir es Cristo, y el morir es ganancia."
+},
+{
+    "livro": "Colosenses",
+    "capitulo": 3,
+    "versiculo": 15,
+    "texto": "Y la paz de Dios gobierne en vuestros corazones, a la que asimismo fuisteis llamados en un solo cuerpo; y sed agradecidos."
+},
+{
+    "livro": "1 Tesalonicenses",
+    "capitulo": 5,
+    "versiculo": 24,
+    "texto": "Fiel es el que os llama, el cual también lo hará."
+},
+{
+    "livro": "2 Timoteo",
+    "capitulo": 4,
+    "versiculo": 18,
+    "texto": "Y el Señor me librará de toda obra mala, y me preservará para su reino celestial. A él sea gloria por los siglos de los siglos. Amén."
+},
+{
+    "livro": "Hebreos",
+    "capitulo": 6,
+    "versiculo": 19,
+    "texto": "La cual tenemos como segura y firme ancla del alma, y que penetra hasta dentro del velo,"
+},
+{
+    "livro": "Santiago",
+    "capitulo": 5,
+    "versiculo": 8,
+    "texto": "Tened también vosotros paciencia, y afirmad vuestros corazones; porque la venida del Señor se acerca."
+},
+{
+    "livro": "1 Pedro",
+    "capitulo": 1,
+    "versiculo": 17,
+    "texto": "Y si invocáis por Padre a aquel que sin acepción de personas juzga según la obra de cada uno, conducíos en temor todo el tiempo de vuestra peregrinación;"
+},
+{
+    "livro": "1 Juan",
+    "capitulo": 4,
+    "versiculo": 18,
+    "texto": "En el amor no hay temor, sino que el perfecto amor echa fuera el temor; porque el temor lleva en sí castigo. De donde el que teme, no ha sido perfeccionado en el amor."
+},
+{
+    "livro": "Apocalipsis",
+    "capitulo": 1,
+    "versiculo": 8,
+    "texto": "Yo soy el Alfa y la Omega, principio y fin, dice el Señor, el que es y que era y que ha de venir, el Todopoderoso."
+},
+{
+    "livro": "Génesis",
+    "capitulo": 22,
+    "versiculo": 14,
+    "texto": "Y llamó Abraham el nombre de aquel lugar, Jehová proveerá. Por tanto se dice hoy: En el monte de Jehová será provisto."
+},
+{
+    "livro": "Éxodo",
+    "capitulo": 3,
+    "versiculo": 14,
+    "texto": "Y respondió Dios a Moisés: YO SOY EL QUE SOY. Y dijo: Así dirás a los hijos de Israel: YO SOY me envió a vosotros."
+},
+{
+    "livro": "Números",
+    "capitulo": 23,
+    "versiculo": 19,
+    "texto": "Dios no es hombre, para que mienta, ni hijo de hombre para que se arrepienta. Él dijo, ¿y no hará? Habló, ¿y no lo ejecutará?"
+},
+{
+    "livro": "Deuteronomio",
+    "capitulo": 32,
+    "versiculo": 4,
+    "texto": "Él es la Roca, cuya obra es perfecta, Porque todos sus caminos son rectitud; Dios de verdad, y sin ninguna iniquidad en él; Es justo y recto."
+},
+{
+    "livro": "Josué",
+    "capitulo": 24,
+    "versiculo": 15,
+    "texto": "Y si mal os parece servir a Jehová, escogeos hoy a quién sirváis; si a los dioses a quienes sirvieron vuestros padres, cuando estuvieron al otro lado del río, o a los dioses de los amorreos en cuya tierra habitáis; pero yo y mi casa serviremos a Jehová."
+},
+{
+    "livro": "1 Samuel",
+    "capitulo": 15,
+    "versiculo": 22,
+    "texto": "Y Samuel dijo: ¿Se complace Jehová tanto en los holocaustos y víctimas, como en que se obedezca a las palabras de Jehová? Ciertamente el obedecer es mejor que los sacrificios, y el prestar atención que la grosura de los carneros."
+},
+{
+    "livro": "Salmos",
+    "capitulo": 37,
+    "versiculo": 4,
+    "texto": "Deléitate asimismo en Jehová, Y él te concederá las peticiones de tu corazón."
+},
+{
+    "livro": "Salmos",
+    "capitulo": 42,
+    "versiculo": 11,
+    "texto": "¿Por qué te abates, oh alma mía, Y por qué te turbas dentro de mí? Espera en Dios; porque aún he de alabarle, Salvación mía y Dios mío."
+},
+{
+    "livro": "Salmos",
+    "capitulo": 119,
+    "versiculo": 11,
+    "texto": "En mi corazón he guardado tus dichos, Para no pecar contra ti."
+},
+{
+    "livro": "Proverbios",
+    "capitulo": 15,
+    "versiculo": 1,
+    "texto": "La blanda respuesta quita la ira; Mas la palabra áspera hace subir el furor."
+},
+{
+    "livro": "Eclesiastés",
+    "capitulo": 3,
+    "versiculo": 1,
+    "texto": "Todo tiene su tiempo, y todo lo que se quiere debajo del cielo tiene su hora."
+},
+{
+    "livro": "Isaías",
+    "capitulo": 41,
+    "versiculo": 13,
+    "texto": "Porque yo Jehová soy tu Dios, quien te sostiene de tu mano derecha, y te dice: No temas, yo te ayudo."
+},
+{
+    "livro": "Jeremías",
+    "capitulo": 8,
+    "versiculo": 22,
+    "texto": "¿No hay bálsamo en Galaad? ¿No hay allí médico? ¿Por qué, pues, no ha habido medicina para la hija de mi pueblo?"
+},
+{
+    "livro": "Malaquías",
+    "capitulo": 1,
+    "versiculo": 11,
+    "texto": "Porque desde donde el sol nace hasta donde se pone, es grande mi nombre entre las naciones; y en todo lugar se ofrece a mi nombre incienso y ofrenda limpia, porque grande es mi nombre entre las naciones, dice Jehová de los ejércitos."
+},
+{
+    "livro": "Mateo",
+    "capitulo": 5,
+    "versiculo": 44,
+    "texto": "Pero yo os digo: Amad a vuestros enemigos, bendecid a los que os maldicen, haced bien a los que os aborrecen, y orad por los que os ultrajan y os persiguen;"
+},
+{
+    "livro": "Mateo",
+    "capitulo": 21,
+    "versiculo": 22,
+    "texto": "Y todo lo que pidiereis en oración, creyendo, lo recibiréis."
+},
+{
+    "livro": "Marcos",
+    "capitulo": 13,
+    "versiculo": 33,
+    "texto": "Mirad, velad y orad; porque no sabéis cuándo será el tiempo."
+},
+{
+    "livro": "Lucas",
+    "capitulo": 11,
+    "versiculo": 9,
+    "texto": "Y yo os digo: Pedid, y se os dará; buscad, y hallaréis; llamad, y se os abrirá."
+},
+{
+    "livro": "Juan",
+    "capitulo": 14,
+    "versiculo": 1,
+    "texto": "No se turbe vuestro corazón; creéis en Dios, creed también en mí."
+},
+{
+    "livro": "Hechos",
+    "capitulo": 10,
+    "versiculo": 34,
+    "texto": "Entonces Pedro, abriendo la boca, dijo: En verdad comprendo que Dios no hace acepción de personas,"
+},
+{
+    "livro": "Romanos",
+    "capitulo": 3,
+    "versiculo": 24,
+    "texto": "siendo justificados gratuitamente por su gracia, mediante la redención que es en Cristo Jesús,"
+},
+{
+    "livro": "1 Corintios",
+    "capitulo": 13,
+    "versiculo": 11,
+    "texto": "Cuando yo era niño, hablaba como niño, pensaba como niño, juzgaba como niño; mas cuando ya fui hombre, dejé lo que era de niño."
+},
+{
+    "livro": "2 Corintios",
+    "capitulo": 1,
+    "versiculo": 4,
+    "texto": "el cual nos consuela en todas nuestras tribulaciones, para que podamos también nosotros consolar a los que están en cualquier tribulación, por medio de la consolación con que nosotros somos consolados por Dios."
+},
+{
+    "livro": "Efesios",
+    "capitulo": 6,
+    "versiculo": 10,
+    "texto": "Por lo demás, hermanos míos, fortaleceos en el Señor, y en el poder de su fuerza."
+},
+{
+    "livro": "Filipenses",
+    "capitulo": 4,
+    "versiculo": 12,
+    "texto": "Sé vivir humildemente, y sé tener abundancia; en todo y por todo estoy enseñado, así para estar saciado como para tener hambre, así para tener abundancia como para padecer necesidad."
+},
+{
+    "livro": "Colosenses",
+    "capitulo": 3,
+    "versiculo": 9,
+    "texto": "No mintáis los unos a los otros, habiéndoos despojado del viejo hombre con sus hechos,"
+},
+{
+    "livro": "1 Tesalonicenses",
+    "capitulo": 5,
+    "versiculo": 21,
+    "texto": "Examinadlo todo; retened lo bueno."
+},
+{
+    "livro": "2 Timoteo",
+    "capitulo": 3,
+    "versiculo": 15,
+    "texto": "y que desde la niñez has sabido las Sagradas Escrituras, las cuales te pueden hacer sabio para la salvación por la fe que es en Cristo Jesús."
+},
+{
+    "livro": "Hebreos",
+    "capitulo": 13,
+    "versiculo": 15,
+    "texto": "Así que, ofrezcamos siempre a Dios, por medio de él, sacrificio de alabanza, es decir, fruto de labios que confiesan su nombre."
+},
+{
+    "livro": "Santiago",
+    "capitulo": 1,
+    "versiculo": 4,
+    "texto": "Mas tenga la paciencia su obra completa, para que seáis perfectos y cabales, sin que os falte cosa alguna."
+},
+{
+    "livro": "1 Pedro",
+    "capitulo": 5,
+    "versiculo": 10,
+    "texto": "Mas el Dios de toda gracia, que nos llamó a su gloria eterna en Jesucristo, después que hayáis padecido un poco de tiempo, él mismo os perfeccione, afirme, fortalezca y establezca."
+},
+{
+    "livro": "2 Pedro",
+    "capitulo": 1,
+    "versiculo": 5,
+    "texto": "Vosotros también, poniendo toda diligencia por esto mismo, añadid a vuestra fe virtud; a la virtud, conocimiento;"
+},
+{
+    "livro": "1 Juan",
+    "capitulo": 1,
+    "versiculo": 7,
+    "texto": "pero si andamos en luz, como él está en luz, tenemos comunión unos con otros, y la sangre de Jesucristo su Hijo nos limpia de todo pecado."
+},
+{
+    "livro": "Salmos",
+    "capitulo": 121,
+    "versiculo": 2,
+    "texto": "Mi socorro viene de Jehová, Que hizo los cielos y la tierra."
+},
+{
+    "livro": "Proverbios",
+    "capitulo": 19,
+    "versiculo": 21,
+    "texto": "Muchos pensamientos hay en el corazón del hombre; Mas el consejo de Jehová permanecerá."
+},
+{
+    "livro": "Isaías",
+    "capitulo": 9,
+    "versiculo": 6,
+    "texto": "Porque un niño nos es nacido, hijo nos es dado, y el principado sobre su hombro; y se llamará su nombre Admirable, Consejero, Dios Fuerte, Padre Eterno, Príncipe de Paz."
+},
+{
+    "livro": "Apocalipsis",
+    "capitulo": 22,
+    "versiculo": 20,
+    "texto": "El que da testimonio de estas cosas dice: Ciertamente vengo en breve. Amén; sí, ven, Señor Jesús."
+}
+
 ]
