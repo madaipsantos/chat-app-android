@@ -24,12 +24,18 @@ class ChatScreen extends StatelessWidget {
       leading: Padding(
         padding: const EdgeInsets.all(4.0),
         child: CircleAvatar(
-          backgroundImage: const NetworkImage(
-            'https://www.shutterstock.com/image-vector/chat-bot-icon-virtual-smart-600nw-2478937553.jpg',
+          backgroundImage: const AssetImage(
+            'assets/images/imagbot.jpg', // Mude para o caminho e nome da sua imagem
           ),
         ),
       ),
-      title: const Text('Asistente Bíblico'),
+      title: const Text(
+        'Asistente Bíblico',
+        style: TextStyle(
+          color: Color.fromARGB(255, 43, 62, 185),
+          fontWeight: FontWeight.bold,
+        ),
+      ),
       centerTitle: true,
     );
   }
@@ -66,10 +72,10 @@ class _ChatViewState extends State<_ChatView> {
 
   void _scrollToBottom() {
     final chatProvider = Provider.of<ChatProvider>(context, listen: false);
-    
+
     Future.delayed(const Duration(milliseconds: 300), () {
       if (!chatProvider.chatScrollController.hasClients) return;
-      
+
       chatProvider.chatScrollController.animateTo(
         chatProvider.chatScrollController.position.maxScrollExtent,
         duration: const Duration(milliseconds: 300),
@@ -93,7 +99,7 @@ class _ChatViewState extends State<_ChatView> {
     return switch (message.fromWho) {
       FromWho.systemChatMessage => SystemChatMessageBubble(message: message),
       FromWho.userChatMessage => UserChatMessageBubble(message: message),
-      FromWho.verseMessage => VerseMessageBubble(message: message)
+      FromWho.verseMessage => VerseMessageBubble(message: message),
     };
   }
 
@@ -113,9 +119,7 @@ class _ChatViewState extends State<_ChatView> {
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Column(
           children: [
-            Expanded(
-              child: _buildMessageList(chatProvider),
-            ),
+            Expanded(child: _buildMessageList(chatProvider)),
             AnimatedPadding(
               padding: EdgeInsets.only(bottom: keyboardPadding),
               duration: const Duration(milliseconds: 100),
