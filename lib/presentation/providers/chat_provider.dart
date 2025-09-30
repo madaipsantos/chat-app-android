@@ -1,8 +1,11 @@
+import 'package:asistente_biblico/core/exceptions/bible_search_exception.dart';
+import 'package:asistente_biblico/core/exceptions/invalid_choice_exception.dart';
 import 'package:flutter/material.dart';
-import 'package:yes_no_app/domain/entities/message.dart';
-import 'package:yes_no_app/infrastructure/services/bible_service.dart';
-import 'package:yes_no_app/data/models/bible_verse_model.dart';
-import 'package:yes_no_app/core/constants/chat_messages_constants.dart';
+import 'package:asistente_biblico/domain/entities/message.dart';
+import 'package:asistente_biblico/infrastructure/services/bible_service.dart';
+import 'package:asistente_biblico/data/models/bible_verse_model.dart';
+import 'package:asistente_biblico/core/constants/chat_messages_constants.dart';
+import 'package:asistente_biblico/core/exceptions/invalid_message_exception.dart';
 
 /// Estados possíveis durante o fluxo de busca de versículos
 enum SearchState {
@@ -53,17 +56,21 @@ class ChatProvider extends ChangeNotifier {
 
   /// Inicializa o chat com mensagens de boas-vindas
   Future<void> _initializeChat() async {
-    final initialMessages = ChatMessagesConstants.welcomeMessages
-        .map(
-          (msg) => msg.replaceFirst(
-            '{userName}',
-            _userName.isNotEmpty ? ", $_userName" : "",
-          ),
-        )
-        .toList();
-    for (final message in initialMessages) {
-      await _showTypingThenMessage(message);
-      await Future.delayed(const Duration(milliseconds: 300));
+    try {
+      final initialMessages = ChatMessagesConstants.welcomeMessages
+          .map(
+            (msg) => msg.replaceFirst(
+              '{userName}',
+              _userName.isNotEmpty ? ", $_userName" : "",
+            ),
+          )
+          .toList();
+      for (final message in initialMessages) {
+        await _showTypingThenMessage(message);
+        await Future.delayed(const Duration(milliseconds: 300));
+      }
+    } catch (e) {
+      await _addSystemChatMessage(ChatMessagesConstants.errorInitChat);
     }
   }
 
@@ -87,52 +94,54 @@ class ChatProvider extends ChangeNotifier {
 
   /// Processa a mensagem enviada pelo usuário
   Future<void> sendMessage(String text) async {
-    if (text.isEmpty) return;
-
-    final upperText = text.toUpperCase().trim();
-
-    // Verificar SALIR y BUSCAR antes de cualquier otra operación
-    if (upperText == 'SALIR') {
-      _addUserChatMessage(text);
-      // Mostrar mensajes de despedida
-      await _addSystemMessages(ChatMessagesConstants.farewellMessages);
-      await Future.delayed(const Duration(seconds: 2));
-
-      // Limpiar completamente el chat
-      messageList.clear();
-      notifyListeners();
-
-      // Esperar un momento para que se vea la limpieza
-      await Future.delayed(const Duration(milliseconds: 500));
-
-      // Reiniciar el estado
-      _resetSearch();
-      _currentState = SearchState.initial;
-
-      // Redirigir a la pantalla inicial y limpiar el historial de navegación
-      if (_context != null) {
-        Navigator.of(_context!).pushNamedAndRemoveUntil(
-          '/',
-          (route) => false, // Esto removerá todas las rutas anteriores
-        );
-      }
-      return;
-    }
-
-    if (upperText == 'BUSCAR') {
-      _addUserChatMessage(text);
-      await _handleSearchCommand();
-      return;
-    }
-
-    if (!_isJsonLoaded) {
-      await _addSystemChatMessage(ChatMessagesConstants.loadingVerses);
-      return;
-    }
-
-    _addUserChatMessage(text);
-
     try {
+      if (text.trim().isEmpty) {
+        throw InvalidMessageException(ChatMessagesConstants.errorEmptyMessage);
+      }
+
+      final upperText = text.toUpperCase().trim();
+
+      // Verificar SALIR y BUSCAR antes de cualquier otra operación
+      if (upperText == 'SALIR') {
+        _addUserChatMessage(text);
+        // Mostrar mensajes de despedida
+        await _addSystemMessages(ChatMessagesConstants.farewellMessages);
+        await Future.delayed(const Duration(seconds: 2));
+
+        // Limpiar completamente el chat
+        messageList.clear();
+        notifyListeners();
+
+        // Esperar un momento para que se vea la limpieza
+        await Future.delayed(const Duration(milliseconds: 500));
+
+        // Reiniciar el estado
+        _resetSearch();
+        _currentState = SearchState.initial;
+
+        // Redirigir a la pantalla inicial y limpiar el historial de navegación
+        if (_context != null) {
+          Navigator.of(_context!).pushNamedAndRemoveUntil(
+            '/',
+            (route) => false, // Esto removerá todas las rutas anteriores
+          );
+        }
+        return;
+      }
+
+      if (upperText == 'BUSCAR') {
+        _addUserChatMessage(text);
+        await _handleSearchCommand();
+        return;
+      }
+
+      if (!_isJsonLoaded) {
+        await _addSystemChatMessage(ChatMessagesConstants.loadingVerses);
+        return;
+      }
+
+      _addUserChatMessage(text);
+
       if (isWaitingNewSearch) {
         await _handleNewSearchResponse(text);
       } else if (isWaitingChoice) {
@@ -140,6 +149,17 @@ class ChatProvider extends ChangeNotifier {
       } else {
         await _searchVerses(text);
       }
+    } on InvalidMessageException catch (e) {
+      await _addSystemChatMessage(e.message);
+    } on InvalidChoiceException catch (e) {
+      await _addSystemChatMessage(e.message);
+      await _addSystemMessages([
+        ChatMessagesConstants.chooseOption,
+        ChatMessagesConstants.invalidChoiceOptions,
+      ]);
+      _currentState = SearchState.waitingChoice;
+    } on BibleSearchException catch (e) {
+      await _addSystemChatMessage(e.message);
     } catch (e) {
       await _addSystemChatMessage(ChatMessagesConstants.errorOccurred);
     }
@@ -150,7 +170,6 @@ class ChatProvider extends ChangeNotifier {
   /// Processa a escolha do usuário
   Future<void> _processChoice(String text) async {
     final upperText = text.toUpperCase().trim();
-    final invalidOptionsMessage = ChatMessagesConstants.invalidChoiceOptions;
 
     switch (upperText) {
       case 'VOLVER':
@@ -170,12 +189,7 @@ class ChatProvider extends ChangeNotifier {
       _currentState = SearchState.waitingChoice;
       await _showVersesList();
     } else {
-      await _addSystemMessages([
-        ChatMessagesConstants.invalidOption,
-        ChatMessagesConstants.chooseOption,
-        invalidOptionsMessage,
-      ]);
-      _currentState = SearchState.waitingChoice;
+      throw InvalidChoiceException(ChatMessagesConstants.errorInvalidChoice);
     }
   }
 
@@ -219,7 +233,11 @@ class ChatProvider extends ChangeNotifier {
 
     // Redirigir a la pantalla inicial y limpiar el historial de navegación
     if (_context != null) {
-      Navigator.of(_context!).pushNamedAndRemoveUntil('/', (route) => false);
+      try {
+        Navigator.of(_context!).pushNamedAndRemoveUntil('/', (route) => false);
+      } catch (e) {
+        await _addSystemChatMessage(ChatMessagesConstants.errorNavigation);
+      }
     }
   }
 
@@ -246,16 +264,20 @@ class ChatProvider extends ChangeNotifier {
   }
 
   Future<void> _searchVerses(String query) async {
-    _searchResults = BibleService.instance.buscar(query);
+    try {
+      _searchResults = BibleService.instance.buscar(query);
 
-    if (_searchResults.isEmpty) {
-      _addSystemChatMessage(
-        ChatMessagesConstants.notFound.replaceFirst('{query}', query),
-      );
-    } else if (_searchResults.length == 1) {
-      _addMessage(_searchResults[0].toMessageEntity());
-    } else {
-      _showVersesList();
+      if (_searchResults.isEmpty) {
+        await _addSystemChatMessage(
+          ChatMessagesConstants.notFound.replaceFirst('{query}', query),
+        );
+      } else if (_searchResults.length == 1) {
+        _addMessage(_searchResults[0].toMessageEntity());
+      } else {
+        await _showVersesList();
+      }
+    } catch (e) {
+      throw BibleSearchException(ChatMessagesConstants.errorSearch);
     }
   }
 

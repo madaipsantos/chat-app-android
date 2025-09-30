@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yes_no_app/domain/entities/message.dart';
+import 'package:asistente_biblico/domain/entities/message.dart';
 
 class VerseMessageBubble extends StatelessWidget {
   static const _borderRadius = 20.0;

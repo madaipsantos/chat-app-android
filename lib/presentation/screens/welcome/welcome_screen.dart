@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yes_no_app/presentation/screens/chat/chat_screen.dart';
-import 'package:yes_no_app/presentation/providers/chat_provider.dart';
+import 'package:asistente_biblico/presentation/screens/chat/chat_screen.dart';
+import 'package:asistente_biblico/presentation/providers/chat_provider.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});

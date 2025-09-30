@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yes_no_app/domain/entities/message.dart';
-import 'package:yes_no_app/presentation/providers/chat_provider.dart';
-import 'package:yes_no_app/presentation/widgets/chat/system_chat_message_bubble.dart';
-import 'package:yes_no_app/presentation/widgets/chat/user_chat_message_bubble.dart';
-import 'package:yes_no_app/presentation/widgets/chat/verse_message_bubble.dart';
-import 'package:yes_no_app/presentation/widgets/shared/message_field_box.dart';
+import 'package:asistente_biblico/domain/entities/message.dart';
+import 'package:asistente_biblico/presentation/providers/chat_provider.dart';
+import 'package:asistente_biblico/presentation/widgets/chat/system_chat_message_bubble.dart';
+import 'package:asistente_biblico/presentation/widgets/chat/user_chat_message_bubble.dart';
+import 'package:asistente_biblico/presentation/widgets/chat/verse_message_bubble.dart';
+import 'package:asistente_biblico/presentation/widgets/shared/message_field_box.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
@@ -25,7 +25,7 @@ class ChatScreen extends StatelessWidget {
         padding: const EdgeInsets.all(4.0),
         child: CircleAvatar(
           backgroundImage: const AssetImage(
-            'assets/images/imagebot.jpg', // Mude para o caminho e nome da sua imagem
+            'assets/images/imagebot.png', // Mude para o caminho e nome da sua imagem
           ),
         ),
       ),

@@ -1,5 +1,7 @@
+import 'package:asistente_biblico/core/constants/chat_messages_constants.dart';
+import 'package:asistente_biblico/core/exceptions/data_format_exception.dart';
 import 'package:equatable/equatable.dart';
-import 'package:yes_no_app/domain/entities/message.dart';
+import 'package:asistente_biblico/domain/entities/message.dart';
 
 /// Modelo que representa um versículo bíblico.
 /// 
@@ -18,12 +20,31 @@ class BibleVerseModel extends Equatable {
   });
 
   /// Cria uma instância de [BibleVerseModel] a partir de um mapa JSON.
-  factory BibleVerseModel.fromJson(Map<String, dynamic> json) => BibleVerseModel(
-        livro: json["livro"] as String,
-        capitulo: json["capitulo"] as int,
-        versiculo: json["versiculo"] as int,
-        texto: json["texto"] as String,
+  factory BibleVerseModel.fromJson(Map<String, dynamic> json) {
+    try {
+      if (!json.containsKey('livro') ||
+          !json.containsKey('capitulo') ||
+          !json.containsKey('versiculo') ||
+          !json.containsKey('texto')) {
+        throw DataFormatException(ChatMessagesConstants.errorMissingFields);
+      }
+      final livro = json['livro'];
+      final capitulo = json['capitulo'];
+      final versiculo = json['versiculo'];
+      final texto = json['texto'];
+      if (livro is! String || capitulo is! int || versiculo is! int || texto is! String) {
+        throw DataFormatException(ChatMessagesConstants.errorWrongTypes);
+      }
+      return BibleVerseModel(
+        livro: livro,
+        capitulo: capitulo,
+        versiculo: versiculo,
+        texto: texto,
       );
+    } catch (e) {
+  throw DataFormatException(ChatMessagesConstants.errorFormatVerse);
+    }
+  }
 
   /// Converte este modelo para um mapa JSON.
   Map<String, dynamic> toJson() => {
