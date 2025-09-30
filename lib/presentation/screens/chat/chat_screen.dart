@@ -25,7 +25,7 @@ class ChatScreen extends StatelessWidget {
         padding: const EdgeInsets.all(4.0),
         child: CircleAvatar(
           backgroundImage: const AssetImage(
-            'assets/images/imagbot.jpg', // Mude para o caminho e nome da sua imagem
+            'assets/images/imagebot.jpg', // Mude para o caminho e nome da sua imagem
           ),
         ),
       ),
