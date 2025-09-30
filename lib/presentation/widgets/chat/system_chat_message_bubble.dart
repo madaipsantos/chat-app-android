@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yes_no_app/domain/entities/message.dart';
+import 'package:asistente_biblico/domain/entities/message.dart';
 
 /// Widget que exibe mensagens de sistema em formato de bolha.
 /// 

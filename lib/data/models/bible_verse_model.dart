@@ -1,7 +1,7 @@
-import 'package:yes_no_app/core/constants/chat_messages_constants.dart';
-import 'package:yes_no_app/core/exceptions/data_format_exception.dart';
+import 'package:asistente_biblico/core/constants/chat_messages_constants.dart';
+import 'package:asistente_biblico/core/exceptions/data_format_exception.dart';
 import 'package:equatable/equatable.dart';
-import 'package:yes_no_app/domain/entities/message.dart';
+import 'package:asistente_biblico/domain/entities/message.dart';
 
 /// Modelo que representa um versículo bíblico.
 /// 

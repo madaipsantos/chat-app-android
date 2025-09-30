@@ -16,7 +16,7 @@ class ChatMessagesConstants {
   static const searchPrompt = 'Escribe el tema o versículo que deseas buscar.';
   static const loadingVerses = 'Cargando versos, por favor espere...';
   static const notFound = 'No se encontraron versículos para "{query}".';
-  static const invalidOption = '¡Ups! Esa opción no es válida.';
+  //static const invalidOption = '¡Ups! Esa opción no es válida.';
   static const chooseOption = 'Por favor, elige una opción:';
   static const invalidChoiceOptions = 'Escribe "BUSCAR" para una nueva búsqueda.\nEscribe "SALIR" si quieres terminar el chat.';
   static const answerYesNoExit = 'Por favor, responda "SÍ", "NO" o "SALIR".';
@@ -28,7 +28,7 @@ class ChatMessagesConstants {
 
   static const String errorInitChat = 'Ocurrió un error al iniciar el chat.';
   static const String errorEmptyMessage = 'El mensaje no puede estar vacío';
-  static const String errorInvalidChoice = 'La opción seleccionada no es válida';
+  static const String errorInvalidChoice = '¡Ups! Esa opción no es válida.';
   static const String errorSearch = 'Error al buscar versículos';
   static const String errorNavigation = 'No se pudo navegar a la pantalla inicial.';
   static const String errorInitService = 'Fallo al inicializar el servicio de la Biblia.';

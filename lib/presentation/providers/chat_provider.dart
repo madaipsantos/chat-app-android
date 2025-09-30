@@ -1,11 +1,11 @@
-import 'package:yes_no_app/core/exceptions/bible_search_exception.dart';
-import 'package:yes_no_app/core/exceptions/invalid_choice_exception.dart';
+import 'package:asistente_biblico/core/exceptions/bible_search_exception.dart';
+import 'package:asistente_biblico/core/exceptions/invalid_choice_exception.dart';
 import 'package:flutter/material.dart';
-import 'package:yes_no_app/domain/entities/message.dart';
-import 'package:yes_no_app/infrastructure/services/bible_service.dart';
-import 'package:yes_no_app/data/models/bible_verse_model.dart';
-import 'package:yes_no_app/core/constants/chat_messages_constants.dart';
-import 'package:yes_no_app/core/exceptions/invalid_message_exception.dart';
+import 'package:asistente_biblico/domain/entities/message.dart';
+import 'package:asistente_biblico/infrastructure/services/bible_service.dart';
+import 'package:asistente_biblico/data/models/bible_verse_model.dart';
+import 'package:asistente_biblico/core/constants/chat_messages_constants.dart';
+import 'package:asistente_biblico/core/exceptions/invalid_message_exception.dart';
 
 /// Estados possíveis durante o fluxo de busca de versículos
 enum SearchState {
@@ -154,7 +154,6 @@ class ChatProvider extends ChangeNotifier {
     } on InvalidChoiceException catch (e) {
       await _addSystemChatMessage(e.message);
       await _addSystemMessages([
-        ChatMessagesConstants.invalidOption,
         ChatMessagesConstants.chooseOption,
         ChatMessagesConstants.invalidChoiceOptions,
       ]);
