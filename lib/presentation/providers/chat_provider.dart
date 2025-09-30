@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yes_no_app/domain/entities/message.dart';
 import 'package:yes_no_app/infrastructure/services/bible_service.dart';
 import 'package:yes_no_app/data/models/bible_verse_model.dart';
+import 'package:yes_no_app/core/constants/chat_messages_constants.dart';
 
 /// Estados possíveis durante o fluxo de busca de versículos
 enum SearchState {
@@ -38,10 +39,10 @@ class ChatProvider extends ChangeNotifier {
   }
 
   void setUserName(String name) {
-      // Capitaliza la primera letra y pone el resto en minúsculas
-      _userName = name.isNotEmpty
-          ? "${name[0].toUpperCase()}${name.substring(1).toLowerCase()}"
-          : name;
+    // Capitaliza la primera letra y pone el resto en minúsculas
+    _userName = name.isNotEmpty
+        ? "${name[0].toUpperCase()}${name.substring(1).toLowerCase()}"
+        : name;
     // Inicializamos el chat cada vez que se establece un nuevo nombre
     messageList.clear();
     _resetSearch();
@@ -52,14 +53,14 @@ class ChatProvider extends ChangeNotifier {
 
   /// Inicializa o chat com mensagens de boas-vindas
   Future<void> _initializeChat() async {
-    final initialMessages = [
-      'Holá${_userName.isNotEmpty ? ", $_userName" : ""}! Soy tu asistente bíblico personal.',      
-      'En cualquier momento, puedes escribir: ',
-      'Escribe "BUSCAR" para una nueva búsqueda.\nEscribe "SALIR" si quieres salir del chat.',
-      '¿Quieres buscar un versículo bíblico?',
-      'Escribe lo que tienes en mente, por ejemplo: "amor", "perdón" o "Salmo 23:1".',
-    ];
-
+    final initialMessages = ChatMessagesConstants.welcomeMessages
+        .map(
+          (msg) => msg.replaceFirst(
+            '{userName}',
+            _userName.isNotEmpty ? ", $_userName" : "",
+          ),
+        )
+        .toList();
     for (final message in initialMessages) {
       await _showTypingThenMessage(message);
       await Future.delayed(const Duration(milliseconds: 300));
@@ -94,10 +95,7 @@ class ChatProvider extends ChangeNotifier {
     if (upperText == 'SALIR') {
       _addUserChatMessage(text);
       // Mostrar mensajes de despedida
-      await _addSystemMessages([
-        '¡Hasta luego!',
-        'Gracias por usar el asistente bíblico.',
-      ]);
+      await _addSystemMessages(ChatMessagesConstants.farewellMessages);
       await Future.delayed(const Duration(seconds: 2));
 
       // Limpiar completamente el chat
@@ -128,7 +126,7 @@ class ChatProvider extends ChangeNotifier {
     }
 
     if (!_isJsonLoaded) {
-      await _addSystemChatMessage("Cargando versos, por favor espere...");
+      await _addSystemChatMessage(ChatMessagesConstants.loadingVerses);
       return;
     }
 
@@ -143,9 +141,7 @@ class ChatProvider extends ChangeNotifier {
         await _searchVerses(text);
       }
     } catch (e) {
-      await _addSystemChatMessage(
-        'Ocurrió un error. Por favor, intenta de nuevo.',
-      );
+      await _addSystemChatMessage(ChatMessagesConstants.errorOccurred);
     }
 
     await moveScrollToBottom();
@@ -154,8 +150,7 @@ class ChatProvider extends ChangeNotifier {
   /// Processa a escolha do usuário
   Future<void> _processChoice(String text) async {
     final upperText = text.toUpperCase().trim();
-    final invalidOptionsMessage =
-        'Escribe "BUSCAR" para una nueva búsqueda.\nEscribe "SALIR" si quieres terminar el chat.';
+    final invalidOptionsMessage = ChatMessagesConstants.invalidChoiceOptions;
 
     switch (upperText) {
       case 'VOLVER':
@@ -176,8 +171,8 @@ class ChatProvider extends ChangeNotifier {
       await _showVersesList();
     } else {
       await _addSystemMessages([
-        '¡Ups! Esa opción no es válida.',
-        'Por favor, elige una opción:',
+        ChatMessagesConstants.invalidOption,
+        ChatMessagesConstants.chooseOption,
         invalidOptionsMessage,
       ]);
       _currentState = SearchState.waitingChoice;
@@ -192,15 +187,13 @@ class ChatProvider extends ChangeNotifier {
       await _exitChat();
     } else if (response == 'si' || response == 'sí') {
       _resetSearch();
-      await _addSystemChatMessage(
-        'Escribe lo que tengas en mente, por ejemplo: "amor", "perdón" o "Salmos 23:1".',
-      );
+      await _addSystemChatMessage(ChatMessagesConstants.writeTopicExample);
       _currentState = SearchState.initial;
     } else if (response == 'no') {
       await _showVersesList();
       _currentState = SearchState.waitingChoice;
     } else {
-      await _addSystemChatMessage('Por favor, responda "SÍ", "NO" o "SALIR".');
+      await _addSystemChatMessage(ChatMessagesConstants.answerYesNoExit);
       _currentState = SearchState.waitingNewSearch;
     }
 
@@ -209,10 +202,7 @@ class ChatProvider extends ChangeNotifier {
 
   /// Finaliza o chat com mensagem de despedida
   Future<void> _exitChat() async {
-    await _addSystemMessages([
-      '¡Hasta luego!',
-      'Gracias por usar el asistente bíblico.',
-    ]);
+    await _addSystemMessages(ChatMessagesConstants.farewellMessages);
     await Future.delayed(const Duration(seconds: 2));
 
     // Limpiamos completamente el chat
@@ -220,7 +210,7 @@ class ChatProvider extends ChangeNotifier {
     notifyListeners();
 
     // Esperamos un momento para que se vea la limpieza
-    await Future.delayed(const Duration(milliseconds: 300));
+    await Future.delayed(const Duration(milliseconds: 100));
 
     // Reiniciamos el estado
     _resetSearch();
@@ -259,7 +249,9 @@ class ChatProvider extends ChangeNotifier {
     _searchResults = BibleService.instance.buscar(query);
 
     if (_searchResults.isEmpty) {
-      _addSystemChatMessage('No se encontraron versículos para "$query".');
+      _addSystemChatMessage(
+        ChatMessagesConstants.notFound.replaceFirst('{query}', query),
+      );
     } else if (_searchResults.length == 1) {
       _addMessage(_searchResults[0].toMessageEntity());
     } else {
@@ -273,10 +265,12 @@ class ChatProvider extends ChangeNotifier {
   /// Mostra um versículo selecionado pelo usuário
   Future<void> _showSelectedVerse(int choice) async {
     final verse = _searchResults[choice - 1];
-    await _showTypingThenMessage(Message(
-      text: verse.toMessageEntity().text,
-      fromWho: FromWho.verseMessage,
-    ));
+    await _showTypingThenMessage(
+      Message(
+        text: verse.toMessageEntity().text,
+        fromWho: FromWho.verseMessage,
+      ),
+    );
   }
 
   void _resetSearch() {
@@ -287,8 +281,8 @@ class ChatProvider extends ChangeNotifier {
   Future<void> _showVersesList() async {
     final lista = _createVersesList();
     await _addSystemChatMessage(lista);
-    await _addSystemChatMessage("Por favor, elige un número de la lista para ver el versículo completo, o escribe una de las opciones de abajo.");
-    await _addSystemChatMessage("Escribe 'BUSCAR' para una nueva búsqueda.\nEscribe 'SALIR' si quieres terminar el chat.");
+    await _addSystemChatMessage(ChatMessagesConstants.chooseVerse);
+    await _addSystemChatMessage(ChatMessagesConstants.listOptions);
     // Mostrar mensajes de navegación si hay más de una página
 
     _currentState = SearchState.waitingChoice;
@@ -337,7 +331,7 @@ class ChatProvider extends ChangeNotifier {
   /// Maneja el comando BUSCAR
   Future<void> _handleSearchCommand() async {
     _resetSearch();
-    await _addSystemChatMessage('Escribe el tema o versículo que deseas buscar.');
+    await _addSystemChatMessage(ChatMessagesConstants.searchPrompt);
     _currentState = SearchState.initial;
   }
 }
