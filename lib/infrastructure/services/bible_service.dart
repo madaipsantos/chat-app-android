@@ -1,3 +1,5 @@
+import '../../core/constants/chat_messages_constants.dart';
+import '../../core/exceptions/bible_search_exception.dart';
 import '../../data/models/bible_verse_model.dart';
 import '../../domain/repositories/bible_repository.dart';
 import 'package:diacritic/diacritic.dart';
@@ -28,27 +30,31 @@ class BibleService {
         _versiculos = await _repository.getAllVerses();
         _initialized = true;
       } catch (e) {
-        throw Exception('Falha ao inicializar o serviço: $e');
+  throw BibleSearchException(ChatMessagesConstants.errorInitService);
       }
     }
   }
 
   /// Busca por palavra ou frase, ignorando acentos, maiúsculas e pontuação
   List<BibleVerseModel> buscar(String query) {
-    if (query.isEmpty || !_initialized) return [];
-    
-    final normalizedQuery = _normalize(query);
-    final queryWords = normalizedQuery.split(' ').where((word) => word.isNotEmpty).toList();
-    
-    if (queryWords.isEmpty) return [];
+    try {
+      if (query.isEmpty || !_initialized) return [];
 
-    return _versiculos.where((v) {
-      final normalizedTexto = _normalize(v.texto);
-      final normalizedLivro = _normalize(v.livro);
-      
-      return queryWords.any((word) => 
-          normalizedTexto.contains(word) || normalizedLivro.contains(word));
-    }).toList();
+      final normalizedQuery = _normalize(query);
+      final queryWords = normalizedQuery.split(' ').where((word) => word.isNotEmpty).toList();
+
+      if (queryWords.isEmpty) return [];
+
+      return _versiculos.where((v) {
+        final normalizedTexto = _normalize(v.texto);
+        final normalizedLivro = _normalize(v.livro);
+
+        return queryWords.any((word) =>
+            normalizedTexto.contains(word) || normalizedLivro.contains(word));
+      }).toList();
+    } catch (e) {
+  throw BibleSearchException(ChatMessagesConstants.errorSearch);
+    }
   }
 
   /// Normaliza texto: minúsculas, remove acentos e pontuação
