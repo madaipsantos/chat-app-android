@@ -6,6 +6,7 @@ import 'package:asistente_biblico/presentation/widgets/chat/system_chat_message_
 import 'package:asistente_biblico/presentation/widgets/chat/user_chat_message_bubble.dart';
 import 'package:asistente_biblico/presentation/widgets/chat/verse_message_bubble.dart';
 import 'package:asistente_biblico/presentation/widgets/shared/message_field_box.dart';
+import 'package:asistente_biblico/core/constants/chat_messages_constants.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
@@ -30,7 +31,7 @@ class ChatScreen extends StatelessWidget {
         ),
       ),
       title: const Text(
-        'Asistente Bíblico',
+        ChatMessagesConstants.chatTitle,
         style: TextStyle(
           color: Color.fromARGB(255, 43, 62, 185),
           fontWeight: FontWeight.bold,

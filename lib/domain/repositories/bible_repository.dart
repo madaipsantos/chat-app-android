@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:asistente_biblico/core/constants/chat_messages_constants.dart';
 import 'package:flutter/services.dart';
 import '../../data/models/bible_verse_model.dart';
 
@@ -14,7 +15,7 @@ class BibleRepository implements IBibleRepository {
       final data = jsonDecode(response) as List;
       return data.map((v) => BibleVerseModel.fromJson(v)).toList();
     } catch (e) {
-      throw Exception('Falha ao carregar versículos: $e');
+      throw Exception('${ChatMessagesConstants.errorLoadVerses}: $e');
     }
   }
 }
