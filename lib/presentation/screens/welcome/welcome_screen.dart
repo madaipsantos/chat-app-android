@@ -24,11 +24,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   void _onEntrarPressed() {
     if (_formKey.currentState!.validate()) {
       context.read<ChatProvider>().setUserName(_nomeController.text.trim());
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (_) => const ChatScreen(),
-        ),
-      );
+      Navigator.pushReplacementNamed(context, '/chat');
     }
   }
 
