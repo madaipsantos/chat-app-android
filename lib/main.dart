@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:asistente_biblico/config/theme/app_theme.dart';
 import 'package:asistente_biblico/infrastructure/services/bible_service.dart';
 import 'package:asistente_biblico/presentation/providers/chat_provider.dart';
-import 'package:asistente_biblico/presentation/screens/welcome/welcome_screen.dart';
+import 'config/router/app_router.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -25,9 +25,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: AppTheme(selectedColor: 2).theme(),
         initialRoute: '/',
-        routes: {
-          '/': (context) => const WelcomeScreen(),
-        }
+        onGenerateRoute: AppRouter.generateRoute,
       ),
     );
   }
