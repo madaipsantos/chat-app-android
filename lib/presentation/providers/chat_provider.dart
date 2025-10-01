@@ -16,6 +16,9 @@ enum SearchState {
 
 /// Provedor para gerenciar o estado do chat e interações com a API bíblica
 class ChatProvider extends ChangeNotifier {
+  // Getters públicos para testing
+  String get userName => _userName;
+  SearchState get currentState => _currentState;
   // Controllers e estado
   final ScrollController chatScrollController = ScrollController();
   final List<Message> messageList = [];
@@ -24,10 +27,10 @@ class ChatProvider extends ChangeNotifier {
   final bool _isJsonLoaded = true;
   String _userName = '';
   BuildContext? _context;
+  final bool _initializeChatFlag;
 
-  ChatProvider({bool initializeChat = true}) {
-    if (initializeChat) {
-      // Iniciamos la carga de mensajes iniciales después de que el widget esté construido
+  ChatProvider({bool initializeChat = true}) : _initializeChatFlag = initializeChat {
+    if (_initializeChatFlag) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (_userName.isEmpty) {
           _initializeChat();
@@ -50,7 +53,9 @@ class ChatProvider extends ChangeNotifier {
     messageList.clear();
     _resetSearch();
     _currentState = SearchState.initial;
-    _initializeChat();
+    if (_initializeChatFlag) {
+      _initializeChat();
+    }
     notifyListeners();
   }
 
@@ -103,7 +108,7 @@ class ChatProvider extends ChangeNotifier {
 
       // Verificar SALIR y BUSCAR antes de cualquier otra operación
       if (upperText == 'SALIR') {
-        _addUserChatMessage(text);
+        addUserChatMessage(text);
         // Mostrar mensajes de despedida
         await _addSystemMessages(ChatMessagesConstants.farewellMessages);
         await Future.delayed(const Duration(seconds: 2));
@@ -130,7 +135,7 @@ class ChatProvider extends ChangeNotifier {
       }
 
       if (upperText == 'BUSCAR') {
-        _addUserChatMessage(text);
+        addUserChatMessage(text);
         await _handleSearchCommand();
         return;
       }
@@ -140,7 +145,7 @@ class ChatProvider extends ChangeNotifier {
         return;
       }
 
-      _addUserChatMessage(text);
+  addUserChatMessage(text);
 
       if (isWaitingNewSearch) {
         await _handleNewSearchResponse(text);
@@ -254,7 +259,7 @@ class ChatProvider extends ChangeNotifier {
     }
   }
 
-  void _addUserChatMessage(String text) {
+  void addUserChatMessage(String text) {
     _addMessage(Message(text: text, fromWho: FromWho.userChatMessage));
   }
 

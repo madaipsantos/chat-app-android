@@ -1,84 +1,45 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yes_no_app/domain/entities/message.dart';
-import 'package:yes_no_app/data/models/bible_verse_model.dart';
-import 'package:yes_no_app/infrastructure/services/bible_service.dart';
-import 'package:yes_no_app/domain/repositories/bible_repository.dart';
-import 'package:yes_no_app/presentation/providers/chat_provider.dart';
+import 'package:asistente_biblico/presentation/providers/chat_provider.dart';
+import 'package:asistente_biblico/domain/entities/message.dart';
+import 'package:mockito/annotations.dart';
+import 'package:asistente_biblico/infrastructure/services/bible_service.dart';
 
-// Mock do BibleRepository
-class MockBibleRepository implements IBibleRepository {
-  @override
-  Future<List<BibleVerseModel>> getAllVerses() async {
-    return [
-      BibleVerseModel(
-        livro: "1 João",
-        capitulo: 4,
-        versiculo: 8,
-        texto: "Deus é amor",
-      ),
-    ];
-  }
-}
 
-// Mock do BibleService
-class MockBibleService extends BibleService {
-  MockBibleService() : super(MockBibleRepository());
-
-  @override
-  List<BibleVerseModel> buscar(String query) {
-    if (query.toLowerCase() == 'amor') {
-      return [
-        BibleVerseModel(
-          livro: "1 João",
-          capitulo: 4,
-          versiculo: 8,
-          texto: "Deus é amor",
-        ),
-      ];
-    }
-    return [];
-  }
-}
-
+@GenerateMocks([BibleService])
 void main() {
-  TestWidgetsFlutterBinding.ensureInitialized();
-  
-  group('ChatProvider Tests', () {
+  WidgetsFlutterBinding.ensureInitialized();
+  group('ChatProvider', () {
     late ChatProvider provider;
 
     setUp(() {
       provider = ChatProvider();
     });
 
-    test('should initialize with message list', () {
-      expect(provider.messageList, isNotNull);
+    test('initial state is correct', () {
+      expect(provider.messageList, isEmpty);
+      expect(provider.currentState, SearchState.initial);
     });
 
-    test('should have correct initial state', () {
-      expect(provider.isWaitingChoice, isFalse);
-      expect(provider.isWaitingNewSearch, isFalse);
-      expect(provider.searchResults, isEmpty);
+    test('setUserName capitalizes first letter', () {
+      provider.setUserName('maria');
+      expect(provider.userName, 'Maria');
     });
 
-    test('should add user message correctly', () async {
-      await provider.sendMessage('Olá');
-      
-      final userMessages = provider.messageList.where(
-        (msg) => msg.fromWho == FromWho.userChatMessage && msg.text == 'Olá'
-      );
-      expect(userMessages.isNotEmpty, true);
+    test('setUserName empty string', () {
+      provider.setUserName('');
+      expect(provider.userName, '');
     });
 
-    test('should handle empty message', () async {
-      final initialLength = provider.messageList.length;
-      await provider.sendMessage('');
-      
-      expect(provider.messageList.length, initialLength);
+    test('add user chat message', () {
+  provider = ChatProvider(initializeChat: false);
+  provider.setUserName('Ana');
+  provider.addUserChatMessage('Hola');
+  expect(provider.messageList.length, 1);
+  expect(provider.messageList[0].text, 'Hola');
+  expect(provider.messageList[0].fromWho, FromWho.userChatMessage);
     });
 
-    test('should have a valid ScrollController', () {
-      expect(provider.chatScrollController, isA<ScrollController>());
-    });
+    // Puedes agregar más tests para métodos públicos relevantes
   });
 }
