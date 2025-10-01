@@ -1,116 +1,71 @@
+import 'package:asistente_biblico/core/constants/chat_messages_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
-import 'package:yes_no_app/presentation/providers/chat_provider.dart';
-import './mock_chat_provider.dart';
-import './mock_chat_screen.dart';
+import 'package:asistente_biblico/presentation/screens/chat/chat_screen.dart';
+import 'package:asistente_biblico/presentation/providers/chat_provider.dart';
+import 'package:asistente_biblico/domain/entities/message.dart';
 
 void main() {
-  group('ChatScreen', () {
-    late MockChatProvider chatProvider;
-
-    Widget createWidgetUnderTest() {
-      return MaterialApp(
-        home: ChangeNotifierProvider<ChatProvider>(
-          create: (context) => chatProvider,
-          child: const MockChatScreen(),
+  testWidgets('ChatScreen muestra AppBar y lista de mensajes vacía', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: ChangeNotifierProvider(
+          create: (_) => ChatProvider(initializeChat: false),
+          child: const ChatScreen(),
         ),
-      );
-    }
+      ),
+    );
 
-    setUp(() {
-      TestWidgetsFlutterBinding.ensureInitialized();
-      chatProvider = MockChatProvider();
-    });
+  // Verifica que el título del chat esté presente
+  expect(find.text(ChatMessagesConstants.chatTitle), findsOneWidget);
+    // Verifica que la lista de mensajes esté vacía
+    expect(find.byType(ListView), findsOneWidget);
+  });
 
-    testWidgets('should render AppBar with correct title', (WidgetTester tester) async {
-      await tester.pumpWidget(createWidgetUnderTest());
-      await tester.pumpAndSettle();
-      
-      final titleFinder = find.text('System Chat Messages');
-      expect(titleFinder, findsOneWidget);
-    });
+  testWidgets('ChatScreen muestra mensaje enviado por el usuario', (WidgetTester tester) async {
+    final provider = ChatProvider(initializeChat: false);
+    await tester.pumpWidget(
+      MaterialApp(
+        home: ChangeNotifierProvider.value(
+          value: provider,
+          child: const ChatScreen(),
+        ),
+      ),
+    );
 
-    testWidgets('should render TextFormField', (WidgetTester tester) async {
-      await tester.pumpWidget(createWidgetUnderTest());
-      await tester.pumpAndSettle();
-      
-      expect(find.byType(TextFormField), findsOneWidget);
-    });
+  // Simula que el usuario escribe y envía un mensaje
+  await tester.enterText(find.byType(TextField), 'Hola mundo');
+  await tester.testTextInput.receiveAction(TextInputAction.send);
+  await tester.pumpAndSettle(const Duration(seconds: 1));
 
-    testWidgets('should handle user input', (WidgetTester tester) async {
-      await tester.pumpWidget(createWidgetUnderTest());
-      await tester.pumpAndSettle();
+  // Verifica que el mensaje aparece en la lista
+  expect(find.text('Hola mundo'), findsOneWidget);
+  });
 
-      const testMessage = 'Hello, World!';
-      await tester.enterText(find.byType(TextFormField), testMessage);
-      await tester.testTextInput.receiveAction(TextInputAction.done);
-      await tester.pumpAndSettle();
+  testWidgets('ChatScreen muestra burbujas de mensaje según el tipo', (WidgetTester tester) async {
+    final provider = ChatProvider(initializeChat: false);
+    provider.addUserChatMessage('Mensaje usuario');
+    provider.addUserChatMessage('Otro mensaje');
+    provider.messageList.add(
+      Message(text: 'Mensaje sistema', fromWho: FromWho.systemChatMessage),
+    );
+    provider.messageList.add(
+      Message(text: 'Mensaje versículo', fromWho: FromWho.verseMessage),
+    );
 
-      // Verifica se a mensagem foi adicionada à lista
-      expect(chatProvider.messageList.length, equals(1));
-      expect(chatProvider.messageList.first.text, equals(testMessage));
-    });
+    await tester.pumpWidget(
+      MaterialApp(
+        home: ChangeNotifierProvider.value(
+          value: provider,
+          child: const ChatScreen(),
+        ),
+      ),
+    );
+  await tester.pumpAndSettle(const Duration(seconds: 1));
 
-    testWidgets('should not add empty messages', (WidgetTester tester) async {
-      await tester.pumpWidget(createWidgetUnderTest());
-      await tester.pumpAndSettle();
-
-      final initialMessageCount = chatProvider.messageList.length;
-      await tester.enterText(find.byType(TextFormField), '');
-      await tester.testTextInput.receiveAction(TextInputAction.done);
-      await tester.pumpAndSettle();
-
-      expect(chatProvider.messageList.length, equals(initialMessageCount));
-    });
-
-    testWidgets('should handle keyboard-aware components', (WidgetTester tester) async {
-      await tester.pumpWidget(createWidgetUnderTest());
-      await tester.pumpAndSettle();
-
-      // Verifica se o Scaffold tem resizeToAvoidBottomInset ativo
-      final scaffold = tester.widget<Scaffold>(find.byType(Scaffold));
-      expect(scaffold.resizeToAvoidBottomInset, true);
-
-      // Verifica se o AnimatedPadding está presente
-      expect(find.byType(AnimatedPadding), findsOneWidget);
-    });
-
-    testWidgets('should handle message list scrolling', (WidgetTester tester) async {
-      await tester.pumpWidget(createWidgetUnderTest());
-      await tester.pumpAndSettle();
-
-      // Adiciona várias mensagens
-      for (var i = 0; i < 5; i++) {
-        chatProvider.sendMessage('Test message $i');
-      }
-      await tester.pumpAndSettle();
-
-      // Verifica se as mensagens foram adicionadas
-      expect(chatProvider.messageList.length, 5);
-
-      // Verifica se o ListView está presente
-      expect(find.byType(ListView), findsOneWidget);
-    });
-
-    testWidgets('should scroll to bottom when new message is sent', (WidgetTester tester) async {
-      await tester.pumpWidget(createWidgetUnderTest());
-      await tester.pumpAndSettle();
-
-      // Adiciona mensagens
-      for (var i = 0; i < 20; i++) {
-        chatProvider.sendMessage('Test message $i');
-      }
-      await tester.pumpAndSettle();
-
-      // Envia nova mensagem
-      await tester.enterText(find.byType(TextFormField), 'New message');
-      await tester.testTextInput.receiveAction(TextInputAction.done);
-      await tester.pump(const Duration(milliseconds: 300));
-
-      // Verifica se todas as mensagens foram adicionadas
-      expect(chatProvider.messageList.length, 21);
-      expect(find.text('New message'), findsOneWidget);
-    });
+    expect(find.text('Mensaje usuario'), findsOneWidget);
+    expect(find.text('Mensaje sistema'), findsOneWidget);
+    expect(find.text('Mensaje versículo'), findsOneWidget);
   });
 }

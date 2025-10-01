@@ -1,31 +1,39 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yes_no_app/domain/entities/message.dart';
+import 'package:asistente_biblico/domain/entities/message.dart';
 
 void main() {
-  group('Message Entity Tests', () {
-    
-    test('should create a user message correctly', () {
+  group('Message', () {
+    test('should create a Message with required fields', () {
       final message = Message(
-        text: 'Hello',
+        text: 'Hola',
         fromWho: FromWho.userChatMessage,
       );
-      
-      expect(message.text, equals('Hello'));
-      expect(message.fromWho, equals(FromWho.userChatMessage));
+      expect(message.text, 'Hola');
+      expect(message.fromWho, FromWho.userChatMessage);
       expect(message.imageUrl, isNull);
     });
 
-    test('should create a system message with image correctly', () {
+    test('should create a Message with imageUrl', () {
       final message = Message(
-        text: 'System message',
+        text: 'Imagen',
+        imageUrl: 'http://test.com/image.png',
         fromWho: FromWho.systemChatMessage,
-        imageUrl: 'https://example.com/image.jpg',
       );
-      
-      expect(message.text, equals('System message'));
-      expect(message.fromWho, equals(FromWho.systemChatMessage));
-      expect(message.imageUrl, equals('https://example.com/image.jpg'));
+      expect(message.imageUrl, 'http://test.com/image.png');
+      expect(message.fromWho, FromWho.systemChatMessage);
     });
 
+    test('should support all FromWho enum values', () {
+      expect(FromWho.values.length, 3);
+      expect(FromWho.userChatMessage.toString(), contains('userChatMessage'));
+      expect(FromWho.systemChatMessage.toString(), contains('systemChatMessage'));
+      expect(FromWho.verseMessage.toString(), contains('verseMessage'));
+    });
+
+    test('should compare Message objects by reference', () {
+      final m1 = Message(text: 'A', fromWho: FromWho.verseMessage);
+      final m2 = Message(text: 'A', fromWho: FromWho.verseMessage);
+      expect(m1 == m2, isFalse); // No override of ==
+    });
   });
 }
