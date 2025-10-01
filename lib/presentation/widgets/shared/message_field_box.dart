@@ -1,3 +1,4 @@
+import 'package:asistente_biblico/core/constants/chat_messages_constants.dart';
 import 'package:flutter/material.dart';
 
 /// Widget para entrada de texto de mensagens com botão de envio.
@@ -23,7 +24,7 @@ class _MessageFieldBoxState extends State<MessageFieldBox> {
   late final FocusNode _focusNode;
   
   // Constantes para melhor manutenção
-  static const String _hintText = "Busca por tema, palabra o referencia bíblica…";
+  static const String _hintText = ChatMessagesConstants.messageFieldHint;
   static const double _borderRadius = 40.0;
 
   @override

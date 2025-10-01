@@ -1,3 +1,4 @@
+import 'package:asistente_biblico/core/constants/chat_messages_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:asistente_biblico/presentation/screens/chat/chat_screen.dart';
@@ -63,7 +64,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                   const SizedBox(height: 30),
                   Text(
-                    'Bienvenido al\n Asistente Bíblico',
+                    ChatMessagesConstants.welcomeTitle ,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 32,
@@ -75,7 +76,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   TextFormField(
                     controller: _nomeController,
                     decoration: InputDecoration(
-                      hintText: 'Introduce tu nombre',
+                      hintText: ChatMessagesConstants.hintEnterName,
                       filled: true,
                       fillColor: colors.surface,
                       border: OutlineInputBorder(
@@ -96,7 +97,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return 'Por favor, introduzca su nombre';
+                        return ChatMessagesConstants.errorEnterName;
                       }
                       return null;
                     },
