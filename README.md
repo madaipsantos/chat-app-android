@@ -8,7 +8,6 @@ Asistente Bíblico es una aplicación Flutter que permite a los usuarios buscar 
 - 🔍 Búsqueda de versículos bíblicos por palabra clave, tema o referencia.
 - 💬 Interfaz de chat para interactuar con el asistente.
 - 📚 Respuestas contextuales y sugerencias de lectura.
-- 🌙 Modo claro y oscuro (si aplica).
 - 📱 Compatible con Android.
 
 ## 📸 Capturas de Pantalla
@@ -24,7 +23,6 @@ Asistente Bíblico es una aplicación Flutter que permite a los usuarios buscar 
 1. Clona el repositorio:
 	```sh
 	git clone https://github.com/madaipsantos/chat-app-android.git
-	cd asistente-biblico
 	```
 2. Instala las dependencias:
 	```sh
@@ -74,7 +72,6 @@ Asistente Bíblico es una aplicación Flutter que permite a los usuarios buscar 
 - [provider](https://pub.dev/packages/provider) (gestión de estado)
 - [diacritic](https://pub.dev/packages/diacritic) (manejo de acentos y caracteres especiales)
 - [equatable](https://pub.dev/packages/equatable) (comparación de objetos)
-- Otras dependencias relevantes...
 
 
 ## 🧪 Testing
