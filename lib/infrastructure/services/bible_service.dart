@@ -1,17 +1,18 @@
 import 'package:asistente_biblico/core/constants/chat_messages_constants.dart';
 import 'package:asistente_biblico/core/exceptions/bible_search_exception.dart';
 import 'package:asistente_biblico/data/models/bible_verse_model.dart';
-import 'package:asistente_biblico/domain/repositories/bible_repository.dart';
+import 'package:asistente_biblico/domain/repositories/bible_repository.dart'; // Ensure this import is correct
+import 'package:asistente_biblico/infrastructure/repositories/bible_repository_impl.dart';
 import 'package:diacritic/diacritic.dart';
 import 'package:flutter/foundation.dart';
 
 class BibleService {
-  final IBibleRepository _repository;
+  final BibleRepository _repository;
   List<BibleVerseModel> _versiculos = [];
   bool _initialized = false;
   
   // Singleton instance
-  static final BibleService instance = BibleService._internal(BibleRepository());
+  static final BibleService instance = BibleService._internal(BibleRepositoryImpl());
   
   // Constructor for testing
   @visibleForTesting

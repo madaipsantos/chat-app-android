@@ -28,7 +28,7 @@ import 'package:mockito/mockito.dart' as _i1;
 /// A class which mocks [IBibleRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIBibleRepository extends _i1.Mock implements _i2.IBibleRepository {
+class MockBibleRepository extends _i1.Mock implements _i2.BibleRepository {
   MockIBibleRepository() {
     _i1.throwOnMissingStub(this);
   }

@@ -13,7 +13,7 @@ void main() {
     ];
 
     test('initialize loads verses', () async {
-      final mockRepository = MockIBibleRepository();
+      final mockRepository = MockBibleRepository();
       when(mockRepository.getAllVerses()).thenAnswer((_) async => verses);
       final service = BibleService(mockRepository);
       await service.initialize();
@@ -21,14 +21,14 @@ void main() {
     });
 
     test('initialize throws BibleSearchException on error', () async {
-      final mockRepository = MockIBibleRepository();
+      final mockRepository = MockBibleRepository();
       when(mockRepository.getAllVerses()).thenThrow(Exception('error'));
       final service = BibleService(mockRepository);
       expect(() => service.initialize(), throwsA(isA<BibleSearchException>()));
     });
 
     test('buscar returns matching verses', () async {
-      final mockRepository = MockIBibleRepository();
+      final mockRepository = MockBibleRepository();
       when(mockRepository.getAllVerses()).thenAnswer((_) async => verses);
       final service = BibleService(mockRepository);
       await service.initialize();
@@ -38,14 +38,14 @@ void main() {
     });
 
     test('buscar returns empty if not initialized', () {
-      final mockRepository = MockIBibleRepository();
+      final mockRepository = MockBibleRepository();
       final service = BibleService(mockRepository);
       final result = service.buscar('João');
       expect(result, isEmpty);
     });
 
     test('buscar is case and accent insensitive', () async {
-      final mockRepository = MockIBibleRepository();
+      final mockRepository = MockBibleRepository();
       when(mockRepository.getAllVerses()).thenAnswer((_) async => verses);
       final service = BibleService(mockRepository);
       await service.initialize();
@@ -55,7 +55,7 @@ void main() {
     });
 
     test('_normalize removes accents and punctuation', () {
-      final mockRepository = MockIBibleRepository();
+      final mockRepository = MockBibleRepository();
       final service = BibleService(mockRepository);
       final normalized = service
           .buscar('João!') // indirect test, as _normalize is private
