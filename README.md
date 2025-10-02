@@ -39,7 +39,7 @@ Asistente Bíblico es una aplicación Flutter que permite a los usuarios buscar 
 - El asistente responderá con el versículo.
 - Ejemplo:  
   - `Juan 3:16`
-  - `Amor.`
+  - `Amor`
   - `Perdón`
 
 ## 📂 Estructura del Proyecto
