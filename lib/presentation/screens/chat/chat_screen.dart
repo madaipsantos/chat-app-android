@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'dart:math' as math;
 import 'package:asistente_biblico/domain/entities/message.dart';
 import 'package:asistente_biblico/presentation/providers/chat_provider.dart';
 import 'package:asistente_biblico/presentation/widgets/chat/system_chat_message_bubble.dart';
@@ -48,8 +49,12 @@ class _ChatView extends StatefulWidget {
   State<_ChatView> createState() => _ChatViewState();
 }
 
-class _ChatViewState extends State<_ChatView> {
+class _ChatViewState extends State<_ChatView>
+    with SingleTickerProviderStateMixin {
   final _messageFocusNode = FocusNode();
+  late AnimationController _handController;
+  late Animation<double> _handAnimation;
+  bool _showHand = false;
 
   @override
   void initState() {
@@ -63,10 +68,21 @@ class _ChatViewState extends State<_ChatView> {
         _scrollToBottom();
       }
     });
+
+    // Inicializar el controlador de animación
+    _handController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 800),
+    );
+    _handAnimation = Tween<double>(
+      begin: -0.6,
+      end: 0.3,
+    ).chain(CurveTween(curve: Curves.easeInOut)).animate(_handController);
   }
 
   @override
   void dispose() {
+    _handController.dispose();
     _messageFocusNode.dispose();
     super.dispose();
   }
@@ -108,6 +124,20 @@ class _ChatViewState extends State<_ChatView> {
     final chatProvider = Provider.of<ChatProvider>(context, listen: false);
     chatProvider.sendMessage(value);
     _scrollToBottom();
+
+    // Mostrar y animar la mano solo si el mensaje es exactamente "salir"
+    if (value.trim().toLowerCase() == 'salir') {
+      setState(() => _showHand = true);
+      _handController.repeat(reverse: true);
+
+      // Ocultar la mano después de 2 segundos
+      Future.delayed(const Duration(seconds: 2), () {
+        if (mounted) {
+          _handController.stop();
+          setState(() => _showHand = false);
+        }
+      });
+    }
   }
 
   @override
@@ -115,24 +145,46 @@ class _ChatViewState extends State<_ChatView> {
     final chatProvider = context.watch<ChatProvider>();
     final keyboardPadding = MediaQuery.of(context).viewInsets.bottom;
 
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        child: Column(
-          children: [
-            Expanded(child: _buildMessageList(chatProvider)),
-            AnimatedPadding(
-              padding: EdgeInsets.only(bottom: keyboardPadding),
-              duration: const Duration(milliseconds: 100),
-              child: MessageFieldBox(
-                focusNode: _messageFocusNode,
-                onValue: _handleMessageSend,
-                onTap: _scrollToBottom,
-              ),
+    return Stack(
+      children: [
+        SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: Column(
+              children: [
+                Expanded(child: _buildMessageList(chatProvider)),
+                AnimatedPadding(
+                  padding: EdgeInsets.only(bottom: keyboardPadding),
+                  duration: const Duration(milliseconds: 100),
+                  child: MessageFieldBox(
+                    focusNode: _messageFocusNode,
+                    onValue: _handleMessageSend,
+                    onTap: _scrollToBottom,
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
-      ),
+        if (_showHand)
+          Positioned(
+            bottom: keyboardPadding + 70,
+            right: 30,
+            child: AnimatedBuilder(
+              animation: _handAnimation,
+              builder: (context, child) {
+                return Transform.rotate(
+                  angle: math.pi * _handAnimation.value,
+                  child: const Icon(
+                    Icons.waving_hand,
+                    color: Colors.amber,
+                    size: 100,
+                  ),
+                );
+              },
+            ),
+          ),
+      ],
     );
   }
 }

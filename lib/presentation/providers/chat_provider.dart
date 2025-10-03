@@ -6,6 +6,7 @@ import 'package:asistente_biblico/infrastructure/services/bible_service.dart';
 import 'package:asistente_biblico/data/models/bible_verse_model.dart';
 import 'package:asistente_biblico/core/constants/chat_messages_constants.dart';
 import 'package:asistente_biblico/core/exceptions/invalid_message_exception.dart';
+import 'package:diacritic/diacritic.dart';
 
 /// Estados possíveis durante o fluxo de busca de versículos
 enum SearchState {
@@ -28,8 +29,11 @@ class ChatProvider extends ChangeNotifier {
   String _userName = '';
   BuildContext? _context;
   final bool _initializeChatFlag;
+  int _currentPage = 0;
+  static const int _pageSize = 5;
 
-  ChatProvider({bool initializeChat = true}) : _initializeChatFlag = initializeChat {
+  ChatProvider({bool initializeChat = true})
+    : _initializeChatFlag = initializeChat {
     if (_initializeChatFlag) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (_userName.isEmpty) {
@@ -88,7 +92,6 @@ class ChatProvider extends ChangeNotifier {
     } else if (messageContent is Message) {
       _addMessage(messageContent);
     }
-
     await moveScrollToBottom();
   }
 
@@ -104,10 +107,10 @@ class ChatProvider extends ChangeNotifier {
         throw InvalidMessageException(ChatMessagesConstants.errorEmptyMessage);
       }
 
-      final upperText = text.toUpperCase().trim();
+      final normalizedText = removeDiacritics(text.toUpperCase().trim());
 
       // Verificar SALIR y BUSCAR antes de cualquier otra operación
-      if (upperText == 'SALIR') {
+      if (normalizedText == 'SALIR') {
         addUserChatMessage(text);
         // Mostrar mensajes de despedida
         await _addSystemMessages(ChatMessagesConstants.farewellMessages);
@@ -134,7 +137,7 @@ class ChatProvider extends ChangeNotifier {
         return;
       }
 
-      if (upperText == 'BUSCAR') {
+      if (normalizedText == 'BUSCAR') {
         addUserChatMessage(text);
         await _handleSearchCommand();
         return;
@@ -145,7 +148,7 @@ class ChatProvider extends ChangeNotifier {
         return;
       }
 
-  addUserChatMessage(text);
+      addUserChatMessage(text);
 
       if (isWaitingNewSearch) {
         await _handleNewSearchResponse(text);
@@ -174,12 +177,37 @@ class ChatProvider extends ChangeNotifier {
 
   /// Processa a escolha do usuário
   Future<void> _processChoice(String text) async {
-    final upperText = text.toUpperCase().trim();
+    final normalizedText = removeDiacritics(text.toUpperCase().trim());
 
-    switch (upperText) {
+    switch (normalizedText) {
       case 'VOLVER':
         await _showVersesList();
         _currentState = SearchState.waitingChoice;
+        return;
+
+      case 'PROXIMO':
+      case 'PRÓXIMO':
+        if ((_currentPage + 1) * _pageSize < _searchResults.length) {
+          _currentPage++;
+          await _showVersesList();
+        } else {
+          await _addSystemChatMessage(ChatMessagesConstants.lastPageOptions);
+          await _addSystemChatMessage(
+            ChatMessagesConstants.lastPageNavigationOptions,
+          );
+        }
+        return;
+
+      case 'ANTERIOR':
+        if (_currentPage > 0) {
+          _currentPage--;
+          await _showVersesList();
+        } else {
+          await _addSystemChatMessage(ChatMessagesConstants.firstPageOptions);
+          await _addSystemChatMessage(
+            ChatMessagesConstants.firstPageAvailableActions,
+          );
+        }
         return;
 
       case 'SALIR':
@@ -200,15 +228,15 @@ class ChatProvider extends ChangeNotifier {
 
   /// Processa a resposta para uma nova busca
   Future<void> _handleNewSearchResponse(String text) async {
-    final response = text.toLowerCase().trim();
+    final normalizedText = removeDiacritics(text.toLowerCase().trim());
 
-    if (response == 'salir') {
+    if (normalizedText == 'salir') {
       await _exitChat();
-    } else if (response == 'si' || response == 'sí') {
+    } else if (normalizedText == 'si' || normalizedText == 'sí') {
       _resetSearch();
       await _addSystemChatMessage(ChatMessagesConstants.writeTopicExample);
       _currentState = SearchState.initial;
-    } else if (response == 'no') {
+    } else if (normalizedText == 'no') {
       await _showVersesList();
       _currentState = SearchState.waitingChoice;
     } else {
@@ -286,12 +314,17 @@ class ChatProvider extends ChangeNotifier {
     }
   }
 
-  bool _isValidChoice(int? choice) =>
-      choice != null && choice > 0 && choice <= _searchResults.length;
+  bool _isValidChoice(int? choice) {
+    int start = _currentPage * _pageSize;
+    int end = start + _pageSize;
+    end = end > _searchResults.length ? _searchResults.length : end;
+    return choice != null && choice > 0 && choice <= (end - start);
+  }
 
   /// Mostra um versículo selecionado pelo usuário
   Future<void> _showSelectedVerse(int choice) async {
-    final verse = _searchResults[choice - 1];
+    int start = _currentPage * _pageSize;
+    final verse = _searchResults[start + choice - 1];
     await _showTypingThenMessage(
       Message(
         text: verse.toMessageEntity().text,
@@ -303,28 +336,51 @@ class ChatProvider extends ChangeNotifier {
   void _resetSearch() {
     _currentState = SearchState.initial;
     _searchResults = [];
+    _currentPage = 0;
   }
 
   Future<void> _showVersesList() async {
     final lista = _createVersesList();
     await _addSystemChatMessage(lista);
     await _addSystemChatMessage(ChatMessagesConstants.chooseVerse);
-    await _addSystemChatMessage(ChatMessagesConstants.listOptions);
-    // Mostrar mensajes de navegación si hay más de una página
+
+    // Agregar opciones de navegación
+    String navigationOptions = ChatMessagesConstants.listOptions;
+    if (_searchResults.length > _pageSize) {
+      if (_currentPage > 0) {
+        navigationOptions =
+            ChatMessagesConstants.previousPageOption + navigationOptions;
+      }
+      if ((_currentPage + 1) * _pageSize < _searchResults.length) {
+        navigationOptions =
+            ChatMessagesConstants.nextPageOption + navigationOptions;
+      }
+    }
+    await _addSystemChatMessage(navigationOptions);
 
     _currentState = SearchState.waitingChoice;
     await moveScrollToBottom();
   }
 
   String _createVersesList() {
+    final totalPages = (_searchResults.length / _pageSize).ceil();
+
     final buffer = StringBuffer(
-      "Encontré ${_searchResults.length} versículos:\n\n",
+      "Encontré ${_searchResults.length} versículos" +
+          (totalPages > 1
+              ? " (página ${_currentPage + 1} de $totalPages)"
+              : "") +
+          ":\n\n",
     );
 
-    for (var i = 0; i < _searchResults.length; i++) {
+    int start = _currentPage * _pageSize;
+    int end = (_currentPage + 1) * _pageSize;
+    end = end > _searchResults.length ? _searchResults.length : end;
+
+    for (var i = start; i < end; i++) {
       final verse = _searchResults[i];
       buffer.write(
-        "${i + 1}. ${verse.livro} ${verse.capitulo}:${verse.versiculo}\n",
+        "${i - start + 1}. ${verse.livro} ${verse.capitulo}:${verse.versiculo}\n",
       );
     }
 
