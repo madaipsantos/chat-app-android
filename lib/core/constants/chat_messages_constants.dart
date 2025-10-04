@@ -2,8 +2,6 @@ class ChatMessagesConstants {
     
   static const welcomeMessages = [
     'Holá{userName}! Soy tu asistente bíblico personal.',
-    'En cualquier momento, puedes escribir: ',
-    'Escribe "BUSCAR" para una nueva búsqueda.\nEscribe "SALIR" si quieres salir del chat.',
     '¿Quieres buscar un versículo bíblico?',
     'Escribe lo que tienes en mente, por ejemplo: "amor", "perdón" o "Salmo 23:1".',
   ];
@@ -16,6 +14,7 @@ class ChatMessagesConstants {
   static const searchPrompt = 'Escribe el tema o versículo que deseas buscar.';
   static const loadingVerses = 'Cargando versos, por favor espere...';
   static const notFound = 'No se encontraron versículos para "{query}".';
+  static const searchAnotherTopic = 'Por favor, busca otro tema.';
   static const chooseOption = 'Por favor, elige una opción:';
   static const invalidChoiceOptions = 'Escribe "BUSCAR" para una nueva búsqueda.\nEscribe "VOLVER" para volver a la lista.\nEscribe "SALIR" si quieres terminar el chat.';
   static const answerYesNoExit = 'Por favor, responda "SÍ", "NO" o "SALIR".';
