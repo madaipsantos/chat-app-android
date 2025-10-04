@@ -38,7 +38,7 @@ class BibleService {
     }
   }
 
-  /// Searches for verses by word or phrase, ignoring accents, case, and punctuation.
+  /// Searches for verses by word or phrase, and ignoring accents, case, and punctuation.
   /// Returns a list of [BibleVerseModel] matching the query.
   /// Throws [BibleSearchException] if search fails.
   List<BibleVerseModel> buscar(String query) {
@@ -54,8 +54,11 @@ class BibleService {
         final normalizedTexto = _normalize(v.texto);
         final normalizedLivro = _normalize(v.livro);
 
+        final textoWords = normalizedTexto.split(RegExp(r'\s+'));
+        final livroWords = normalizedLivro.split(RegExp(r'\s+'));
+
         return queryWords.any((word) =>
-            normalizedTexto.contains(word) || normalizedLivro.contains(word));
+            textoWords.contains(word) || livroWords.contains(word));
       }).toList();
     } catch (e) {
       throw BibleSearchException(ChatMessagesConstants.errorSearch);
