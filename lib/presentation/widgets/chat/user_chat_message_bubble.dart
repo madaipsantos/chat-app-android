@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:asistente_biblico/domain/entities/message.dart';
 
+/// Widget that displays user messages in a chat bubble style.
 class UserChatMessageBubble extends StatelessWidget {
-  static const _borderRadius = 20.0;
-  static const _bubblePadding = EdgeInsets.symmetric(horizontal: 20, vertical: 10);
-  static const _messageSpacing = 5.0;
+  static const double _borderRadius = 20.0;
+  static const EdgeInsets _bubblePadding = EdgeInsets.symmetric(horizontal: 20, vertical: 10);
+  static const double _messageSpacing = 5.0;
 
+  /// The message to display.
   final Message message;
 
   const UserChatMessageBubble({
-    super.key, 
+    super.key,
     required this.message,
   });
 
@@ -26,6 +28,7 @@ class UserChatMessageBubble extends StatelessWidget {
     );
   }
 
+  /// Builds the user message bubble.
   Widget _buildMessageBubble(ColorScheme colors) {
     return Container(
       decoration: BoxDecoration(

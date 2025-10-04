@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:asistente_biblico/domain/entities/message.dart';
 
-/// Widget que exibe mensagens de sistema em formato de bolha.
-/// 
-/// Apresenta o texto da mensagem em uma bolha com estilo visual
-/// adequado para mensagens do sistema.
+/// Widget that displays system messages in a chat bubble style.
+/// Shows the message text in a visually distinct bubble for system messages.
 class SystemChatMessageBubble extends StatelessWidget {
-  /// A mensagem a ser exibida
+  
+  /// The message to display.
   final Message message;
-  
-  /// Raio da borda da bolha
+
+  /// Border radius of the bubble.
   final double borderRadius;
-  
-  /// Espaçamento interno da bolha
+
+  /// Inner padding of the bubble.
   final EdgeInsets padding;
-  
-  /// Espaçamento externo da bolha
+
+  /// Outer margin of the bubble.
   final EdgeInsets margin;
 
   const SystemChatMessageBubble({
-    super.key, 
+    super.key,
     required this.message,
     this.borderRadius = 20.0,
     this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -42,8 +41,8 @@ class SystemChatMessageBubble extends StatelessWidget {
         child: Text(
           message.text,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: Colors.white,
-          ),
+                color: Colors.white,
+              ),
         ),
       ),
     );
