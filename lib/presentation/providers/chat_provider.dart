@@ -8,21 +8,30 @@ import 'package:asistente_biblico/core/constants/chat_messages_constants.dart';
 import 'package:asistente_biblico/core/exceptions/invalid_message_exception.dart';
 import 'package:diacritic/diacritic.dart';
 
-/// Estados possíveis durante o fluxo de busca de versículos
+/// Number of verses to show per page in the chat.
+const int kPageSize = 5;
+
+/// Possible states during the verse search flow.
 enum SearchState {
-  initial, // Estado inicial, pronto para receber uma busca
-  waitingChoice, // Esperando que o usuário escolha um versículo da lista
-  waitingNewSearch, // Esperando confirmação para iniciar uma nova busca
+  initial, // Ready to receive a search
+  waitingChoice, // Waiting for user to choose a verse from the list
+  waitingNewSearch, // Waiting for confirmation to start a new search
 }
 
-/// Provedor para gerenciar o estado do chat e interações com a API bíblica
+/// Provider to manage chat state and interactions with the Bible API.
 class ChatProvider extends ChangeNotifier {
-  // Getters públicos para testing
+  // Public getters
   String get userName => _userName;
   SearchState get currentState => _currentState;
-  // Controllers e estado
+  List<BibleVerseModel> get searchResults => List.unmodifiable(_searchResults);
+  bool get isWaitingChoice => _currentState == SearchState.waitingChoice;
+  bool get isWaitingNewSearch => _currentState == SearchState.waitingNewSearch;
+
+  // Public fields
   final ScrollController chatScrollController = ScrollController();
   final List<Message> messageList = [];
+
+  // Private fields
   List<BibleVerseModel> _searchResults = [];
   SearchState _currentState = SearchState.initial;
   final bool _isJsonLoaded = true;
@@ -30,8 +39,8 @@ class ChatProvider extends ChangeNotifier {
   BuildContext? _context;
   final bool _initializeChatFlag;
   int _currentPage = 0;
-  static const int _pageSize = 5;
 
+  /// Creates a [ChatProvider].
   ChatProvider({bool initializeChat = true})
     : _initializeChatFlag = initializeChat {
     if (_initializeChatFlag) {
@@ -43,17 +52,16 @@ class ChatProvider extends ChangeNotifier {
     }
   }
 
-  /// Define o nome do usuário
+  /// Sets the context for navigation.
   void setContext(BuildContext context) {
     _context = context;
   }
 
+  /// Sets the user name and initializes the chat.
   void setUserName(String name) {
-    // Capitaliza la primera letra y pone el resto en minúsculas
     _userName = name.isNotEmpty
         ? "${name[0].toUpperCase()}${name.substring(1).toLowerCase()}"
         : name;
-    // Inicializamos el chat cada vez que se establece un nuevo nombre
     messageList.clear();
     _resetSearch();
     _currentState = SearchState.initial;
@@ -63,44 +71,7 @@ class ChatProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Inicializa o chat com mensagens de boas-vindas
-  Future<void> _initializeChat() async {
-    try {
-      final initialMessages = ChatMessagesConstants.welcomeMessages
-          .map(
-            (msg) => msg.replaceFirst(
-              '{userName}',
-              _userName.isNotEmpty ? ", $_userName" : "",
-            ),
-          )
-          .toList();
-      for (final message in initialMessages) {
-        await _showTypingThenMessage(message);
-        await Future.delayed(const Duration(milliseconds: 300));
-      }
-    } catch (e) {
-      await _addSystemChatMessage(ChatMessagesConstants.errorInitChat);
-    }
-  }
-
-  /// Adiciona a mensagem diretamente sem efeito de digitação
-  Future<void> _showTypingThenMessage(dynamic messageContent) async {
-    if (messageContent is String) {
-      _addMessage(
-        Message(text: messageContent, fromWho: FromWho.systemChatMessage),
-      );
-    } else if (messageContent is Message) {
-      _addMessage(messageContent);
-    }
-    await moveScrollToBottom();
-  }
-
-  // Getters
-  bool get isWaitingChoice => _currentState == SearchState.waitingChoice;
-  bool get isWaitingNewSearch => _currentState == SearchState.waitingNewSearch;
-  List<BibleVerseModel> get searchResults => List.unmodifiable(_searchResults);
-
-  /// Processa a mensagem enviada pelo usuário
+  /// Processes the message sent by the user.
   Future<void> sendMessage(String text) async {
     try {
       if (text.trim().isEmpty) {
@@ -109,30 +80,20 @@ class ChatProvider extends ChangeNotifier {
 
       final normalizedText = removeDiacritics(text.toUpperCase().trim());
 
-      // Verificar SALIR y BUSCAR antes de cualquier otra operación
+      // Handle exit and search commands first
       if (normalizedText == 'SALIR') {
         addUserChatMessage(text);
-        // Mostrar mensajes de despedida
         await _addSystemMessages(ChatMessagesConstants.farewellMessages);
         await Future.delayed(const Duration(seconds: 2));
-
-        // Limpiar completamente el chat
         messageList.clear();
         notifyListeners();
-
-        // Esperar un momento para que se vea la limpieza
         await Future.delayed(const Duration(milliseconds: 500));
-
-        // Reiniciar el estado
         _resetSearch();
         _currentState = SearchState.initial;
-
-        // Redirigir a la pantalla inicial y limpiar el historial de navegación
         if (_context != null) {
-          Navigator.of(_context!).pushNamedAndRemoveUntil(
-            '/',
-            (route) => false, // Esto removerá todas las rutas anteriores
-          );
+          Navigator.of(
+            _context!,
+          ).pushNamedAndRemoveUntil('/', (route) => false);
         }
         return;
       }
@@ -168,14 +129,82 @@ class ChatProvider extends ChangeNotifier {
       _currentState = SearchState.waitingChoice;
     } on BibleSearchException catch (e) {
       await _addSystemChatMessage(e.message);
-    } catch (e) {
+    } catch (_) {
       await _addSystemChatMessage(ChatMessagesConstants.errorOccurred);
     }
 
     await moveScrollToBottom();
   }
 
-  /// Processa a escolha do usuário
+  /// Adds a user message to the chat.
+  void addUserChatMessage(String text) {
+    _addMessage(Message(text: text, fromWho: FromWho.userChatMessage));
+  }
+
+  /// Moves the scroll to the bottom of the chat.
+  Future<void> moveScrollToBottom() async {
+    try {
+      await Future.delayed(const Duration(milliseconds: 100));
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!chatScrollController.hasClients) return;
+        final maxScroll = chatScrollController.position.maxScrollExtent;
+        final currentScroll = chatScrollController.position.pixels;
+        if (currentScroll < maxScroll) {
+          chatScrollController.animateTo(
+            maxScroll,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeOut,
+          );
+        }
+      });
+    } catch (_) {
+      // Ignore scroll errors, not critical for functionality
+    }
+  }
+
+  // ===========================
+  // Private methods below
+  // ===========================
+
+  /// Initializes the chat with welcome messages.
+  Future<void> _initializeChat() async {
+    try {
+      final initialMessages = ChatMessagesConstants.welcomeMessages
+          .map(
+            (msg) => msg.replaceFirst(
+              '{userName}',
+              _userName.isNotEmpty ? ", $_userName" : "",
+            ),
+          )
+          .toList();
+      for (final message in initialMessages) {
+        await _showTypingThenMessage(message);
+        await Future.delayed(const Duration(milliseconds: 300));
+      }
+    } catch (_) {
+      await _addSystemChatMessage(ChatMessagesConstants.errorInitChat);
+    }
+  }
+
+  /// Shows a message with typing effect.
+  Future<void> _showTypingThenMessage(dynamic messageContent) async {
+    if (messageContent is String) {
+      _addMessage(
+        Message(text: messageContent, fromWho: FromWho.systemChatMessage),
+      );
+    } else if (messageContent is Message) {
+      _addMessage(messageContent);
+    }
+    await moveScrollToBottom();
+  }
+
+  /// Adds a message to the chat and notifies listeners.
+  void _addMessage(Message message) {
+    messageList.add(message);
+    notifyListeners();
+  }
+
+  /// Handles the user's choice from the list of verses.
   Future<void> _processChoice(String text) async {
     final normalizedText = removeDiacritics(text.toUpperCase().trim());
 
@@ -184,10 +213,9 @@ class ChatProvider extends ChangeNotifier {
         await _showVersesList();
         _currentState = SearchState.waitingChoice;
         return;
-
       case 'PROXIMO':
       case 'PRÓXIMO':
-        if ((_currentPage + 1) * _pageSize < _searchResults.length) {
+        if ((_currentPage + 1) * kPageSize < _searchResults.length) {
           _currentPage++;
           await _showVersesList();
         } else {
@@ -197,7 +225,6 @@ class ChatProvider extends ChangeNotifier {
           );
         }
         return;
-
       case 'ANTERIOR':
         if (_currentPage > 0) {
           _currentPage--;
@@ -209,7 +236,6 @@ class ChatProvider extends ChangeNotifier {
           );
         }
         return;
-
       case 'SALIR':
         return;
     }
@@ -217,7 +243,6 @@ class ChatProvider extends ChangeNotifier {
     final choice = int.tryParse(text);
     if (_isValidChoice(choice)) {
       await _showSelectedVerse(choice!);
-      // Agregamos una pausa más corta para mejorar la fluidez
       await Future.delayed(const Duration(milliseconds: 300));
       _currentState = SearchState.waitingChoice;
       await _showVersesList();
@@ -226,7 +251,7 @@ class ChatProvider extends ChangeNotifier {
     }
   }
 
-  /// Processa a resposta para uma nova busca
+  /// Handles the response for a new search.
   Future<void> _handleNewSearchResponse(String text) async {
     final normalizedText = removeDiacritics(text.toLowerCase().trim());
 
@@ -247,39 +272,31 @@ class ChatProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Finaliza o chat com mensagem de despedida
+  /// Ends the chat with a farewell message and resets state.
   Future<void> _exitChat() async {
     await _addSystemMessages(ChatMessagesConstants.farewellMessages);
     await Future.delayed(const Duration(seconds: 2));
-
-    // Limpiamos completamente el chat
     messageList.clear();
     notifyListeners();
-
-    // Esperamos un momento para que se vea la limpieza
     await Future.delayed(const Duration(milliseconds: 100));
-
-    // Reiniciamos el estado
     _resetSearch();
     _currentState = SearchState.initial;
-    _userName = ''; // Limpiamos también el nombre de usuario
-
-    // Redirigir a la pantalla inicial y limpiar el historial de navegación
+    _userName = '';
     if (_context != null) {
       try {
         Navigator.of(_context!).pushNamedAndRemoveUntil('/', (route) => false);
-      } catch (e) {
+      } catch (_) {
         await _addSystemChatMessage(ChatMessagesConstants.errorNavigation);
       }
     }
   }
 
-  /// Adiciona uma mensagem do sistema com efeito de digitação
+  /// Adds a system message with typing effect.
   Future<void> _addSystemChatMessage(String text) async {
     await _showTypingThenMessage(text);
   }
 
-  /// Adiciona várias mensagens do sistema em sequência
+  /// Adds multiple system messages in sequence.
   Future<void> _addSystemMessages(List<String> messages) async {
     for (String message in messages) {
       await _addSystemChatMessage(message);
@@ -287,15 +304,7 @@ class ChatProvider extends ChangeNotifier {
     }
   }
 
-  void addUserChatMessage(String text) {
-    _addMessage(Message(text: text, fromWho: FromWho.userChatMessage));
-  }
-
-  void _addMessage(Message message) {
-    messageList.add(message);
-    notifyListeners();
-  }
-
+  /// Searches for verses matching the query.
   Future<void> _searchVerses(String query) async {
     try {
       _searchResults = BibleService.instance.buscar(query);
@@ -309,21 +318,22 @@ class ChatProvider extends ChangeNotifier {
       } else {
         await _showVersesList();
       }
-    } catch (e) {
+    } catch (_) {
       throw BibleSearchException(ChatMessagesConstants.errorSearch);
     }
   }
 
+  /// Checks if the user's choice is valid for the current page.
   bool _isValidChoice(int? choice) {
-    int start = _currentPage * _pageSize;
-    int end = start + _pageSize;
+    int start = _currentPage * kPageSize;
+    int end = start + kPageSize;
     end = end > _searchResults.length ? _searchResults.length : end;
     return choice != null && choice > 0 && choice <= (end - start);
   }
 
-  /// Mostra um versículo selecionado pelo usuário
+  /// Shows the selected verse.
   Future<void> _showSelectedVerse(int choice) async {
-    int start = _currentPage * _pageSize;
+    int start = _currentPage * kPageSize;
     final verse = _searchResults[start + choice - 1];
     await _showTypingThenMessage(
       Message(
@@ -333,25 +343,27 @@ class ChatProvider extends ChangeNotifier {
     );
   }
 
+  /// Resets the search state and results.
   void _resetSearch() {
     _currentState = SearchState.initial;
     _searchResults = [];
     _currentPage = 0;
   }
 
+  /// Shows the list of verses for the current page.
   Future<void> _showVersesList() async {
-    final lista = _createVersesList();
-    await _addSystemChatMessage(lista);
+    final listText = _createVersesList();
+    await _addSystemChatMessage(listText);
     await _addSystemChatMessage(ChatMessagesConstants.chooseVerse);
 
-    // Agregar opciones de navegación
+    // Add navigation options
     String navigationOptions = ChatMessagesConstants.listOptions;
-    if (_searchResults.length > _pageSize) {
+    if (_searchResults.length > kPageSize) {
       if (_currentPage > 0) {
         navigationOptions =
             ChatMessagesConstants.previousPageOption + navigationOptions;
       }
-      if ((_currentPage + 1) * _pageSize < _searchResults.length) {
+      if ((_currentPage + 1) * kPageSize < _searchResults.length) {
         navigationOptions =
             ChatMessagesConstants.nextPageOption + navigationOptions;
       }
@@ -362,8 +374,9 @@ class ChatProvider extends ChangeNotifier {
     await moveScrollToBottom();
   }
 
+  /// Creates the list of verses for the current page.
   String _createVersesList() {
-    final totalPages = (_searchResults.length / _pageSize).ceil();
+    final totalPages = (_searchResults.length / kPageSize).ceil();
 
     final buffer = StringBuffer(
       "Encontré ${_searchResults.length} versículos" +
@@ -373,8 +386,8 @@ class ChatProvider extends ChangeNotifier {
           ":\n\n",
     );
 
-    int start = _currentPage * _pageSize;
-    int end = (_currentPage + 1) * _pageSize;
+    int start = _currentPage * kPageSize;
+    int end = (_currentPage + 1) * kPageSize;
     end = end > _searchResults.length ? _searchResults.length : end;
 
     for (var i = start; i < end; i++) {
@@ -387,31 +400,7 @@ class ChatProvider extends ChangeNotifier {
     return buffer.toString();
   }
 
-  /// Move o scroll para o final da lista de mensagens
-  Future<void> moveScrollToBottom() async {
-    try {
-      await Future.delayed(const Duration(milliseconds: 100));
-
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (!chatScrollController.hasClients) return;
-
-        final maxScroll = chatScrollController.position.maxScrollExtent;
-        final currentScroll = chatScrollController.position.pixels;
-
-        if (currentScroll < maxScroll) {
-          chatScrollController.animateTo(
-            maxScroll,
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.easeOut,
-          );
-        }
-      });
-    } catch (e) {
-      // Ignora erros de scroll, pois não são críticos para a funcionalidade
-    }
-  }
-
-  /// Maneja el comando BUSCAR
+  /// Handles the BUSCAR command.
   Future<void> _handleSearchCommand() async {
     _resetSearch();
     await _addSystemChatMessage(ChatMessagesConstants.searchPrompt);

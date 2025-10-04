@@ -3,15 +3,16 @@ import 'package:asistente_biblico/core/exceptions/data_format_exception.dart';
 import 'package:equatable/equatable.dart';
 import 'package:asistente_biblico/domain/entities/message.dart';
 
-/// Modelo que representa um versículo bíblico.
-/// 
-/// Fornece métodos para converter de/para JSON e para criar uma entidade [Message].
+/// Model representing a Bible verse.
+///
+/// Provides methods for JSON serialization and conversion to a [Message] entity.
 class BibleVerseModel extends Equatable {
   final String livro;
   final int capitulo;
   final int versiculo;
   final String texto;
 
+  /// Creates a [BibleVerseModel] instance.
   const BibleVerseModel({
     required this.livro,
     required this.capitulo,
@@ -19,7 +20,9 @@ class BibleVerseModel extends Equatable {
     required this.texto,
   });
 
-  /// Cria uma instância de [BibleVerseModel] a partir de um mapa JSON.
+  /// Creates a [BibleVerseModel] from a JSON map.
+  ///
+  /// Throws [DataFormatException] if required fields are missing or types are incorrect.
   factory BibleVerseModel.fromJson(Map<String, dynamic> json) {
     try {
       if (!json.containsKey('livro') ||
@@ -41,12 +44,12 @@ class BibleVerseModel extends Equatable {
         versiculo: versiculo,
         texto: texto,
       );
-    } catch (e) {
-  throw DataFormatException(ChatMessagesConstants.errorFormatVerse);
+    } catch (_) {
+      throw DataFormatException(ChatMessagesConstants.errorFormatVerse);
     }
   }
 
-  /// Converte este modelo para um mapa JSON.
+  /// Converts this model to a JSON map.
   Map<String, dynamic> toJson() => {
         "livro": livro,
         "capitulo": capitulo,
@@ -54,10 +57,10 @@ class BibleVerseModel extends Equatable {
         "texto": texto,
       };
 
-  /// Formata a referência bíblica (ex: "João 3:16").
+  /// Returns the formatted Bible reference (e.g., "John 3:16").
   String get reference => '$livro $capitulo:$versiculo';
 
-  /// Converte este modelo para uma entidade [Message].
+  /// Converts this model to a [Message] entity.
   Message toMessageEntity() => Message(
         text: '$reference - $texto',
         fromWho: FromWho.systemChatMessage,
