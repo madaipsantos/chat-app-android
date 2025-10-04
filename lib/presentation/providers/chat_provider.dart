@@ -311,8 +311,9 @@ class ChatProvider extends ChangeNotifier {
 
       if (_searchResults.isEmpty) {
         await _addSystemChatMessage(
-          ChatMessagesConstants.notFound.replaceFirst('{query}', query),
+          ChatMessagesConstants.notFound.replaceFirst('{query}', query),          
         );
+        await _addSystemChatMessage(ChatMessagesConstants.searchAnotherTopic);
       } else if (_searchResults.length == 1) {
         _addMessage(_searchResults[0].toMessageEntity());
       } else {
