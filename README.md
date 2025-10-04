@@ -13,8 +13,10 @@ Asistente Bíblico es una aplicación Flutter que permite a los usuarios buscar 
 ## 📸 Capturas de Pantalla
 
 <!-- Ejemplo de cómo agregar capturas de pantalla reales: -->
-![Pantalla principal](assets/images/screenshot1.png)
-![Chat en acción](assets/images/screenshot2.png)
+<p align="center">
+  <img src="assets/images/chat_screen.jpg" alt="Pantalla principal" width="200"/>
+  <img src="assets/images/welcome_screen.jpg" alt="Chat en acción" width="200"/>
+</p>
 
 <!-- Cambia los nombres de archivo y el texto alternativo según tus imágenes -->
 
