@@ -5,12 +5,14 @@ import 'package:asistente_biblico/presentation/providers/chat_provider.dart';
 import 'config/router/app_router.dart';
 import 'package:provider/provider.dart';
 
+/// Entry point of the application.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await BibleService.instance.initialize();
   runApp(const MyApp());
 }
 
+/// Root widget of the application.
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

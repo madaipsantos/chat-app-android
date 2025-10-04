@@ -1,15 +1,20 @@
 import 'package:asistente_biblico/core/constants/chat_messages_constants.dart';
 import 'package:flutter/material.dart';
 
-/// Widget para entrada de texto de mensagens com botão de envio.
-/// Suporta gerenciamento de foco e callbacks para envio de mensagens.
+/// Widget for message text input with send button.
+/// Supports focus management and callbacks for sending messages.
 class MessageFieldBox extends StatefulWidget {
+  /// Callback when a message is sent.
   final ValueChanged<String> onValue;
+
+  /// Optional callback when the field is tapped.
   final VoidCallback? onTap;
+
+  /// Optional external focus node.
   final FocusNode? focusNode;
 
   const MessageFieldBox({
-    super.key, 
+    super.key,
     required this.onValue,
     this.onTap,
     this.focusNode,
@@ -22,8 +27,7 @@ class MessageFieldBox extends StatefulWidget {
 class _MessageFieldBoxState extends State<MessageFieldBox> {
   late final TextEditingController _textController;
   late final FocusNode _focusNode;
-  
-  // Constantes para melhor manutenção
+
   static const String _hintText = ChatMessagesConstants.messageFieldHint;
   static const double _borderRadius = 40.0;
 
@@ -32,10 +36,9 @@ class _MessageFieldBoxState extends State<MessageFieldBox> {
     super.initState();
     _textController = TextEditingController();
     _focusNode = widget.focusNode ?? FocusNode();
-    
-    // Solicitar foco apenas se não for um focusNode externo
+
+    // Request focus only if not using an external focus node
     if (widget.focusNode == null) {
-      // Agendar para após a construção do widget
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _focusNode.requestFocus();
       });
@@ -51,7 +54,7 @@ class _MessageFieldBoxState extends State<MessageFieldBox> {
     super.dispose();
   }
 
-  /// Processa o envio da mensagem e limpa o campo de texto
+  /// Handles message submission and clears the text field.
   void _handleSubmit() {
     final textValue = _textController.text.trim();
     if (textValue.isEmpty) return;
@@ -61,7 +64,7 @@ class _MessageFieldBoxState extends State<MessageFieldBox> {
     _focusNode.requestFocus();
   }
 
-  /// Gerencia o toque no campo de texto
+  /// Handles tap on the text field.
   void _handleTap() {
     widget.onTap?.call();
     _focusNode.requestFocus();
@@ -80,7 +83,7 @@ class _MessageFieldBoxState extends State<MessageFieldBox> {
     );
   }
 
-  /// Constrói a decoração do campo de texto
+  /// Builds the input decoration for the text field.
   InputDecoration _buildInputDecoration() {
     final outlineInputBorder = UnderlineInputBorder(
       borderSide: const BorderSide(color: Colors.transparent),

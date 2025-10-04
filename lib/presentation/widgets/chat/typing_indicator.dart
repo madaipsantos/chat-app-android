@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 
-/// Um widget que exibe um indicador de digitação.
-/// 
-/// Pode ser personalizado com diferentes estilos e textos.
+/// A widget that displays a typing indicator.
+/// Can be customized with different styles and texts.
 class TypingIndicator extends StatefulWidget {
-  /// Texto a ser exibido no indicador de digitação.
+  /// Text to display in the typing indicator.
   final String text;
-  
-  /// Estilo do texto do indicador.
+
+  /// Text style for the indicator.
   final TextStyle? textStyle;
-  
-  /// Padding ao redor do indicador de digitação.
+
+  /// Padding around the typing indicator.
   final EdgeInsetsGeometry padding;
-  
-  /// Define se deve mostrar os pontos animados.
+
+  /// Whether to show animated dots.
   final bool showDots;
 
   const TypingIndicator({
@@ -36,19 +35,19 @@ class _TypingIndicatorState extends State<TypingIndicator> with SingleTickerProv
   @override
   void initState() {
     super.initState();
-    
+
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 500),
     )..addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        setState(() {
-          _currentDotIndex = (_currentDotIndex + 1) % _dots.length;
-        });
-        _controller.forward(from: 0.0);
-      }
-    });
-    
+        if (status == AnimationStatus.completed) {
+          setState(() {
+            _currentDotIndex = (_currentDotIndex + 1) % _dots.length;
+          });
+          _controller.forward(from: 0.0);
+        }
+      });
+
     _controller.forward();
   }
 
@@ -65,12 +64,12 @@ class _TypingIndicatorState extends State<TypingIndicator> with SingleTickerProv
       fontSize: 12,
       fontStyle: FontStyle.italic,
     );
-    
+
     return Padding(
       padding: widget.padding,
       child: Text(
-        widget.showDots 
-            ? '${widget.text}${_dots[_currentDotIndex]}' 
+        widget.showDots
+            ? '${widget.text}${_dots[_currentDotIndex]}'
             : widget.text,
         style: widget.textStyle ?? defaultStyle,
       ),
