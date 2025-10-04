@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:asistente_biblico/presentation/providers/chat_provider.dart';
 
+/// Welcome screen where the user enters their name to start the chat.
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
 
@@ -11,18 +12,19 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  final _nomeController = TextEditingController();
+  final _nameController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
-    _nomeController.dispose();
+    _nameController.dispose();
     super.dispose();
   }
 
-  void _onEntrarPressed() {
+  /// Handles the "Start" button press.
+  void _onStartPressed() {
     if (_formKey.currentState!.validate()) {
-      context.read<ChatProvider>().setUserName(_nomeController.text.trim());
+      context.read<ChatProvider>().setUserName(_nameController.text.trim());
       Navigator.pushReplacementNamed(context, '/chat');
     }
   }
@@ -59,7 +61,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                   const SizedBox(height: 30),
                   Text(
-                    ChatMessagesConstants.welcomeTitle ,
+                    ChatMessagesConstants.welcomeTitle,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 32,
@@ -69,7 +71,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                   const SizedBox(height: 40),
                   TextFormField(
-                    controller: _nomeController,
+                    controller: _nameController,
                     decoration: InputDecoration(
                       hintText: ChatMessagesConstants.hintEnterName,
                       filled: true,
@@ -97,11 +99,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       return null;
                     },
                     textInputAction: TextInputAction.done,
-                    onFieldSubmitted: (_) => _onEntrarPressed(),
+                    onFieldSubmitted: (_) => _onStartPressed(),
                   ),
                   const SizedBox(height: 20),
                   ElevatedButton(
-                    onPressed: _onEntrarPressed,
+                    onPressed: _onStartPressed,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: colors.surface,
                       foregroundColor: colors.primary,

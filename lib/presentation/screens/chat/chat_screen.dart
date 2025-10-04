@@ -9,6 +9,7 @@ import 'package:asistente_biblico/presentation/widgets/chat/verse_message_bubble
 import 'package:asistente_biblico/presentation/widgets/shared/message_field_box.dart';
 import 'package:asistente_biblico/core/constants/chat_messages_constants.dart';
 
+/// Chat screen displaying the conversation and input field.
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
 
@@ -21,13 +22,14 @@ class ChatScreen extends StatelessWidget {
     );
   }
 
+  /// Builds the app bar for the chat screen.
   AppBar _buildAppBar() {
     return AppBar(
       leading: Padding(
         padding: const EdgeInsets.all(4.0),
         child: CircleAvatar(
           backgroundImage: const AssetImage(
-            'assets/images/imagebot.png', // Mude para o caminho e nome da sua imagem
+            'assets/images/imagebot.png',
           ),
         ),
       ),
@@ -43,15 +45,17 @@ class ChatScreen extends StatelessWidget {
   }
 }
 
+/// Internal chat view with message list and input field.
 class _ChatView extends StatefulWidget {
   const _ChatView();
+
   @override
   State<_ChatView> createState() => _ChatViewState();
 }
 
 class _ChatViewState extends State<_ChatView>
     with SingleTickerProviderStateMixin {
-  final _messageFocusNode = FocusNode();
+  final FocusNode _messageFocusNode = FocusNode();
   late AnimationController _handController;
   late Animation<double> _handAnimation;
   bool _showHand = false;
@@ -59,7 +63,7 @@ class _ChatViewState extends State<_ChatView>
   @override
   void initState() {
     super.initState();
-    // Establecer el contexto en el ChatProvider
+    // Set context in ChatProvider after build
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<ChatProvider>(context, listen: false).setContext(context);
     });
@@ -69,7 +73,6 @@ class _ChatViewState extends State<_ChatView>
       }
     });
 
-    // Inicializar el controlador de animación
     _handController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 800),
@@ -87,12 +90,11 @@ class _ChatViewState extends State<_ChatView>
     super.dispose();
   }
 
+  /// Scrolls the chat list to the bottom.
   void _scrollToBottom() {
     final chatProvider = Provider.of<ChatProvider>(context, listen: false);
-
     Future.delayed(const Duration(milliseconds: 300), () {
       if (!chatProvider.chatScrollController.hasClients) return;
-
       chatProvider.chatScrollController.animateTo(
         chatProvider.chatScrollController.position.maxScrollExtent,
         duration: const Duration(milliseconds: 300),
@@ -101,6 +103,7 @@ class _ChatViewState extends State<_ChatView>
     });
   }
 
+  /// Builds the message list widget.
   Widget _buildMessageList(ChatProvider chatProvider) {
     return ListView.builder(
       controller: chatProvider.chatScrollController,
@@ -112,6 +115,7 @@ class _ChatViewState extends State<_ChatView>
     );
   }
 
+  /// Builds the appropriate message bubble based on message type.
   Widget _buildMessageBubble(Message message) {
     return switch (message.fromWho) {
       FromWho.systemChatMessage => SystemChatMessageBubble(message: message),
@@ -120,17 +124,18 @@ class _ChatViewState extends State<_ChatView>
     };
   }
 
+  /// Handles sending a message from the input field.
   void _handleMessageSend(String value) {
     final chatProvider = Provider.of<ChatProvider>(context, listen: false);
     chatProvider.sendMessage(value);
     _scrollToBottom();
 
-    // Mostrar y animar la mano solo si el mensaje es exactamente "salir"
+    // Show and animate the hand icon if the message is exactly "salir"
     if (value.trim().toLowerCase() == 'salir') {
       setState(() => _showHand = true);
       _handController.repeat(reverse: true);
 
-      // Ocultar la mano después de 2 segundos
+      // Hide the hand after 2 seconds
       Future.delayed(const Duration(seconds: 2), () {
         if (mounted) {
           _handController.stop();
