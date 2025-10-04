@@ -79,7 +79,7 @@ class _ChatViewState extends State<_ChatView>
     );
     _handAnimation = Tween<double>(
       begin: -0.6,
-      end: 0.3,
+      end: 0.1,
     ).chain(CurveTween(curve: Curves.easeInOut)).animate(_handController);
   }
 
